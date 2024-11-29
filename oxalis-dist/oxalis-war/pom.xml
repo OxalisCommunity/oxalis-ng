@@ -31,6 +31,11 @@
             <groupId>network.oxalis</groupId>
             <artifactId>oxalis-inbound</artifactId>
         </dependency>
+        <!--Oxalis-AS4-->
+        <dependency>
+            <groupId>network.oxalis</groupId>
+            <artifactId>oxalis-as4</artifactId>
+        </dependency>
 
         <!-- Servlet -->
         <dependency>

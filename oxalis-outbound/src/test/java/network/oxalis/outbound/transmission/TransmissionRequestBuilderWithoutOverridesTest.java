@@ -147,8 +147,8 @@ public class TransmissionRequestBuilderWithoutOverridesTest {
         MockLookupModule.resetService();
 
         transmissionRequestBuilder.payLoad(inputStreamWithSBDH);
-        transmissionRequestBuilder.overrideAs2Endpoint(Endpoint.of(
-                TransportProfile.AS2_1_0, URI.create("http://localhost:8443/oxalis/as2"), null));
+        transmissionRequestBuilder.overrideAs4Endpoint(Endpoint.of(
+                TransportProfile.PEPPOL_AS4_2_0, URI.create("http://localhost:8443/oxalis/as4"), null));
         transmissionRequestBuilder.build();
     }
 
@@ -164,8 +164,8 @@ public class TransmissionRequestBuilderWithoutOverridesTest {
                         ":#urn:www.peppol.eu:bis:peppol4a:ver1.0" +
                         "::2.0", DocumentTypeIdentifier.BUSDOX_DOCID_QNS_SCHEME));
         transmissionRequestBuilder.processType(ProcessIdentifier.of("urn:www.cenbii.eu:profile:bii04:ver1.0"));
-        transmissionRequestBuilder.overrideAs2Endpoint(Endpoint.of(
-                TransportProfile.AS2_1_0, URI.create("https://localhost:8080/oxalis/as2"), certificate));
+        transmissionRequestBuilder.overrideAs4Endpoint(Endpoint.of(
+                TransportProfile.PEPPOL_AS4_2_0, URI.create("https://localhost:8080/oxalis/as4"), certificate));
 
         transmissionRequestBuilder.setTransmissionBuilderOverride(true);
 
@@ -183,7 +183,7 @@ public class TransmissionRequestBuilderWithoutOverridesTest {
                         "::2.0", DocumentTypeIdentifier.BUSDOX_DOCID_QNS_SCHEME));
         assertEquals(header.getProcess(), ProcessIdentifier.of("urn:www.cenbii.eu:profile:bii04:ver1.0"));
         assertEquals(request.getEndpoint(), Endpoint.of(
-                TransportProfile.AS2_1_0, URI.create("https://localhost:8080/oxalis/as2"), certificate));
+                TransportProfile.PEPPOL_AS4_2_0, URI.create("https://localhost:8080/oxalis/as4"), certificate));
     }
 
 }

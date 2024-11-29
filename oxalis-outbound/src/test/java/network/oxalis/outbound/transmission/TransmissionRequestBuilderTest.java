@@ -174,12 +174,12 @@ public class TransmissionRequestBuilderTest {
     @Test
     public void testOverrideEndPoint() throws Exception {
         assertNotNull(inputStreamWithSBDH);
-        URI url = URI.create("http://localhost:8080/oxalis/as2");
+        URI url = URI.create("http://localhost:8080/oxalis/as4");
         TransmissionRequest request = transmissionRequestBuilder
                 .payLoad(inputStreamWithSBDH)
-                .overrideAs2Endpoint(Endpoint.of(TransportProfile.AS2_1_0, url, certificate))
+                .overrideAs4Endpoint(Endpoint.of(TransportProfile.PEPPOL_AS4_2_0, url, certificate))
                 .build();
-        assertEquals(request.getEndpoint().getTransportProfile(), TransportProfile.AS2_1_0);
+        assertEquals(request.getEndpoint().getTransportProfile(), TransportProfile.PEPPOL_AS4_2_0);
         assertEquals(request.getEndpoint().getAddress(), url);
     }
 
@@ -202,7 +202,7 @@ public class TransmissionRequestBuilderTest {
         assertEquals(header.getProcess(), PeppolProcessTypeIdAcronym.ORDER_ONLY.toVefa());
         assertEquals(header.getC1CountryIdentifier(), CountryIdentifierExample.BE);
         assertNotEquals(header.getIdentifier().getIdentifier(), transmissionIdentifier.getIdentifier(),
-                "The SBDH instanceId should not be equal to the AS2 transmission identifier");
+                "The SBDH instanceId should not be equal to the AS4 transmission identifier");
     }
 
     /**

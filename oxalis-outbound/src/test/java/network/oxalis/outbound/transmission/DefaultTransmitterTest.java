@@ -83,7 +83,7 @@ public class DefaultTransmitterTest {
 
         TransmissionRequest transmissionRequest = Mockito.mock(TransmissionRequest.class);
         Mockito.when(transmissionRequest.getEndpoint())
-                .thenReturn(Endpoint.of(TransportProfile.AS2_1_0, URI.create("http://localhost/"), null));
+                .thenReturn(Endpoint.of(TransportProfile.PEPPOL_AS4_2_0, URI.create("http://localhost/"), null));
 
         Transmitter transmitter = new DefaultTransmitter(messageSenderFactory, statisticsService,
                 new DefaultTransmissionVerifier(), lookupService, tracer,

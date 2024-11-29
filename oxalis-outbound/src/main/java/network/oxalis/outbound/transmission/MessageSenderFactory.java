@@ -81,7 +81,7 @@ class MessageSenderFactory {
                 .collect(Collectors.toList()));
 
         // Logging list of prioritized transport profiles supported.
-        log.info("Prioritized list of transport profiles:");
+        log.info("Supported list of transport profiles:");
         prioritizedTransportProfiles
                 .forEach(tp -> log.info("=> {}", tp.getIdentifier()));
     }

@@ -46,16 +46,16 @@
         <module>oxalis-api</module>
         <module>oxalis-test</module>
         <module>oxalis-commons</module>
+        <module>oxalis-extension</module>
         <module>oxalis-inbound</module>
         <module>oxalis-dist/oxalis-war</module>
+        <module>oxalis-legacy/oxalis-statistics</module>
+        <module>oxalis-legacy/oxalis-persistence</module>
+        <module>oxalis-legacy/oxalis-document-sniffer</module>
         <module>oxalis-outbound</module>
         <module>oxalis-dist/oxalis-standalone</module>
         <module>oxalis-dist/oxalis-server</module>
         <module>oxalis-dist/oxalis-distribution</module>
-        <module>oxalis-legacy/oxalis-statistics</module>
-        <module>oxalis-legacy/oxalis-persistence</module>
-        <module>oxalis-legacy/oxalis-document-sniffer</module>
-        <module>oxalis-extension</module>
     </modules>
 
     <properties>
@@ -121,7 +121,7 @@
             </dependency>
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-as2</artifactId>
+                <artifactId>oxalis-as4</artifactId>
                 <version>${network.oxalis.version}</version>
             </dependency>
             <dependency>

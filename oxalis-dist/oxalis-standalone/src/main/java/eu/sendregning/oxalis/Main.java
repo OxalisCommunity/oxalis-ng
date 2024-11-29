@@ -350,7 +350,7 @@ public class Main {
                 .requiredIf(destinationUrl).withRequiredArg().ofType(File.class);
 
         protocol = optionParser.accepts("protocol", "Protocol to be used")
-                .withRequiredArg().ofType(String.class).defaultsTo(TransportProfile.AS2_1_0.getIdentifier());
+                .withRequiredArg().ofType(String.class).defaultsTo(TransportProfile.PEPPOL_AS4_2_0.getIdentifier());
 
         maxTransmissions = optionParser.accepts("m", "Max number of transmissions")
                 .withRequiredArg().ofType(Integer.class).defaultsTo(Integer.MAX_VALUE);

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings xmlns="https://jakarta.ee/xml/ns/jaxb"
+		  xmlns:xjc="https://jakarta.ee/xml/ns/jaxb/xjc"
+          xmlns:xs="http://www.w3.org/2001/XMLSchema"
+          extensionBindingPrefixes="xjc"
+		  version="3.0">
+
+	<bindings schemaLocation="ebxml/ebms-header-3_0-200704.xsd" node="//xs:attribute[@ref='S12:mustUnderstand']">
+		<property name="mustUnderstand12" />
+	</bindings>
+
+	<bindings schemaLocation="w3/xmldsig-core-schema.xsd">
+		<schemaBindings>
+			<package name="org.w3.xmldsig"/>
+		</schemaBindings>
+	</bindings>
+
+	<bindings schemaLocation="w3/xlink.xsd">
+		<schemaBindings>
+			<package name="org.w3.xlink"/>
+		</schemaBindings>
+	</bindings>
+
+	<bindings schemaLocation="w3/xlink.xsd" node="/xs:schema">
+
+		<bindings node="//xs:attributeGroup[@name='locatorAttrs']">
+			<bindings node=".//xs:attribute[@ref='xlink:title']">
+				<property name="locatorTitle"/>
+			</bindings>
+		</bindings>
+
+		<bindings node="//xs:attributeGroup[@name='arcAttrs']">
+			<bindings node=".//xs:attribute[@ref='xlink:title']">
+				<property name="arcTitle"/>
+			</bindings>
+		</bindings>
+
+	</bindings>
+
+	<bindings schemaLocation="w3/soap-envelope.xsd">
+		<schemaBindings>
+			<package name="org.w3.soap"/>
+		</schemaBindings>
+	</bindings>
+
+</bindings>

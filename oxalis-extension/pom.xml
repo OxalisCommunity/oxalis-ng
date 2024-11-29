@@ -35,7 +35,7 @@
     <name>Oxalis :: Ext</name>
 
     <modules>
-        <module>oxalis-as2</module>
+        <module>oxalis-as4</module>
         <module>oxalis-extension-example</module>
         <module>oxalis-extension-testbed</module>
     </modules>

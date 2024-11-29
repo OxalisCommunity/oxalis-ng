@@ -122,10 +122,10 @@ public class TransmissionRequestBuilder {
     }
 
     /**
-     * Overrides the endpoint URL and the AS2 System identifier for the AS2 protocol.
+     * Overrides the endpoint URL and the AS4 System identifier for the AS4 protocol.
      * You had better know what you are doing :-)
      */
-    public TransmissionRequestBuilder overrideAs2Endpoint(Endpoint endpoint) {
+    public TransmissionRequestBuilder overrideAs4Endpoint(Endpoint endpoint) {
         this.endpoint = endpoint;
         return this;
     }

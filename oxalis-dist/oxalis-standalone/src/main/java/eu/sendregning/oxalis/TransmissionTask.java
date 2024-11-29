@@ -133,7 +133,7 @@ public class TransmissionTask implements Callable<TransmissionResult> {
                 // Overrides the destination URL if so requested
                 if (params.getEndpoint().isPresent()) {
                     final Endpoint endpoint = params.getEndpoint().get();
-                    requestBuilder.overrideAs2Endpoint(endpoint);
+                    requestBuilder.overrideAs4Endpoint(endpoint);
                 }
 
                 // Specifying the details completed, creates the transmission request

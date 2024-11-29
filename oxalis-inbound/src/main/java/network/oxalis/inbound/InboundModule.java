@@ -33,7 +33,6 @@ import network.oxalis.api.settings.Settings;
 import network.oxalis.commons.guice.ImplLoader;
 import network.oxalis.commons.settings.SettingsBuilder;
 import network.oxalis.inbound.servlet.HomeServlet;
-import network.oxalis.inbound.servlet.StatusServlet;
 import network.oxalis.inbound.tracing.DefaultOpenTelemetryTracingFilter;
 import network.oxalis.inbound.tracing.OpenTelemetryServletConf;
 import network.oxalis.inbound.tracing.OpenTelemetryTracingFilter;
@@ -50,7 +49,6 @@ public class InboundModule extends ServletModule {
         filter("/*").through(OpenTelemetryTracingFilter.class);
 
         serve("/").with(HomeServlet.class);
-        serve("/status").with(StatusServlet.class);
 
         bind(InboundService.class).to(DefaultInboundService.class);
 

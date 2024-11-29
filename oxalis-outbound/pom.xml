@@ -56,12 +56,6 @@
         </dependency>
         <dependency>
             <groupId>network.oxalis</groupId>
-            <artifactId>oxalis-as4</artifactId>
-            <version>7.0.0-RC1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>network.oxalis</groupId>
             <artifactId>oxalis-document-sniffer</artifactId>
         </dependency>
         <dependency>
@@ -71,9 +65,8 @@
         </dependency>
         <dependency>
             <groupId>network.oxalis</groupId>
-            <artifactId>oxalis-as2</artifactId>
+            <artifactId>oxalis-as4</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>

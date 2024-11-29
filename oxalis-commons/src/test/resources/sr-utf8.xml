@@ -33,9 +33,9 @@
                 <ns3:Process>
                     <ProcessIdentifier scheme="cenbii-procid-ubl">urn:www.cenbii.eu:profile:bii04:ver2.0</ProcessIdentifier>
                     <ns3:ServiceEndpointList>
-                        <ns3:Endpoint transportProfile="busdox-transport-as2-ver1p0">
+                        <ns3:Endpoint transportProfile="peppol-transport-as4-v2_0">
                             <ns2:EndpointReference>
-                                <ns2:Address>https://ap.unit4.com/oxalis/as2</ns2:Address>
+                                <ns2:Address>https://ap.unit4.com/oxalis/as4</ns2:Address>
                                 <ns2:ReferenceParameters/>
                                 <ns2:Metadata/>
                             </ns2:EndpointReference>

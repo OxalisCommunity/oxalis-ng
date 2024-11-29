@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardBusinessDocument xmlns="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader">
+    <StandardBusinessDocumentHeader>
+        <HeaderVersion>1.0</HeaderVersion>
+        <Sender>
+            <!-- This Sender section describes the PEPPOL Sender -->
+            <!-- It corresponds to an OriginalSender in AS4 -->
+          <Identifier>urn:oasis:names:tc:ebcore:partyid-type:unregistered:C1</Identifier>
+      </Sender>
+      <Receiver>
+           <!-- This Sender section describes the PEPPOL Receiver -->
+           <!-- It corresponds to an FinalRecipient in AS4 -->
+           <Identifier>urn:oasis:names:tc:ebcore:partyid-type:unregistered:C4</Identifier>
+        </Receiver>
+        <DocumentIdentification>
+            <!-- This DocumentIdentification section describes the content of the payload -->
+            <!-- It is noe essential to the CEF connectivity test, but is needed for a valid SBDH -->
+
+            <Standard>NONE</Standard>
+            <TypeVersion>1.0</TypeVersion>
+            <InstanceIdentifier>555bcb4c-940b-4694-9b90-d9b0ae1e937b</InstanceIdentifier>
+            <Type>CEF Connectivity test</Type>
+            <CreationDateAndTime>2019-10-30T11:20:05.304+02:00</CreationDateAndTime>
+        </DocumentIdentification>
+        <BusinessScope>
+            <Scope>
+                <!-- This Scope section describes the PEPPOL DocumentType -->
+                <!-- It corresponds to an Action in AS4 (PMode[1].BusinessInfo.Action) -->
+
+                <Type>DOCUMENTID</Type>
+                <!-- We add an empty Identifier element to set the 'DocumentIdentifier Schema' to en empty string -->
+                <!-- If we do not do this Oxalis-Standalone will add a default 'DocumentType Schema' that will prefix the Action with "busdox-docid-qns", or what is defined in this element, and "::" -->
+                <Identifier/>
+                <InstanceIdentifier>submitMessage</InstanceIdentifier>
+            </Scope>
+            <Scope>
+                <!-- This Scope section describes the PEPPOL Process -->
+                <!-- It corresponds to an Service in AS4 (PMode[1].BusinessInfo.Service) -->
+
+                <Type>PROCESSID</Type>
+                <!-- This Identifier describes the PEPPOL 'Process Schema' and corresponds to a Service.Type in AS4 (PMode[].BusinessInfo.Service.type) -->
+                <Identifier>e-delivery</Identifier>
+                <!-- This InstanceIdentifier describes the PEPPOL 'Process Value' and corresponds to an Service in AS4 (PMode[1].BusinessInfo.Service) -->
+                <InstanceIdentifier>http://ec.europa.eu/edelivery/services/connectivity-service</InstanceIdentifier>
+            </Scope>
+        </BusinessScope>
+    </StandardBusinessDocumentHeader>
+    <Request> eDelivery AS4 Connectivity test. Sending Message </Request>
+</StandardBusinessDocument>
