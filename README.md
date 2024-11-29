@@ -24,11 +24,6 @@ Persistence have been modularized so you can provide your own implementation if 
 
 Binary distributions is available both at [Maven Central](https://repo1.maven.org/maven2/network/oxalis/) and [GitHub](https://github.com/OxalisCommunity/oxalis/releases). 
 
-## The Latest version is Oxalis 6.x.x
-
-Java 11 is minimum supported Java version since Oxalis 6.0.0. For detailed documentation, refer: [main.adoc](/doc/main.adoc)
-
-
 # Technical Information
 The Latest technical news is available at : https://www.oxalis.network/technical-information
 
@@ -45,7 +40,7 @@ We are actively looking for contributors who can contribute to Oxalis and associ
 | oxalis-outbound   | jar  | Outbound component for sending PEPPOL business documents (2) |
 | oxalis-standalone | main | Command line application for sending PEPPOL business documents (3) |
 
-(1) Receives messages using AS2 protocol and stores them in the filesystem as default.
+(1) Receives messages using AS4 protocol and stores them in the filesystem as default.
 
 (2) Can be incorporated into any system which needs to send PEPPOL documents.
 
@@ -75,12 +70,6 @@ We are actively looking for contributors who can contribute to Oxalis and associ
 
 * `Provider net.sf.saxon.TransformerFactoryImpl not found` might be an XSLT implementation conflice between Oxalis and the [VEFA validator](https://github.com/difi/vefa-validator-app).  VEFA needs XSLT 2.0 and explicitly set Saxon 9 as the transformer engine to the JVM.  Since Saxon 9 is not used and included with Oxalis you'll end up with that error on the Oxalis side.  To get rid of the error make sure you run Oxalis and VEFA in separate Tomcats/JVM processes.
 
-* `ValidatorException: PKIX path building failed` is probably because the receivers SSL certificate does not contain the correct certificate chain.  The AS2 implementation needs to validate the SSL certificate chain and any intermediate certificates needs to be present.  See the https://github.com/OxalisCommunity/oxalis/issues/173 for more info.
-
-* `Internal error occured: null` when receiving might be due to a bug in some
-   Apache Tomcat versions.  The full error message logged is `ERROR [network.oxalis.as2.inbound.As2Servlet] [] Internal error occured: null` followed by a stack trace with `java.lang.NullPointerException: null`.  To resolve this upgrade Tomcat to a newer version, take a look at https://github.com/OxalisCommunity/oxalis/issues/179 for more details.
-
-
 ## Build from source
 
 Note that the Oxalis "head" revision on *master* branch is often in "flux" and should be considered a "nightly build".
@@ -103,6 +92,5 @@ All such front end software should be able to enforce security like the one sugg
 
 | URL | Function | Transport | Security |
 | --- | -------- | --------- | -------- |
-| oxalis/as2 | AS2 protocol endpoint | HTTPS with proper certificates | Enable inbound access from Internet |
 | oxalis/status | Status information, for internal use and debugging | HTTP/HTTPS | Internet access can be blocked |
 | oxalis/statistics | RAW statistics for DIFI | HTTPS with proper certificates | Used by DIFI to collect statistics |
