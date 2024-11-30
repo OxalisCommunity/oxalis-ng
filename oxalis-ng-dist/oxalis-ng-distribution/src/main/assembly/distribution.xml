@@ -1,0 +1,115 @@
+<!--
+  ~ Copyright 2010-2018 Norwegian Agency for Public Management and eGovernment (Difi)
+  ~
+  ~ Licensed under the EUPL, Version 1.1 or – as soon they
+  ~ will be approved by the European Commission - subsequent
+  ~ versions of the EUPL (the "Licence");
+  ~
+  ~ You may not use this work except in compliance with the Licence.
+  ~
+  ~ You may obtain a copy of the Licence at:
+  ~
+  ~ https://joinup.ec.europa.eu/community/eupl/og_page/eupl
+  ~
+  ~ Unless required by applicable law or agreed to in
+  ~ writing, software distributed under the Licence is
+  ~ distributed on an "AS IS" basis,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+  ~ express or implied.
+  ~ See the Licence for the specific language governing
+  ~ permissions and limitations under the Licence.
+  -->
+
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+
+    <id>distro</id>
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <!-- The output produced. Everybody can open .zip files  -->
+    <formats>
+        <format>dir</format>
+        <format>tar.gz</format>
+        <format>zip</format>
+    </formats>
+
+    <fileSets>
+        <!-- Sample configuration files -->
+        <fileSet>
+            <directory>../oxalis-ng-distribution/src/main/resources</directory>
+            <outputDirectory>etc</outputDirectory>
+            <includes>
+                <include>*.xml</include>
+                <include>*.properties</include>
+            </includes>
+            <lineEnding>windows</lineEnding>
+        </fileSet>
+
+        <!-- Documentation -->
+        <fileSet>
+            <directory>../../doc</directory>
+            <outputDirectory>doc</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
+
+        <!-- Shell scripts -->
+        <fileSet>
+            <directory>../oxalis-ng-standalone/src/main/bash</directory>
+            <outputDirectory>bin</outputDirectory>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+        </fileSet>
+
+        <!-- SQL scripts -->
+        <fileSet>
+            <directory>../../oxalis-ng-legacy/oxalis-statistics/src/main/resources/sql</directory>
+            <outputDirectory>sql</outputDirectory>
+            <includes>
+                <include>*.sql</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>../oxalis-ng-standalone/target</directory>
+            <outputDirectory>bin</outputDirectory>
+            <includes>
+                <include>oxalis-ng-standalone.jar</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+    <moduleSets>
+
+        <moduleSet>
+            <useAllReactorProjects>true</useAllReactorProjects>
+            <includes>
+                <include>network.oxalis:oxalis-ng-war:*</include>
+            </includes>
+            <binaries>
+                <includeDependencies>false</includeDependencies>
+                <unpack>false</unpack>
+                <outputDirectory>jee</outputDirectory>
+                <!-- No version name to ensure that the name of the web context is unchanged across versions -->
+                <outputFileNameMapping>oxalis-ng.${artifact.extension}</outputFileNameMapping>
+            </binaries>
+        </moduleSet>
+
+        <moduleSet>
+            <useAllReactorProjects>true</useAllReactorProjects>
+            <includes>
+                <include>network.oxalis:oxalis-ng-outbound:*</include>
+            </includes>
+            <binaries>
+                <includeDependencies>true</includeDependencies>
+                <unpack>false</unpack>
+                <outputDirectory>api</outputDirectory>
+            </binaries>
+        </moduleSet>
+
+    </moduleSets>
+
+</assembly>

@@ -27,35 +27,35 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>network.oxalis</groupId>
-    <artifactId>oxalis</artifactId>
+    <artifactId>oxalis-ng</artifactId>
     <version>7.0.1-RC1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Oxalis :: Parent</name>
+    <name>Oxalis-NG :: Parent</name>
     <description>The binary plug-and-play implementation of the PEPPOL sample extension.</description>
-    <url>https://github.com/OxalisCommunity/oxalis</url>
+    <url>https://github.com/OxalisCommunity/oxalis-ng</url>
 
     <scm>
-        <connection>scm:git:https://github.com/OxalisCommunity/oxalis.git</connection>
-        <url>https://github.com/OxalisCommunity/oxalis</url>
-        <developerConnection>scm:git:git@github.com:OxalisCommunity/oxalis.git </developerConnection>
+        <connection>scm:git:https://github.com/OxalisCommunity/oxalis-ng.git</connection>
+        <url>https://github.com/OxalisCommunity/oxalis-ng</url>
+        <developerConnection>scm:git:git@github.com:OxalisCommunity/oxalis-ng.git </developerConnection>
         <tag>HEAD</tag>
     </scm>
 
     <modules>
-        <module>oxalis-api</module>
-        <module>oxalis-test</module>
-        <module>oxalis-commons</module>
-        <module>oxalis-extension</module>
-        <module>oxalis-inbound</module>
-        <module>oxalis-dist/oxalis-war</module>
-        <module>oxalis-legacy/oxalis-statistics</module>
-        <module>oxalis-legacy/oxalis-persistence</module>
-        <module>oxalis-legacy/oxalis-document-sniffer</module>
-        <module>oxalis-outbound</module>
-        <module>oxalis-dist/oxalis-standalone</module>
-        <module>oxalis-dist/oxalis-server</module>
-        <module>oxalis-dist/oxalis-distribution</module>
+        <module>oxalis-ng-api</module>
+        <module>oxalis-ng-test</module>
+        <module>oxalis-ng-commons</module>
+        <module>oxalis-ng-extension</module>
+        <module>oxalis-ng-inbound</module>
+        <module>oxalis-ng-dist/oxalis-ng-war</module>
+        <module>oxalis-ng-legacy/oxalis-ng-statistics</module>
+        <module>oxalis-ng-legacy/oxalis-ng-persistence</module>
+        <module>oxalis-ng-legacy/oxalis-ng-document-sniffer</module>
+        <module>oxalis-ng-outbound</module>
+        <module>oxalis-ng-dist/oxalis-ng-standalone</module>
+        <module>oxalis-ng-dist/oxalis-ng-server</module>
+        <module>oxalis-ng-dist/oxalis-ng-distribution</module>
     </modules>
 
     <properties>
@@ -65,7 +65,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <lombok.version>1.18.24</lombok.version>
         <metainf-services.version>1.9</metainf-services.version>
-        <network.oxalis.version>7.0.1-RC1-SNAPSHOT</network.oxalis.version>
+        <network.oxalis.ng.version>7.0.1-RC1-SNAPSHOT</network.oxalis.ng.version>
         <slf4j.version>2.0.6</slf4j.version>
         <logback.version>1.5.6</logback.version>
         <guava.version>33.3.1-jre</guava.version>
@@ -113,73 +113,73 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Oxalis -->
+            <!-- oxalis-ng -->
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-api</artifactId>
-                <version>${network.oxalis.version}</version>
+                <artifactId>oxalis-ng-api</artifactId>
+                <version>${network.oxalis.ng.version}</version>
             </dependency>
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-as4</artifactId>
-                <version>${network.oxalis.version}</version>
+                <artifactId>oxalis-ng-as4</artifactId>
+                <version>${network.oxalis.ng.version}</version>
             </dependency>
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-commons</artifactId>
-                <version>${network.oxalis.version}</version>
+                <artifactId>oxalis-ng-commons</artifactId>
+                <version>${network.oxalis.ng.version}</version>
             </dependency>
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-inbound</artifactId>
-                <version>${network.oxalis.version}</version>
+                <artifactId>oxalis-ng-inbound</artifactId>
+                <version>${network.oxalis.ng.version}</version>
             </dependency>
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-outbound</artifactId>
-                <version>${network.oxalis.version}</version>
+                <artifactId>oxalis-ng-outbound</artifactId>
+                <version>${network.oxalis.ng.version}</version>
             </dependency>
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-persistence</artifactId>
-                <version>${network.oxalis.version}</version>
+                <artifactId>oxalis-ng-persistence</artifactId>
+                <version>${network.oxalis.ng.version}</version>
             </dependency>
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-persistence</artifactId>
+                <artifactId>oxalis-ng-persistence</artifactId>
                 <type>test-jar</type>
-                <version>${network.oxalis.version}</version>
+                <version>${network.oxalis.ng.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-standalone</artifactId>
-                <version>${network.oxalis.version}</version>
+                <artifactId>oxalis-ng-standalone</artifactId>
+                <version>${network.oxalis.ng.version}</version>
             </dependency>
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-statistics</artifactId>
-                <version>${network.oxalis.version}</version>
+                <artifactId>oxalis-ng-statistics</artifactId>
+                <version>${network.oxalis.ng.version}</version>
             </dependency>
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-test</artifactId>
-                <version>${network.oxalis.version}</version>
+                <artifactId>oxalis-ng-test</artifactId>
+                <version>${network.oxalis.ng.version}</version>
             </dependency>
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-document-sniffer</artifactId>
-                <version>${network.oxalis.version}</version>
+                <artifactId>oxalis-ng-document-sniffer</artifactId>
+                <version>${network.oxalis.ng.version}</version>
             </dependency>
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-extension-testbed</artifactId>
-                <version>${network.oxalis.version}</version>
+                <artifactId>oxalis-ng-extension-testbed</artifactId>
+                <version>${network.oxalis.ng.version}</version>
             </dependency>
             <dependency>
                 <groupId>network.oxalis</groupId>
-                <artifactId>oxalis-war</artifactId>
-                <version>${network.oxalis.version}</version>
+                <artifactId>oxalis-ng-war</artifactId>
+                <version>${network.oxalis.ng.version}</version>
                 <classifier>classes</classifier>
             </dependency>
 
@@ -554,7 +554,7 @@
     </build>
 
     <issueManagement>
-        <url>https://github.com/OxalisCommunity/oxalis/issues</url>
+        <url>https://github.com/OxalisCommunity/oxalis-ng/issues</url>
         <system>GitHub Issues</system>
     </issueManagement>
 
