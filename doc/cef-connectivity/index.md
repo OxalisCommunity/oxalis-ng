@@ -70,7 +70,7 @@ First you should test that your AP works as expected by using [oxalis-standalone
 ```bash
 java -DOXALIS_HOME=/c/dev/cef/.oxalis \
   -classpath "standalone/*;as4/*" \
-  eu.sendregning.oxalis.Main \
+  network.oxalis.ng.Main \
   -cert ./ceftestpartyXXgw.crt \
   -s cefsupportgw \
   -r ceftestpartyXXgw \
@@ -108,7 +108,7 @@ Example of sending to CEF-connectivity standalone URL using oxalis-standalone
 ```bash
 java -DOXALIS_HOME=/c/dev/cef/.oxalis \
   -classpath "standalone/*;as4/*" \
-  eu.sendregning.oxalis.Main \
+  network.oxalis.ng.Main \
   -cert ./cefsupportgw.cer \
   -s ceftestpartyXXgw \
   -r cefsupportgw \

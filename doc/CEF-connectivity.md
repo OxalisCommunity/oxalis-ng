@@ -83,7 +83,7 @@ Example payload.xml
 
 Example of sending to CEF-connectivity standalone URL using oxalis-standalone
 ```bash
-java -classpath "standalone/*;as4/*" eu.sendregning.oxalis.Main -cert ./cefsupportgw.cer -f payload.xml --protocol peppol-transport-as4-v2_0 -u "<replace with the URL in the email you received from CEF-EDELIVERY-SUPPORT>"
+java -classpath "standalone/*;as4/*" network.oxalis.ng.Main -cert ./cefsupportgw.cer -f payload.xml --protocol peppol-transport-as4-v2_0 -u "<replace with the URL in the email you received from CEF-EDELIVERY-SUPPORT>"
 ```
 
 The cefsupportgw.cer can be exported from the truststore JKS. On Windows we recommend using Keystore Explorer for an easy export.

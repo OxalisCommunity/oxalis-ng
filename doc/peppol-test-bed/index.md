@@ -466,7 +466,7 @@ Then you send the file using the oxalis-standalone like this:
 ```bash
 java -DOXALIS_HOME=/c/dev/peppoltest/.oxalis \
  -classpath "standalone/*;as4/*" \
- eu.sendregning.oxalis.Main \
+ network.oxalis.ng.Main \
  -f the_altered_file.xml
 ```
 

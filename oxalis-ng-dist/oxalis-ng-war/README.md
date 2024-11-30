@@ -24,14 +24,14 @@ This allow for the convenient deployment of a single web archive including your 
 
     <properties>
         <!-- Replace with 4.0.3 or newer. -->
-        <oxalis.version>4.0.x</oxalis.version>
+        <oxalis.ng.version>4.0.x</oxalis.ng.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>network.oxalis</groupId>
             <artifactId>oxalis-war</artifactId>
-            <version>${oxalis.version}</version>
+            <version>${oxalis.ng.version}</version>
             <classifier>classes</classifier>
         </dependency>
         <!-- Any other extensions or libraries to be included. -->

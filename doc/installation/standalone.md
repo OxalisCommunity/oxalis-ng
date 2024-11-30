@@ -17,7 +17,7 @@ oxalis-standalone-as4/    <-- Base folder, we will run our commands from here
 
 To run our combined application all we need to do is to run the following command (This command assumes we are standing in our base folder):
 <pre>
-java -classpath "standalone/*;as4/*" eu.sendregning.oxalis.Main [followd by the argument like -f c:\some-invoice.xml]
+java -classpath "standalone/*;as4/*" network.oxalis.ng.Main [followd by the argument like -f c:\some-invoice.xml]
 </pre>
 
 All this command does is to tell Java to load the content of both folders, then execute the logic in "_eu.sendregning.oxalis.Main_" (which is the starting point of the Standalone application).
