@@ -1,4 +1,4 @@
-name: Publish to Docker hub
+name: Oxalis-NG Snapshot publish to Docker hub
 
 on: [push]
 
@@ -41,7 +41,7 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64/v8
           push: true
-          tags: norstella/oxalis:7.0.0-latest
+          tags: norstella/oxalis-ng:0.1.0-alpha-latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 

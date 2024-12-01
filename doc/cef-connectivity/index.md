@@ -18,8 +18,8 @@ the information in the below format to the CEF eDelivery Support team.Static Dis
 
 ![alt text](../img/cef_static_discovery_form.PNG "CEF Static Discovery form")
 
-Please note! The AS4 Access Point Service URL should end with /as4 or /oxalis/as4 if you are going to use Tomcat.
-E.g. https://my.host.com/oxalis/as4
+Please note! The AS4 Access Point Service URL should end with /as4 or /oxalis-ng/as4 if you are going to use Tomcat.
+E.g. https://my.host.com/oxalis-ng/as4
 
 ### Registration details received from CEF Support
 
@@ -82,7 +82,7 @@ java -DOXALIS_HOME=/c/dev/cef/.oxalis \
 The ./ceftestpartyXXgw.crt certificate can be extracted from the truststore using a tool like Keystore Explorer.
 Look further down for information about the content of the payload.xml.
 
-The oxalis.conf in OXALIS_HOME of the oxalis-standalone outbound should be similar to this:
+The oxalis.conf in OXALIS_HOME of the oxalis-ng-standalone outbound should be similar to this:
 
 ```xml
 oxalis.keystore {
@@ -104,7 +104,7 @@ oxalis.logging.config=logback.xml
 ```
 
 
-Example of sending to CEF-connectivity standalone URL using oxalis-standalone
+Example of sending to CEF-connectivity standalone URL using oxalis-ng-standalone
 ```bash
 java -DOXALIS_HOME=/c/dev/cef/.oxalis \
   -classpath "standalone/*;as4/*" \
@@ -153,7 +153,7 @@ Here is a template for the payload.xml:
 
                 <Type>DOCUMENTID</Type>
                 <!-- We add an empty Identifier element to set the 'DocumentIdentifier Schema' to en empty string -->
-                <!-- If we do not do this Oxalis-Standalone will add a default 'DocumentType Schema' that will prefix the Action with "busdox-docid-qns", or what is defined in this element, and "::" -->
+                <!-- If we do not do this oxalis-ng-Standalone will add a default 'DocumentType Schema' that will prefix the Action with "busdox-docid-qns", or what is defined in this element, and "::" -->
                 <Identifier/>
                 <InstanceIdentifier>connectivity::cef##connectivity::submitMessage</InstanceIdentifier>
             </Scope>

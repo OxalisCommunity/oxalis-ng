@@ -1,4 +1,4 @@
-name: Oxalis Snapshot publish
+name: Oxalis-NG Snapshot publish
 
 on: [push]
 

@@ -1,6 +1,6 @@
-### CEF-Connectivity using Oxalis-Standalone sending SBD payloads
+### CEF-Connectivity using Oxalis-NG-Standalone sending SBD payloads
 
-Oxalis-Standalone performs validations to ensure messages conform to PEPPOL standards. To work around this issue, we have made some changes to Oxalis-AS4 to allow us to bypass these restrictions for CEF-Connectivity test. These changes are kept minimal not to unnecessarily endanger the PEPPOL network. If messages using CEF PMode is to be used regularly we recommend the creation of a separate CLI wrapper or adjustments to Oxalis-Standalone. The modified version of Oxalis-AS4 can be found here.
+Oxalis-NG-Standalone performs validations to ensure messages conform to PEPPOL standards. To work around this issue, we have made some changes to Oxalis-AS4 to allow us to bypass these restrictions for CEF-Connectivity test. These changes are kept minimal not to unnecessarily endanger the PEPPOL network. If messages using CEF PMode is to be used regularly we recommend the creation of a separate CLI wrapper or adjustments to Oxalis-NG-Standalone. The modified version of Oxalis-AS4 can be found here.
 
 To perform the CEF-Connectivity test send use the provided configuration and payload using these parameters `-f <path to file> -u <http address to CEF> -cert <path to CEF certificate>`. Use of the additional override commands will add PEPPOL prefixes to the values that will break the connectivity test.
 
@@ -61,7 +61,7 @@ Example payload.xml
 
                 <Type>DOCUMENTID</Type>
                 <!-- We add an empty Identifier element to set the 'DocumentIdentifier Schema' to en empty string -->
-                <!-- If we do not do this Oxalis-Standalone will add a default 'DocumentType Schema' that will prefix the Action with "busdox-docid-qns", or what is defined in this element, and "::" -->
+                <!-- If we do not do this Oxalis-NG-Standalone will add a default 'DocumentType Schema' that will prefix the Action with "busdox-docid-qns", or what is defined in this element, and "::" -->
                 <Identifier/>
                 <InstanceIdentifier>connectivity::cef##connectivity::submitMessage</InstanceIdentifier>
             </Scope>
@@ -81,7 +81,7 @@ Example payload.xml
 </StandardBusinessDocument>
 ```
 
-Example of sending to CEF-connectivity standalone URL using oxalis-standalone
+Example of sending to CEF-connectivity standalone URL using oxalis-ng-standalone
 ```bash
 java -classpath "standalone/*;as4/*" network.oxalis.ng.Main -cert ./cefsupportgw.cer -f payload.xml --protocol peppol-transport-as4-v2_0 -u "<replace with the URL in the email you received from CEF-EDELIVERY-SUPPORT>"
 ```
@@ -89,9 +89,9 @@ java -classpath "standalone/*;as4/*" network.oxalis.ng.Main -cert ./cefsupportgw
 The cefsupportgw.cer can be exported from the truststore JKS. On Windows we recommend using Keystore Explorer for an easy export.
 
 <details>
-  <summary>More info regarding Oxalis-Standalone and CEF-Connectivity testing</summary>
+  <summary>More info regarding Oxalis-NG-Standalone and CEF-Connectivity testing</summary>
   
-Oxalis-Standalone is a commandline wrapper around Oxalis-Outbound that facilitate sending of PEPPOL messages.
+Oxalis-NG-Standalone is a commandline wrapper around Oxalis-Outbound that facilitate sending of Peppol messages.
 
 The base functionallity of Standalone is to send files that is in the form of a Standard Bussines Document (SBD). SBD files starts with a Standard Bussines Ducument Header (SBDH) that describes the message, sender, and reciever and some more. Standalone reads this information and uses it to perform the transmission. 
 
@@ -198,4 +198,4 @@ oxalis.header.parser=dummy
 ## Oxalis outside PEPPOL
 
 Oxalis is made to serve as an AccessPoint in the PEPPOL network.
-If you intend to use Oxalis sending messages outside PEPPOL you should implement your own version of the relevant [Oxalis extension points](https://github.com/difi/oxalis/blob/master/doc/extension-points.adoc).
+If you intend to use Oxalis sending messages outside PEPPOL you should implement your own version of the relevant [Oxalis extension points](https://github.com/OxalisCommunity/oxalis-ng/blob/master/doc/extension-points.adoc).

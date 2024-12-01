@@ -1,12 +1,12 @@
-# Oxalis installation
+# Oxalis-NG installation
 
 The purpose of this document is to document how to install Oxalis as simple as possible.
 
 ## Prerequisites
 
-* Java JDK 11 (newer versions should also work, Java 17 issue due to Peppol specification)
+* Java JDK 11+ (and higher versions)
 * [Maven 3+](http://maven.apache.org/download.cgi) (if you plan to build Oxalis yourself)
-* [Tomcat 9+](https://tomcat.apache.org/download-90.cgi) (if you have a different JEE container, you need to figure out the differences on your own, sorry :-)
+* [Tomcat 10+](https://tomcat.apache.org/download-10.cgi) (if you have a different JEE container, you need to figure out the differences on your own, sorry :-)
 * Create `OXALIS_HOME` directory to hold configuration files, certificates etc
 * Add `OXALIS_HOME` environment variable to reference that directory
 
@@ -18,7 +18,7 @@ When running the following commands you should expect output similar to the one 
 
 | Verify | Command | Expected example output |
 | ------ | ------- | --------------- |
-| JDK 11 | `javac -version` | javac 11.0.16.1 |
+| JDK 11 | `javac -version` | javac 11.0.25 |
 | Maven 3 | `mvn -version` | Apache Maven 3.8.6  |
 | OXALIS_HOME | `echo $OXALIS_HOME` | /Users/arunkum/.oxalis |
 
@@ -67,14 +67,14 @@ When running the following commands you should expect output similar to the one 
 
    More information may be find in the [configuration document](../doc/configuration.adoc).
 
-6. Copy the file `oxalis.war` into your Tomcat deployment directory, example :
+6. Copy the file `oxalis-ng.war` into your Tomcat deployment directory, example :
 
    ```
-   cp oxalis-dist/oxalis-distribution/target/oxalis-distribution-x.y.z/jee/oxalis.war /users/oxalis/apache-tomcat-7.0.56/webapps
+   cp oxalis-dist/oxalis-ng-distribution/target/oxalis-ng-distribution-x.y.z/jee/oxalis.war /users/oxalis/apache-tomcat-7.0.56/webapps
    ```
 
-7. Start Tomcat, check the logs for any errors and make sure the [oxalis status page](http://localhost/oxalis/status) seems right (the URL could be different for your setup).
-   Note! If you intend to terminate TLS in your Tomcat instance, the status pages resides at `https://localhost:443/oxalis/status`
+7. Start Tomcat, check the logs for any errors and make sure the [oxalis status page](http://localhost/oxalis-ng/status) seems right (the URL could be different for your setup).
+   Note! If you intend to terminate TLS in your Tomcat instance, the status pages resides at `https://localhost:443/oxalis-ng/status`
 
 8. Attempt to send a sample invoice using the file `example.sh` file located in `oxalis-dist/oxalis-standalone`.
    Do not forget to review the script first!
@@ -89,11 +89,11 @@ Testing and verification of your installation assume that you have performed abo
 (The running mode will be detected by Oxalis by validating your certificate - no need to maintain that setting anymore.)
 
 
-### Sending a sample invoice to Difi's test access point
+### Sending a sample invoice to Remote access point
 
 This is how you send a sample invoice to remote test access point using the test SML (SMK):
 ```
-java -jar target/oxalis-standalone.jar \
+java -jar target/oxalis-ng-standalone.jar \
      -f src/test/resources/BII04_T10_PEPPOL-v2.0_invoice.xml \
      -r 9908:810418052 \
      -s 9909:810418052
@@ -106,14 +106,14 @@ Verify that your sample invoice received at remote destination access point
 ### Sending a sample invoice to your own local access point
 
 You need to override the use of the SML/SMP in order to send directly to your own access point.
-This is done by specifying a) the URL, b) the protocol and the c) AS2 system identifier.
+This is done by specifying a) the URL, b) the protocol 
 
 Here is how to send a sample invoice in PEPPOOL Bis 4A profile to your own local access point:
 
 ````
-java -jar target/oxalis-standalone.jar \
+java -jar target/oxalis-ng-standalone.jar \
      -f src/test/resources/BII04_T10_PEPPOL-v2.0_invoice.xml \
-     -u http://localhost:8080/oxalis/as2 \
+     -u http://localhost:8080/oxalis-ng/as4 \
      -cert /path/to/your/certificate.cer
 ````
 

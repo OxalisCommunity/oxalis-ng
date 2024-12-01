@@ -1,4 +1,4 @@
-name: Oxalis Release publish
+name: Oxalis-NG Release publish
 on:
   release:
     types: [created]

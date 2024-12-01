@@ -1,7 +1,7 @@
-# Oxalis Web Archive (Oxalis WAR)
+# Oxalis-ng Web Archive (Oxalis WAR)
 
-The traditional war distribution for application servers recreated to use Java Servlet 3.0 functionality.
-This is the distribution made available as `oxalis.war` in `oxalis-distribution`.
+The traditional war distribution for application servers recreated to use Java Servlet 5.0 functionality.
+This is the distribution made available as `oxalis-ng.war` in `oxalis-ng-distribution`.
 
 It is recommended to create your own web archive (war) if you need to change anything inside the one provided by this project.
 The following is a Maven configuration file (`pom.xml`) for your own project where you may customize Oxalis to your needs without having to change any existing artifacts.
@@ -16,21 +16,20 @@ This allow for the convenient deployment of a single web archive including your 
 
     <!-- Replace the following three values according to your preferences. -->
     <groupId>com.example.peppol</groupId>
-    <artifactId>oxalis</artifactId>
+    <artifactId>oxalis-ng</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <!-- Create web archive. -->
     <packaging>war</packaging>
 
     <properties>
-        <!-- Replace with 4.0.3 or newer. -->
-        <oxalis.ng.version>4.0.x</oxalis.ng.version>
+        <oxalis.ng.version>1.0.x</oxalis.ng.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>network.oxalis</groupId>
-            <artifactId>oxalis-war</artifactId>
+            <artifactId>oxalis-ng-war</artifactId>
             <version>${oxalis.ng.version}</version>
             <classifier>classes</classifier>
         </dependency>
@@ -39,7 +38,7 @@ This allow for the convenient deployment of a single web archive including your 
 
     <build>
         <!-- Resulting file as oxalis.war. -->
-        <finalName>oxalis</finalName>
+        <finalName>oxalis-ng</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

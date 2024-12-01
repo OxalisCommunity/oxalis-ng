@@ -1,4 +1,4 @@
-name: Oxalis Master Build
+name: Oxalis-NG Master Build
 
 on: [push]
 

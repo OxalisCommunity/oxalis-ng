@@ -4,40 +4,40 @@ ADD . $MAVEN_HOME
 
 RUN cd $MAVEN_HOME \
  && mvn -B clean package -Pdist -DskipTests=true -Dgit.shallow=true \
- && mv $MAVEN_HOME/target/oxalis-server /oxalis-server \
- && mv $MAVEN_HOME/target/oxalis-standalone /oxalis-standalone \
- && mkdir -p /oxalis/lib \
- && for f in $(ls /oxalis-server/lib); do \
-    if [ -e /oxalis-standalone/lib/$f ]; then \
-        mv /oxalis-server/lib/$f /oxalis/lib/; \
-        rm /oxalis-standalone/lib/$f; \
+ && mv $MAVEN_HOME/target/oxalis-ng-server /oxalis-ng-server \
+ && mv $MAVEN_HOME/target/oxalis-ng-standalone /oxalis-ng-standalone \
+ && mkdir -p /oxalis-ng/lib \
+ && for f in $(ls /oxalis-ng-server/lib); do \
+    if [ -e /oxalis-ng-standalone/lib/$f ]; then \
+        mv /oxalis-ng-server/lib/$f /oxalis/lib/; \
+        rm /oxalis-ng-standalone/lib/$f; \
     fi; \
  done \
- && mv /oxalis-server/bin /oxalis/bin-server \
- && mv /oxalis-server/lib /oxalis/lib-server \
- && mv /oxalis-standalone/bin /oxalis/bin-standalone \
- && mv /oxalis-standalone/lib /oxalis/lib-standalone \
- && cat /oxalis/bin-server/run.sh | sed "s|lib/\*|lib-server/*:lib/*|" > /oxalis/bin-server/run-docker.sh \
- && chmod 755 /oxalis/bin-server/run-docker.sh \
- && cat /oxalis/bin-standalone/run.sh | sed "s|lib/\*|lib-standalone/*:lib/*|" > /oxalis/bin-standalone/run-docker.sh \
- && chmod 755 /oxalis/bin-standalone/run-docker.sh \
- && mkdir /oxalis/bin /oxalis/conf /oxalis/ext /oxalis/inbound /oxalis/outbound /oxalis/plugin \
- && printf "#!/bin/sh\n\nexec /oxalis/bin-\$MODE/run-docker.sh \$@" > /oxalis/bin/run-docker.sh \
- && find /oxalis -name .gitkeep -exec rm -rf '{}' \;
+ && mv /oxalis-ng-server/bin /oxalis-ng/bin-server \
+ && mv /oxalis-ng-server/lib /oxalis-ng/lib-server \
+ && mv /oxalis-ng-standalone/bin /oxalis-ng/bin-standalone \
+ && mv /oxalis-ng-standalone/lib /oxalis-ng/lib-standalone \
+ && cat /oxalis-ng/bin-server/run.sh | sed "s|lib/\*|lib-server/*:lib/*|" > /oxalis-ng/bin-server/run-docker.sh \
+ && chmod 755 /oxalis-ng/bin-server/run-docker.sh \
+ && cat /oxalis-ng/bin-standalone/run.sh | sed "s|lib/\*|lib-standalone/*:lib/*|" > /oxalis-ng/bin-standalone/run-docker.sh \
+ && chmod 755 /oxalis-ng/bin-standalone/run-docker.sh \
+ && mkdir /oxalis-ng/bin /oxalis-ng/conf /oxalis-ng/ext /oxalis-ng/inbound /oxalis-ng/outbound /oxalis-ng/plugin \
+ && printf "#!/bin/sh\n\nexec /oxalis-ng/bin-\$MODE/run-docker.sh \$@" > /oxalis-ng/bin/run-docker.sh \
+ && find /oxalis-ng -name .gitkeep -exec rm -rf '{}' \;
 
 
-FROM openjdk:11.0.16-jre as oxalis-base
+FROM openjdk:11.0.16-jre as oxalis-ng-base
 
-COPY --from=mvn /oxalis /oxalis
+COPY --from=mvn /oxalis-ng /oxalis-ng
 
 ENV MODE server
 
-FROM oxalis-base as oxalis
+FROM oxalis-ng-base as oxalis-ng
 
-VOLUME /oxalis/conf /oxalis/ext /oxalis/inbound /oxalis/outbound /oxalis/plugin
+VOLUME /oxalis-ng/conf /oxalis-ng/ext /oxalis-ng/inbound /oxalis-ng/outbound /oxalis-ng/plugin
 
 EXPOSE 8080
 
-WORKDIR /oxalis
+WORKDIR /oxalis-ng
 
 ENTRYPOINT ["sh", "bin/run-docker.sh"]

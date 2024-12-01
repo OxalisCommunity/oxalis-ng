@@ -10,7 +10,7 @@ Please include a summary of the change request or bug which is supposed to be fi
 
 ## Type of Change
 
-- [ ] OpenPeppol AS2/AS4 specification
+- [ ] OpenPeppol AS4 specification
 - [ ] OpenPeppol Spring/Fall release 
 - [ ] Oxalis software change or enhancement
 - [ ] CEF change

@@ -1,4 +1,4 @@
-name: Publish Releases to Docker hub
+name: Oxalis-NG Release Publish to Docker hub
 
 # When its time to do a release do a full cross platform build for all supported
 # architectures and push all of them to Docker Hub.
@@ -18,7 +18,7 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=norstella/oxalis
+          DOCKER_IMAGE=norstella/oxalis-ng
           VERSION=edge
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/v}
@@ -64,7 +64,7 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64/v8
           push: true
-          tags: norstella/oxalis:7.0.0-RC1
+          tags: norstella/oxalis-ng:0.1.0-alpha
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 

@@ -10,7 +10,7 @@
 # supported CodeQL languages.
 #
 
-name: "CodeQL for Oxalis"
+name: "CodeQL for Oxalis-NG"
 
 on:
   push:

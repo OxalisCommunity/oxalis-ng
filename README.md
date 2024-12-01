@@ -1,5 +1,5 @@
-[![Oxalis Master Build](https://github.com/OxalisCommunity/oxalis/workflows/Oxalis%20Master%20Build/badge.svg?branch=master)](https://github.com/OxalisCommunity/oxalis/actions?query=workflow%3A%22Oxalis%20Master%20Build%22)
-[![Maven Central](https://img.shields.io/maven-central/v/network.oxalis/oxalis.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22network.oxalis%22%20AND%20a%3A%22oxalis%22)
+[![Oxalis NG Master Build](https://github.com/OxalisCommunity/oxalis-ng/workflows/Oxalis-NG%20Master%20Build/badge.svg?branch=master)](https://github.com/OxalisCommunity/oxalis-ng/actions?query=workflow%3A%22Oxalis-NG%20Master%20Build%22)
+[![Maven Central](https://img.shields.io/maven-central/v/network.oxalis/oxalis-ng.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22network.oxalis%22%20AND%20a%3A%22oxalis-ng%22)
 
 ---
 # Oxalis
@@ -22,7 +22,7 @@ Oxalis can be used either as a complete standalone PEPPOL solution or as an API 
 It persists inbound messages to the filesystem Out of the box. 
 Persistence have been modularized so you can provide your own implementation if you need to send inbound messages to a message queue, a workflow engine, a document archive or others.
 
-Binary distributions is available both at [Maven Central](https://repo1.maven.org/maven2/network/oxalis/) and [GitHub](https://github.com/OxalisCommunity/oxalis/releases). 
+Binary distributions is available both at [Maven Central](https://repo1.maven.org/maven2/network/oxalis/) and [GitHub](https://github.com/OxalisCommunity/oxalis-ng/releases). 
 
 # Technical Information
 The Latest technical news is available at : https://www.oxalis.network/technical-information
@@ -32,19 +32,19 @@ The Latest technical news is available at : https://www.oxalis.network/technical
 We are actively looking for contributors who can contribute to Oxalis and associated Git repositories. You can start fixing issues by selecting any existing issue or you can add new feature. Please refer [Pull request Checklist](/pull_request_template.md) while generating new pull request. Team will review your code, if it will meet desired goal, and will be according to standards and guidelines then it will be merged to master.
 
 ---
-## Oxalis components
+## Oxalis NG components
 
 | Component | Type | Description |
 | --------- | ---- | ----------- |
-| oxalis-inbound    | war  | Inbound access point implementation which runs on Tomcat (1) |
-| oxalis-outbound   | jar  | Outbound component for sending PEPPOL business documents (2) |
-| oxalis-standalone | main | Command line application for sending PEPPOL business documents (3) |
+| oxalis-ng-inbound    | war  | Inbound access point implementation which runs on Tomcat (1) |
+| oxalis-ng-outbound   | jar  | Outbound component for sending Peppol business documents (2) |
+| oxalis-ng-standalone | main | Command line application for sending Peppol business documents (3) |
 
 (1) Receives messages using AS4 protocol and stores them in the filesystem as default.
 
-(2) Can be incorporated into any system which needs to send PEPPOL documents.
+(2) Can be incorporated into any system which needs to send Peppol documents.
 
-(3) Serves as example code on how to send a business documents using the oxalis-outbound component.
+(3) Serves as example code on how to send a business documents using the oxalis-ng-outbound component.
 
 
 ## Installation
@@ -60,7 +60,7 @@ We are actively looking for contributors who can contribute to Oxalis and associ
 * Deploy `oxalis.war` to your Tomcat `webapps` directory
 * Send a sample invoice; modify `example.sh` to your liking and execute it.
 * See the [installation guide](/doc/installation.md) for more additional details.
-* To install or replace the PEPPOL certificate, see the [keystore document](/doc/keystore.adoc).
+* To install or replace the Peppol certificate, see the [keystore document](/doc/keystore.adoc).
 * Oxalis is meant to be extended rather than changing the Oxalis source code.
 
 
@@ -73,12 +73,12 @@ We are actively looking for contributors who can contribute to Oxalis and associ
 ## Build from source
 
 Note that the Oxalis "head" revision on *master* branch is often in "flux" and should be considered a "nightly build".
-The official releases are tagged and may be downloaded by clicking on [Tags](https://github.com/OxalisCommunity/oxalis/tags).
+The official releases are tagged and may be downloaded by clicking on [Tags](https://github.com/OxalisCommunity/oxalis-ng/tags).
 
 * make sure [Maven 3+](http://maven.apache.org/) is installed
 * make sure [JDK 11](http://www.oracle.com/technetwork/java/javase/) is installed (the version we have tested with)
-* pull the version of interest from [GitHub](https://github.com/OxalisCommunity/oxalis).
-* from `oxalis` root directory run : `mvn clean install -Pdist`
+* pull the version of interest from [GitHub](https://github.com/OxalisCommunity/oxalis-ng).
+* from `oxalis-ng` root directory run : `mvn clean install -Pdist`
 * locate assembled artifacts in `oxalis-dist/oxalis-distribution/target/oxalis-distribution-<version.number>-distro/`
 
 
@@ -92,5 +92,5 @@ All such front end software should be able to enforce security like the one sugg
 
 | URL | Function | Transport | Security |
 | --- | -------- | --------- | -------- |
-| oxalis/status | Status information, for internal use and debugging | HTTP/HTTPS | Internet access can be blocked |
-| oxalis/statistics | RAW statistics for DIFI | HTTPS with proper certificates | Used by DIFI to collect statistics |
+| oxalis-ng/status | Status information, for internal use and debugging | HTTP/HTTPS | Internet access can be blocked |
+| oxalis-ng/statistics | RAW statistics for DIFI | HTTPS with proper certificates | Used by DIFI to collect statistics |

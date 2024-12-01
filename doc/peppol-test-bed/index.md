@@ -1,22 +1,22 @@
 # OpenPEPPOL Test Bed
 
-This document intends to help with the setup of Oxalis AS4 for testing with the PEPPOL Test Bed and guide your through the testing procedure.
+This document intends to help with the setup of Oxalis NG for testing with the Peppol Test Bed and guide your through the testing procedure.
 
 ## Prerequisites and configuration
 
 The following prerequisites must be fulfilled before starting this tutorial:
 
-* You need a PEPPOL test certificate and truststore.
+* You need a Peppol test certificate and truststore.
 
 * A domain to put your AP behind supporting HTTPS with certificate chains to Certificate Authorities (CAs) which are trusted by the
-PEPPOL community. Your certificate must be trusted by both Microsoft and Oracle CAs. Self-signed certificates
-are considered non-compliant and will not be accepted when onboarding as a PEPPOL service provider. To test
+Peppol community. Your certificate must be trusted by both Microsoft and Oracle CAs. Self-signed certificates
+are considered non-compliant and will not be accepted when onboarding as a Peppol service provider. To test
 your SSL configuration, go to [https://www.ssllabs.com/ssltest/](https://www.ssllabs.com/ssltest/). It must be a grade A or above. This will
 eventually also be controlled by the OpenPEPPOL Operating Office.
 
 * Your PEPPOL Test certificate is installed in your browser so that your are able to open the [OpenPEPPOL Centralized Testbed](https://testbed.peppol.eu/secure/suite/view).
 
-## Setting up an Oxalis-AS4 Access Point
+## Setting up an Oxalis-NG Access Point
 
 Please follow one of the inbound installation procedures found [here](../installation/index.md).
 
@@ -63,7 +63,7 @@ Here is an example of a verbose logback.xml:
 You now need to configure your domain so that the newly installed AP is reachable by HTTPS.
 The URL might be something like this:
 
-https://your.domain.com/oxalis/as4
+https://your.domain.com/oxalis-ng/as4
 
 This URL should reply with:
 
@@ -77,30 +77,30 @@ You are now ready to go to the [OpenPEPPOL Centralized Testbed](https://testbed.
 
 You will see a startup screen with the following box:
 
-![alt text](../img/peppol_testbed1.PNG "No active sessions found.")
+![alt text](../img/peppol_testbed1.PNG "No active sessions found.") - //TODO
 
 ### Enrollment
 
-To enroll for a test suite, please click on the ![alt text](../img/peppol_testbed2.PNG "Enroll for a test suite.") button.
+To enroll for a test suite, please click on the ![alt text](../img/peppol_testbed2.PNG "Enroll for a test suite.") button. - //TODO
 
 You should choose the AS4 profile and the URL to your AS4 Access Point. For the Receiving Participant you can specify scheme NO:ORG (0192) and participant identifier 810418052.
 
-![alt text](../img/peppol_testbed3.PNG "Enrollment form.")
+![alt text](../img/peppol_testbed3.PNG "Enrollment form.")  - //TODO
 
 After pressing the Enroll button, you should see something like this:
 
-![alt text](../img/peppol_testbed4.PNG "Conformance/onboarding test suite.")
+![alt text](../img/peppol_testbed4.PNG "Conformance/onboarding test suite.") - //TODO
 
 ### Outbound - Testbed sends to testing AP
 
 Then you should go on with '#5 Outbound - Testbed sends to testing AP', by pressing the play button.
 The testbed now sends a message to your AP. If successful your should see something like this:
 
-![alt text](../img/peppol_testbed5.PNG "Successful - Outbound - Testbed sends to testing AP.")
+![alt text](../img/peppol_testbed5.PNG "Successful - Outbound - Testbed sends to testing AP.") - //TODO
 
 ### Inbound - Testing AP sends back to Testbed
 
-Your AP should have received a file in the inbound folder. Please locate it and copy it to the folder where you have installed the [oxalis_standalone](../installation/standalone.md) outbound application.
+Your AP should have received a file in the inbound folder. Please locate it and copy it to the folder where you have installed the [oxalis_NG_standalone](../installation/standalone.md) outbound application.
 
 The standalone outbound application should use a configuration similar to this:
 
@@ -472,7 +472,7 @@ java -DOXALIS_HOME=/c/dev/peppoltest/.oxalis \
 
 If successful you should see this is the test bed:
 
-![alt text](../img/peppol_testbed6.PNG "Successful - Inbound - Testing AP sends back to Testbed.")
+![alt text](../img/peppol_testbed6.PNG "Successful - Inbound - Testing AP sends back to Testbed.") - //TODO
 
 ### Outbound - Testbed sends large file to testing AP
 
@@ -485,13 +485,13 @@ Just press the "play"-button and your AP will receive a new file that you are to
 As in the first case, swap the Sender and <Receiver> and EndpointId and PartyIdentification.
 In addition you need to change the CompanyID under the PartyLegalEntity:
 
-![alt text](../img/peppol_testbed7.PNG "Altering the file")
+![alt text](../img/peppol_testbed7.PNG "Altering the file") - //TODO
 
 Then you should once again press the "play"-button on the last test, and send the newly altered file back to the testbed.
 
 If the test succeeds you should see a page similar to this:
 
-![alt text](../img/peppol_testbed8.PNG "Success")
+![alt text](../img/peppol_testbed8.PNG "Success") - //TODO
 
 
 

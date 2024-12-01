@@ -10,7 +10,7 @@
 TRACE=""
 
 # The default is to send the sample document to our own access point running on our own machine.
-URL="https://localhost:8080/oxalis/as2"
+URL="https://localhost:8080/oxalis-ng/as4"
 
 # The URL and the METHOD must correspond
 METHOD="as2"
@@ -29,7 +29,7 @@ SENDER="9908:810017902"
 PROFILE="urn:www.cenbii.eu:profile:bii04:ver1.0"
 
 # Location of the executable program
-EXECUTABLE="target/oxalis-standalone.jar"
+EXECUTABLE="target/oxalis-ng-standalone.jar"
 
 function usage() {
     cat <<EOT
@@ -103,7 +103,7 @@ fi
 # Verifies that the .jar file is available to us
 if [ ! -r "$EXECUTABLE" ]; then
     echo "Unable to locate the executable .jar file in $EXECUTABLE"
-    echo "This script is expected to run from the root of the oxalis-standalone source dir"
+    echo "This script is expected to run from the root of the oxalis-ng-standalone source dir"
     exit 4
 fi
 
@@ -148,7 +148,7 @@ echo java -jar "$EXECUTABLE" \
     $AS2SID_OPTION \
     $TRACE
 
-# Executes the Oxalis outbound standalone Java program
+# Executes the oxalis-ng outbound standalone Java program
 java -jar "$EXECUTABLE" \
     -f "$FILE" \
     -r "$RECEIVER" \
