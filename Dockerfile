@@ -1,4 +1,4 @@
-FROM maven:3.8.6-jdk-11 AS mvn
+FROM maven:3.9.9-amazoncorretto-11-alpine AS mvn
 
 ADD . $MAVEN_HOME
 
@@ -26,13 +26,13 @@ RUN cd $MAVEN_HOME \
  && find /oxalis-ng -name .gitkeep -exec rm -rf '{}' \;
 
 
-FROM openjdk:11.0.16-jre as oxalis-ng-base
+FROM amazoncorretto:11.0.25-alpine AS  oxalis-ng-base
 
 COPY --from=mvn /oxalis-ng /oxalis-ng
 
-ENV MODE server
+ENV MODE=server
 
-FROM oxalis-ng-base as oxalis-ng
+FROM oxalis-ng-base AS  oxalis-ng
 
 VOLUME /oxalis-ng/conf /oxalis-ng/ext /oxalis-ng/inbound /oxalis-ng/outbound /oxalis-ng/plugin
 

@@ -31,7 +31,7 @@
     <fileSets>
         <fileSet>
             <directory>src/main/assembly/full</directory>
-            <outputDirectory>/oxalis-server</outputDirectory>
+            <outputDirectory>/oxalis-ng-server</outputDirectory>
             <excludes>
                 <exclude>*/**/.gitignore</exclude>
                 <exclude>*/**/.gitkeep</exclude>
@@ -40,7 +40,7 @@
     </fileSets>
     <dependencySets>
         <dependencySet>
-            <outputDirectory>oxalis-server/lib</outputDirectory>
+            <outputDirectory>oxalis-ng-server/lib</outputDirectory>
         </dependencySet>
     </dependencySets>
 </assembly>
