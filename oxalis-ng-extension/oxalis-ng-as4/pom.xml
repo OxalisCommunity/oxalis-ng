@@ -33,7 +33,6 @@
 
     <artifactId>oxalis-ng-as4</artifactId>
     <packaging>jar</packaging>
-
     <name>Oxalis-NG :: Ext  :: AS4</name>
     <description>Extension adding AS4 support to Oxalis-NG</description>
     <url>https://github.com/OxalisCommunity/oxalis-ng</url>
@@ -84,29 +83,6 @@
         </license>
     </licenses>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>11</java.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <peppol.sbdh.version>2.3.0</peppol.sbdh.version>
-        <cxf.version>4.0.5</cxf.version>
-        <wss4j.version>3.0.3</wss4j.version>
-        <jakarta.xml.soap-api.version>3.0.2</jakarta.xml.soap-api.version>
-        <com.typesafe.config.version>1.4.2</com.typesafe.config.version>
-        <saaj-impl.version>3.0.4</saaj-impl.version>
-        <jakarta.xml.bind-api.version>4.0.2</jakarta.xml.bind-api.version>
-        <jaxb-impl-version>4.0.0</jaxb-impl-version>
-        <jakarta.annotation-api.version>3.0.0</jakarta.annotation-api.version>
-        <jakarta.xml.ws-api.version>4.0.2</jakarta.xml.ws-api.version>
-        <bouncycastle.version>1.78.1</bouncycastle.version>
-        <commons-io.version>2.14.0</commons-io.version>
-        <neethi.version>3.2.0</neethi.version>
-        <junit.version>4.13.2</junit.version>
-        <powermock.version>2.0.0</powermock.version>
-        <mockito.version>2.23.4</mockito.version>
-    </properties>
-
     <dependencies>
         <!-- Oxalis -->
         <dependency>
@@ -120,7 +96,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- PEPPOL -->
+        <!-- Vefa Peppol -->
         <dependency>
             <groupId>network.oxalis.vefa</groupId>
             <artifactId>peppol-common</artifactId>
@@ -142,10 +118,10 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Peppol Specification -->
         <dependency>
             <groupId>network.oxalis.peppol</groupId>
             <artifactId>peppol-sbdh</artifactId>
-            <version>${peppol.sbdh.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -153,7 +129,6 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-core</artifactId>
-            <version>${cxf.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.glassfish.jaxb</groupId>
@@ -172,7 +147,6 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-security</artifactId>
-            <version>${cxf.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.sun.activation</groupId>
@@ -183,7 +157,6 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-bindings-soap</artifactId>
-            <version>${cxf.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>jakarta.jws</groupId>
@@ -198,7 +171,6 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-databinding-jaxb</artifactId>
-            <version>${cxf.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.sun.activation</groupId>
@@ -209,7 +181,6 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-wsdl</artifactId>
-            <version>${cxf.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.sun.activation</groupId>
@@ -220,7 +191,6 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-features-logging</artifactId>
-            <version>${cxf.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.sun.activation</groupId>
@@ -231,7 +201,6 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>${cxf.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.sun.activation</groupId>
@@ -242,7 +211,6 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
-            <version>${cxf.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.sun.activation</groupId>
@@ -253,7 +221,6 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-policy</artifactId>
-            <version>${cxf.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.sun.activation</groupId>
@@ -264,7 +231,6 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-security</artifactId>
-            <version>${cxf.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.glassfish.jaxb</groupId>
@@ -293,7 +259,6 @@
         <dependency>
             <groupId>org.apache.wss4j</groupId>
             <artifactId>wss4j-ws-security-common</artifactId>
-            <version>${wss4j.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.geronimo.specs</groupId>
@@ -336,7 +301,6 @@
         <dependency>
             <groupId>org.apache.wss4j</groupId>
             <artifactId>wss4j-ws-security-dom</artifactId>
-            <version>${wss4j.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.geronimo.specs</groupId>
@@ -379,7 +343,6 @@
         <dependency>
             <groupId>org.apache.wss4j</groupId>
             <artifactId>wss4j-policy</artifactId>
-            <version>${wss4j.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.neethi</groupId>
@@ -387,22 +350,53 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- Bouncy Castle -->
         <dependency>
-            <groupId>jakarta.xml.soap</groupId>
-            <artifactId>jakarta.xml.soap-api</artifactId>
-            <version>${jakarta.xml.soap-api.version}</version>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk18on</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.typesafe</groupId>
-            <artifactId>config</artifactId>
-            <version>${com.typesafe.config.version}</version>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
             <scope>provided</scope>
         </dependency>
 
+        <!-- Jakarta -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.ws</groupId>
+            <artifactId>jakarta.xml.ws-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.soap</groupId>
+            <artifactId>jakarta.xml.soap-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.sun.xml.messaging.saaj</groupId>
             <artifactId>saaj-impl</artifactId>
-            <version>${saaj-impl.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.sun.activation</groupId>
@@ -411,62 +405,42 @@
             </exclusions>
         </dependency>
 
-        <!-- Jakarta -->
+        <!-- Google Guice -->
         <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>${jakarta.xml.bind-api.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>${jaxb-impl-version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.activation</groupId>
-            <artifactId>jakarta.activation-api</artifactId>
-            <version>${jakarta.activation.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.annotation</groupId>
-            <artifactId>jakarta.annotation-api</artifactId>
-            <version>${jakarta.annotation-api.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.xml.ws</groupId>
-            <artifactId>jakarta.xml.ws-api</artifactId>
-            <version>${jakarta.xml.ws-api.version}</version>
-        </dependency>
-
-        <!-- Bouncycastle -->
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk18on</artifactId>
-            <version>${bouncycastle.version}</version>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk18on</artifactId>
-            <version>${bouncycastle.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-servlet</artifactId>
             <scope>provided</scope>
         </dependency>
 
+        <!-- Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Apache -->
+        <dependency>
+            <groupId>org.apache.neethi</groupId>
+            <artifactId>neethi</artifactId>
+        </dependency>
+
+        <!-- typesafe -->
+        <dependency>
+            <groupId>com.typesafe</groupId>
+            <artifactId>config</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Commons -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>${commons-io.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -475,33 +449,10 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Logging -->
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.neethi</groupId>
-            <artifactId>neethi</artifactId>
-            <version>${neethi.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-servlet</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -546,7 +497,6 @@
             <version>${powermock.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
