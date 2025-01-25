@@ -50,7 +50,7 @@ public class SignatureTest {
 
         KeyPair keyPair = generateKeyPair();
 
-        Signature signature = Signature.getInstance("SHA1withDSA");
+        Signature signature = Signature.getInstance("SHA256withRSA");
 
         PrivateKey privateKey = keyPair.getPrivate();
 
@@ -61,7 +61,7 @@ public class SignatureTest {
         byte[] signatureBytes = signature.sign();
 
 
-        Signature signature2 = Signature.getInstance("SHA1withDSA");
+        Signature signature2 = Signature.getInstance("SHA256withRSA");
         signature2.initVerify(keyPair.getPublic());
         signature2.update(plainText.getBytes());
 
@@ -97,14 +97,9 @@ public class SignatureTest {
 
 
     private KeyPair generateKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException {
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("DSA");
-        SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG", "SUN");
-        keyPairGenerator.initialize(1024, secureRandom);
-
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+        keyPairGenerator.initialize(2048, new SecureRandom());
         return keyPairGenerator.generateKeyPair();
     }
-
-
-
 
 }
