@@ -89,7 +89,7 @@
             <artifactId>jcl-over-slf4j</artifactId>
         </dependency>
 
-        <!-- VEFA PEPPOL -->
+        <!-- Vefa Peppol -->
         <dependency>
             <groupId>network.oxalis.vefa</groupId>
             <artifactId>peppol-lookup</artifactId>

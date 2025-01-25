@@ -32,7 +32,7 @@
     <packaging>pom</packaging>
 
     <name>Oxalis-NG :: Parent</name>
-    <description>The binary plug-and-play implementation of the PEPPOL sample extension.</description>
+    <description>The binary plug-and-play implementation of the Peppol sample extension.</description>
     <url>https://github.com/OxalisCommunity/oxalis-ng</url>
 
     <scm>

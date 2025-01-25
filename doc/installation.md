@@ -25,15 +25,21 @@ When running the following commands you should expect output similar to the one 
 
 ## Installation steps
 
-1. Install Tomcat and configure it for SSL on port 443 or make sure you terminate SSL in front of Tomcat on port 443 (using nginx or similar). Please, do not change this port. Most other access points need to communicate with you and their operations department usually don't like opening non-standard ports. **Do not use your PEPPOL certificate as an SSL certificate!**. You can refer additional documentation "[Default trusted root certificates and the Peppol policy for Transport Security](https://ionite.net/newsblog/2020-06-29_peppol_tls_certificates/)" - Disclaimer: this external documentation not cross-verified, so please take your own wise decision
+1. Install Tomcat and configure it for SSL on port 443 or make sure you terminate SSL in front of Tomcat on port 443 
+(using nginx or similar). Please, do not change this port. Most other access points need to communicate with you and their 
+operations department usually don't like opening non-standard ports. 
+**Do not use your PEPPOL certificate as an SSL certificate!**. 
+You can refer additional documentation
+"[Default trusted root certificates and the Peppol policy for Transport Security](https://ionite.net/newsblog/2020-06-29_peppol_tls_certificates/)"- Disclaimer: this external 
+documentation not cross-verified, so please take your own wise decision
 
 2. Obtain the binary artifacts for Oxalis by either:
    1. Downloading the binary artifacts from [Maven Central](https://search.maven.org/#search%7Cga%7C1%7Coxalis) and unpack the distribution.
-   1. Building yourself from the source at [GitHub](https://github.com/OxalisCommunity/oxalis)
+   2. Building yourself from the source at [GitHub](https://github.com/OxalisCommunity/oxalis-ng)
 
 3. Create an Oxalis home directory in which you place files that do not change between new releases of Oxalis.
-   We recommend that you name the Oxalis home directory `.oxalis` in what is considered the home directory of the user running Oxalis. If you
-   are using Tomcat, it should be the home directory of the tomcat user.
+   We recommend that you name the Oxalis home directory `.oxalis` in what is considered the home directory of the user running Oxalis. 
+4. If you are using Tomcat, it should be the home directory of the tomcat user.
    Remember to set the `$OXALIS_HOME` environment variable referencing your Oxalis home directory in your shell startup
    script.
 

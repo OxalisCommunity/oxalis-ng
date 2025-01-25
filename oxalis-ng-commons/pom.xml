@@ -84,7 +84,7 @@
             <artifactId>guice</artifactId>
         </dependency>
 
-        <!-- VEFA PEPPOL -->
+        <!-- Vefa Peppol -->
         <dependency>
             <groupId>network.oxalis.vefa</groupId>
             <artifactId>peppol-mode</artifactId>
