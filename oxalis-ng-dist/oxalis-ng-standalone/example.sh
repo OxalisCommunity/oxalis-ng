@@ -21,7 +21,7 @@ AS2SID="APP_1000000XXX"
 FILE="./src/test/resources/BII04_T10_PEPPOL-v2.0_invoice.xml"
 DOC_TYPE_OPTION=""
 
-# Difi PEPPOL Participant Identifier for test purposes.
+# Difi Peppol Participant Identifier for test purposes.
 # Check reception at https://test-aksesspunkt.difi.no/inbound/9908_810418052/
 RECEIVER="9908:810418052"
 
@@ -36,17 +36,17 @@ function usage() {
 
     usage:
 
-    Sends a PEPOL document to a reciever using the supplied URL.
+    Sends a Peppol document to a receiver using the supplied URL.
 
-    $0 [-k password] [-f file] [-d doc.type] [-p profile ] [-m start|as2] [-i as2-identifer] [-r receiver] [-s sender] [-u url|-u 'smp'] [-t]
+    $0 [-k password] [-f file] [-d doc.type] [-p profile ] [-m start|as2] [-i as2-identifier] [-r receiver] [-s sender] [-u url|-u 'smp'] [-t]
 
-    -d doc.type optional, overrides the PEPPOL document type as can be found in the payload (the document).
+    -d doc.type optional, overrides the Peppol document type as can be found in the payload (the document).
 
     -f "file"   denotes the xml document to be sent.
 
-    -r receiver optional PEPPOL Participan ID of receiver, default receiver is $RECEIVER (Difi)
+    -r receiver optional Peppol Participant ID of receiver, default receiver is $RECEIVER (Difi)
 
-    -s sender optional PEPPOL Participan ID of sender, default is $SENDER (Difi)
+    -s sender optional Peppol Participant ID of sender, default is $SENDER (Difi)
 
     -m method of transmission, either 'start' or 'as2'. Required if you specify a url different from 'smp'
 

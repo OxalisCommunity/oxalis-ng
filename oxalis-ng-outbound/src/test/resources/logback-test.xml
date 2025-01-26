@@ -30,17 +30,16 @@
         </encoder>
     </appender>
 
-    <logger name="oxalis-ng-tes" level="debug"/>
-    <logger name="oxalis-ng-com" level="debug"/>
-    <logger name="oxalis-ng-out" level="debug"/>
-    <logger name="org.apache" level="debug"/>
+    <logger name="oxalis-ng-tes" level="info"/>
+    <logger name="oxalis-ng-com" level="info"/>
+    <logger name="oxalis-ng-out" level="info"/>
 
     <logger name="org.apache" level="warn"/>
     <logger name="org.eclipse.jetty" level="warn"/>
     <logger name="network.oxalis.ng.commons.settings" level="warn"/>
     <logger name="network.oxalis.ng.persistence" level="info"/>
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="STDOUT"/>
     </root>
 

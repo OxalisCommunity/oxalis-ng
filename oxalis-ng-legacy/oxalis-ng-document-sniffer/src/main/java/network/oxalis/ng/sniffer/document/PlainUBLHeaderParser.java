@@ -32,7 +32,7 @@ import org.w3c.dom.Document;
 import javax.xml.xpath.XPath;
 
 /**
- * Parses the common PEPPOL header information, enough to decide document type and profile
+ * Parses the common Peppol header information, enough to decide document type and profile
  *
  * @author steinar
  * @author thore

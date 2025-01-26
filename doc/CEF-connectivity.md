@@ -1,8 +1,8 @@
 ### CEF-Connectivity using Oxalis-NG-Standalone sending SBD payloads
 
-Oxalis-NG-Standalone performs validations to ensure messages conform to PEPPOL standards. To work around this issue, we have made some changes to Oxalis-AS4 to allow us to bypass these restrictions for CEF-Connectivity test. These changes are kept minimal not to unnecessarily endanger the PEPPOL network. If messages using CEF PMode is to be used regularly we recommend the creation of a separate CLI wrapper or adjustments to Oxalis-NG-Standalone. The modified version of Oxalis-AS4 can be found here.
+Oxalis-NG-Standalone performs validations to ensure messages conform to Peppol standards. To work around this issue, we have made some changes to Oxalis-AS4 to allow us to bypass these restrictions for CEF-Connectivity test. These changes are kept minimal not to unnecessarily endanger the Peppol network. If messages using CEF PMode is to be used regularly we recommend the creation of a separate CLI wrapper or adjustments to Oxalis-NG-Standalone. The modified version of Oxalis-AS4 can be found here.
 
-To perform the CEF-Connectivity test send use the provided configuration and payload using these parameters `-f <path to file> -u <http address to CEF> -cert <path to CEF certificate>`. Use of the additional override commands will add PEPPOL prefixes to the values that will break the connectivity test.
+To perform the CEF-Connectivity test send use the provided configuration and payload using these parameters `-f <path to file> -u <http address to CEF> -cert <path to CEF certificate>`. Use of the additional override commands will add Peppol prefixes to the values that will break the connectivity test.
 
 Oxalis 4.1.0 added the ability to use self-signed certificates in a LOCAL mode (this mode is automatically detected if you provide a self-signed certificate). This LOCAL mode does require that you provide your own truststore and SMP (locator) address. An example is provided below.
 
@@ -35,12 +35,12 @@ Example payload.xml
     <StandardBusinessDocumentHeader>
         <HeaderVersion>1.0</HeaderVersion>
         <Sender>
-            <!-- This Sender section describes the PEPPOL Sender -->
+            <!-- This Sender section describes the Peppol Sender -->
             <!-- It corresponds to an OriginalSender in AS4 -->
           <Identifier>urn:oasis:names:tc:ebcore:partyid-type:unregistered:ceftestpartyXXgw</Identifier>
       </Sender>
       <Receiver>
-           <!-- This Sender section describes the PEPPOL Receiver -->
+           <!-- This Sender section describes the Peppol Receiver -->
            <!-- It corresponds to an FinalRecipient in AS4 -->
            <Identifier>urn:oasis:names:tc:ebcore:partyid-type:unregistered:cefsupportgw</Identifier>
         </Receiver>
@@ -56,7 +56,7 @@ Example payload.xml
         </DocumentIdentification>
         <BusinessScope>
             <Scope>
-                <!-- This Scope section describes the PEPPOL DocumentType -->
+                <!-- This Scope section describes the Peppol DocumentType -->
                 <!-- It corresponds to an Action in AS4 (PMode[1].BusinessInfo.Action) -->
 
                 <Type>DOCUMENTID</Type>
@@ -66,13 +66,13 @@ Example payload.xml
                 <InstanceIdentifier>connectivity::cef##connectivity::submitMessage</InstanceIdentifier>
             </Scope>
             <Scope>
-                <!-- This Scope section describes the PEPPOL Process -->
+                <!-- This Scope section describes the Peppol Process -->
                 <!-- It corresponds to an Service in AS4 (PMode[1].BusinessInfo.Service) -->
 
                 <Type>PROCESSID</Type>
-                <!-- This Identifier describes the PEPPOL 'Process Schema' and corresponds to a Service.Type in AS4 (PMode[].BusinessInfo.Service.type) -->
+                <!-- This Identifier describes the Peppol 'Process Schema' and corresponds to a Service.Type in AS4 (PMode[].BusinessInfo.Service.type) -->
                 <Identifier>e-delivery</Identifier>
-                <!-- This InstanceIdentifier describes the PEPPOL 'Process Value' and corresponds to an Service in AS4 (PMode[1].BusinessInfo.Service) -->
+                <!-- This InstanceIdentifier describes the Peppol 'Process Value' and corresponds to an Service in AS4 (PMode[1].BusinessInfo.Service) -->
                 <InstanceIdentifier>http://ec.europa.eu/e-delivery/services/connectivity-service</InstanceIdentifier>
             </Scope>
         </BusinessScope>
@@ -195,7 +195,7 @@ oxalis.header.parser=dummy
 ```
 
 
-## Oxalis outside PEPPOL
+## Oxalis outside Peppol
 
-Oxalis is made to serve as an AccessPoint in the PEPPOL network.
-If you intend to use Oxalis sending messages outside PEPPOL you should implement your own version of the relevant [Oxalis extension points](https://github.com/OxalisCommunity/oxalis-ng/blob/master/doc/extension-points.adoc).
+Oxalis is made to serve as an AccessPoint in the Peppol network.
+If you intend to use Oxalis sending messages outside Peppol you should implement your own version of the relevant [Oxalis extension points](https://github.com/OxalisCommunity/oxalis-ng/blob/master/doc/extension-points.adoc).

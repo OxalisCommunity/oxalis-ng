@@ -117,7 +117,7 @@ public class NoSbdhParser implements ContentDetector {
                     documentParser = headerParser.createDocumentParser();
                 } catch (Exception ex) {
                     /*
-                        allow this to happen so that "unknown" PEPPOL documents still
+                        allow this to happen so that "unknown" Peppol documents still
                         can be used by explicitly setting sender and receiver thru API
                     */
                 }

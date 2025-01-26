@@ -22,7 +22,7 @@
   ~ permissions and limitations under the Licence.
   -->
 
-<configuration debug="false">
+<configuration>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

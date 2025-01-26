@@ -73,7 +73,7 @@ public class HomeServlet extends HttpServlet {
         }
         writer.print("The AS4 endpoint is served at: <a href=\"as4\">here</a>");
         writer.print("<p>Important version, certificate and related information can be found at: <a href=\"as4\\status\">status</a></p>\n");
-        writer.print("<p><b>NOTE:</b><i>Status information is only for debugging and internal support purpose so please consider blocking access to this page.<i></p>\n");
+        writer.print("<p><b>NOTE:</b><i>Status information is only for debugging and internal support purpose so please consider blocking access to Status page.<i></p>\n");
         writer.print("</div></div>");
         writer.print("</body>");
         writer.print("</html>");

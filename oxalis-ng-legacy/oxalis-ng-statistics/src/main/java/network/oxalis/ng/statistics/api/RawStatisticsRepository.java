@@ -26,7 +26,7 @@ import java.util.Date;
 
 /**
  * Objects implementing this interface are capable of storing and retrieving raw data
- * pertaining to the sending and receiving of PEPPOL messages in order to provide statistics.
+ * pertaining to the sending and receiving of Peppol messages in order to provide statistics.
  * <p>
  * User: steinar
  * Date: 30.01.13

@@ -37,12 +37,12 @@
         <MaxSize>280</MaxSize>
     </appender>
 
-    <logger name="oxalis-ng-tes" level="debug"/>
-    <logger name="oxalis-ng-com" level="debug"/>
-    <logger name="oxalis-ng-out" level="debug"/>
-    <logger name="oxalis-ng-inb" level="debug"/>
+    <logger name="oxalis-ng-tes" level="info"/>
+    <logger name="oxalis-ng-com" level="info"/>
+    <logger name="oxalis-ng-out" level="info"/>
+    <logger name="oxalis-ng-inb" level="info"/>
     
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="cyclic-buffer"/>
         <appender-ref ref="logfile"/>
     </root>

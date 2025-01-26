@@ -30,7 +30,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Represents a type safe PEPPOL Document Identifier, textually represented thus:
+ * Represents a type safe Peppol Document Identifier, textually represented thus:
  * <p>
  * <pre>
  *     {@literal <root NS>::<document element local name>##<customization id>::<version>}
@@ -38,7 +38,7 @@ import java.util.regex.Pattern;
  *
  * @author Steinar Overbeck Cook
  * @author Thore Johnsen
- * @see "PEPPOL Policy for use of identifiers v3.0 of 2014-02-03"
+ * @see "Peppol Policy for use of identifiers v3.0 of 2014-02-03"
  */
 public class PeppolDocumentTypeId implements Serializable {
 
@@ -66,7 +66,7 @@ public class PeppolDocumentTypeId implements Serializable {
     }
 
     /**
-     * Parses the supplied text string into the separate components of a PEPPOL Document Identifier.
+     * Parses the supplied text string into the separate components of a Peppol Document Identifier.
      *
      * @param documentIdAsText textual representation of a document identifier.
      * @return type safe instance of DocumentTypeIdentifier
@@ -85,7 +85,7 @@ public class PeppolDocumentTypeId implements Serializable {
             return new PeppolDocumentTypeId(rootNameSpace, localName, customizationIdentifier, version);
         } else
             throw new IllegalArgumentException(
-                    String.format("Unable to parseOld '%s' into PEPPOL Document Type Identifier", documentIdAsText));
+                    String.format("Unable to parseOld '%s' into Peppol Document Type Identifier", documentIdAsText));
     }
 
     /**

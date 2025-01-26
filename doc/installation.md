@@ -28,7 +28,7 @@ When running the following commands you should expect output similar to the one 
 1. Install Tomcat and configure it for SSL on port 443 or make sure you terminate SSL in front of Tomcat on port 443 
 (using nginx or similar). Please, do not change this port. Most other access points need to communicate with you and their 
 operations department usually don't like opening non-standard ports. 
-**Do not use your PEPPOL certificate as an SSL certificate!**. 
+**Do not use your Peppol certificate as an SSL certificate!**. 
 You can refer additional documentation
 "[Default trusted root certificates and the Peppol policy for Transport Security](https://ionite.net/newsblog/2020-06-29_peppol_tls_certificates/)"- Disclaimer: this external 
 documentation not cross-verified, so please take your own wise decision
@@ -48,7 +48,7 @@ documentation not cross-verified, so please take your own wise decision
        export OXALIS_HOME=~/.oxalis
        ```
 
-4. See the [Oxalis keystore guide](/doc/keystore.adoc) for details on how to create your keystore. During the startup, your certificate validated towards the proper certificate chain. Please note that Oxalis will not work non-PEPPOL or expired certificates.
+4. See the [Oxalis keystore guide](/doc/keystore.adoc) for details on how to create your keystore. During the startup, your certificate validated towards the proper certificate chain. Please note that Oxalis will not work non-Peppol or expired certificates.
 
 5. Create the file `oxalis.conf`. Here is an example of how it might look:
 
@@ -90,7 +90,7 @@ documentation not cross-verified, so please take your own wise decision
 
 Testing and verification of your installation assume that you have performed above listed actions. 
 
-* You have obtained a PEPPOL test certificate.
+* You have obtained a Peppol test certificate.
 
 (The running mode will be detected by Oxalis by validating your certificate - no need to maintain that setting anymore.)
 

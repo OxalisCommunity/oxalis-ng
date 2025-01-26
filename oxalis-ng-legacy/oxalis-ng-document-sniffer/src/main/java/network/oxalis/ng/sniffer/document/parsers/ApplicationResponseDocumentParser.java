@@ -26,7 +26,7 @@ import network.oxalis.ng.sniffer.document.PlainUBLParser;
 import network.oxalis.vefa.peppol.common.model.ParticipantIdentifier;
 
 /**
- * Parser to retrieves information from PEPPOL Application Response documents.
+ * Parser to retrieves information from Peppol Application Response documents.
  * Should be able to decode Catalogue Response, Message Level Response and others based on ApplicationResponse
  *
  * @author thore

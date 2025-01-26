@@ -68,9 +68,9 @@ public class Main {
 
     private static OptionSpec<String> recipient;
 
-    private static OptionSpec<String> docType;              // The PEPPOL document type (very long string)
+    private static OptionSpec<String> docType;              // The Peppol document type (very long string)
 
-    private static OptionSpec<String> profileType;          // The PEPPOL document profile
+    private static OptionSpec<String> profileType;          // The Peppol document profile
 
     private static OptionSpec<File> evidencePath;  // Path to persistent storage of evidence data
 

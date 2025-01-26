@@ -26,7 +26,7 @@ import network.oxalis.ng.sniffer.document.PlainUBLParser;
 import network.oxalis.vefa.peppol.common.model.ParticipantIdentifier;
 
 /**
- * Parser to retrieves information from PEPPOL Catalogue scenarios.
+ * Parser to retrieves information from Peppol Catalogue scenarios.
  * Should be able to decode Catalogue (for catalogue response see ApplicationResponse)
  *
  * @author thore

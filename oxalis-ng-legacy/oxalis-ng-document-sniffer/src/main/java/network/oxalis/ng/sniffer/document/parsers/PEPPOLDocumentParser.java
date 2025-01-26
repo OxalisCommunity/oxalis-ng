@@ -25,19 +25,19 @@ package network.oxalis.ng.sniffer.document.parsers;
 import network.oxalis.vefa.peppol.common.model.ParticipantIdentifier;
 
 /**
- * A small set of common information we should be able to retrieve from any PEPPOL UBL/EHF document.
+ * A small set of common information we should be able to retrieve from any Peppol UBL/EHF document.
  *
  * @author thore
  */
 public interface PEPPOLDocumentParser {
 
     /**
-     * Identify and return the PEPPOL participant sending the document.
+     * Identify and return the Peppol participant sending the document.
      */
     ParticipantIdentifier getSender();
 
     /**
-     * Identify and return the PEPPOL participant receiving the document.
+     * Identify and return the Peppol participant receiving the document.
      */
     ParticipantIdentifier getReceiver();
 

@@ -13,7 +13,7 @@ PRGDIR=`dirname $0`
 
 RECEIVER="9908:983995691"
 
-# PEPPOL Participant id for Difi
+# Peppol Participant id for Difi
 DIFI_TEST="9908:810418052"
 
 #

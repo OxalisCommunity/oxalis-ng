@@ -26,7 +26,7 @@ import network.oxalis.ng.sniffer.document.PlainUBLParser;
 import network.oxalis.vefa.peppol.common.model.ParticipantIdentifier;
 
 /**
- * Parser to retrieves information from PEPPOL Despatch Advice scenarios.
+ * Parser to retrieves information from Peppol Despatch Advice scenarios.
  * Should be able to decode Despatch Advice document
  *
  * @author thore

@@ -104,12 +104,17 @@
         </dependency>
         <dependency>
             <groupId>network.oxalis.vefa</groupId>
-            <artifactId>peppol-sbdh</artifactId>
+            <artifactId>peppol-lookup</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>network.oxalis.vefa</groupId>
             <artifactId>peppol-mode</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>network.oxalis.vefa</groupId>
+            <artifactId>peppol-sbdh</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

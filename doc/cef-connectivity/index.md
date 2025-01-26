@@ -127,12 +127,12 @@ Here is a template for the payload.xml:
     <StandardBusinessDocumentHeader>
         <HeaderVersion>1.0</HeaderVersion>
         <Sender>
-            <!-- This Sender section describes the PEPPOL Sender -->
+            <!-- This Sender section describes the Peppol Sender -->
             <!-- It corresponds to an OriginalSender in AS4 -->
           <Identifier>urn:oasis:names:tc:ebcore:partyid-type:unregistered:C1</Identifier>
       </Sender>
       <Receiver>
-           <!-- This Sender section describes the PEPPOL Receiver -->
+           <!-- This Sender section describes the Peppol Receiver -->
            <!-- It corresponds to an FinalRecipient in AS4 -->
            <Identifier>urn:oasis:names:tc:ebcore:partyid-type:unregistered:C4</Identifier>
         </Receiver>
@@ -148,7 +148,7 @@ Here is a template for the payload.xml:
         </DocumentIdentification>
         <BusinessScope>
             <Scope>
-                <!-- This Scope section describes the PEPPOL DocumentType -->
+                <!-- This Scope section describes the Peppol DocumentType -->
                 <!-- It corresponds to an Action in AS4 (PMode[1].BusinessInfo.Action) -->
 
                 <Type>DOCUMENTID</Type>
@@ -158,13 +158,13 @@ Here is a template for the payload.xml:
                 <InstanceIdentifier>connectivity::cef##connectivity::submitMessage</InstanceIdentifier>
             </Scope>
             <Scope>
-                <!-- This Scope section describes the PEPPOL Process -->
+                <!-- This Scope section describes the Peppol Process -->
                 <!-- It corresponds to an Service in AS4 (PMode[1].BusinessInfo.Service) -->
 
                 <Type>PROCESSID</Type>
-                <!-- This Identifier describes the PEPPOL 'Process Schema' and corresponds to a Service.Type in AS4 (PMode[].BusinessInfo.Service.type) -->
+                <!-- This Identifier describes the Peppol 'Process Schema' and corresponds to a Service.Type in AS4 (PMode[].BusinessInfo.Service.type) -->
                 <Identifier>e-delivery</Identifier>
-                <!-- This InstanceIdentifier describes the PEPPOL 'Process Value' and corresponds to an Service in AS4 (PMode[1].BusinessInfo.Service) -->
+                <!-- This InstanceIdentifier describes the Peppol 'Process Value' and corresponds to an Service in AS4 (PMode[1].BusinessInfo.Service) -->
                 <InstanceIdentifier>http://ec.europa.eu/e-delivery/services/connectivity-service</InstanceIdentifier>
             </Scope>
         </BusinessScope>

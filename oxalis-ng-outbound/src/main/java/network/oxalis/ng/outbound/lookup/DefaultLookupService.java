@@ -50,7 +50,7 @@ import java.util.List;
 class DefaultLookupService implements LookupService {
 
     /**
-     * LookupClient provided by VEFA PEPPOL project.
+     * LookupClient provided by VEFA Peppol project.
      */
     private final LookupClient lookupClient;
 

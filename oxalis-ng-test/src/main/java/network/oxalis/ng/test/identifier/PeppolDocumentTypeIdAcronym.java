@@ -38,19 +38,19 @@ import network.oxalis.vefa.peppol.common.model.DocumentTypeIdentifier;
  */
 public enum PeppolDocumentTypeIdAcronym {
 
-    // PEPPOL Catalogues (PEPPOL BIS profile 1a)
+    // Peppol Catalogues (Peppol BIS profile 1a)
     PEPPOL_CATALOGUE("urn:oasis:names:specification:ubl:schema:xsd:Catalogue-2::Catalogue" +
             "##urn:www.cenbii.eu:transaction:biicoretrdm019:ver1.0" +
             ":#urn:www.peppol.eu:bis:peppol1a:ver1.0" +
             "::2.0"),
 
-    // Basic Order according to PEPPOL BIS 3a
+    // Basic Order according to Peppol BIS 3a
     ORDER("urn:oasis:names:specification:ubl:schema:xsd:Order-2::Order" +
             "##urn:www.cenbii.eu:transaction:biicoretrdm001:ver1.0" +
             ":#urn:www.peppol.eu:bis:peppol3a:ver1.0" +
             "::2.0"),
 
-    // Standard PEPPOL BIS profile 4a invoice
+    // Standard Peppol BIS profile 4a invoice
     INVOICE("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice" +
             "##urn:www.cenbii.eu:transaction:biitrns010:ver2.0" +
             ":extended:urn:www.peppol.eu:bis:peppol4a:ver2.0" +
@@ -70,19 +70,19 @@ public enum PeppolDocumentTypeIdAcronym {
             "#urn:www.difi.no:ehf:kreditnota:ver1" +
             "::2.0"),
 
-    // PEPPOL Billing (PEPPOL BIS Profile 5a)
+    // Peppol Billing (Peppol BIS Profile 5a)
     INVOICE_BILLING("urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice" +
             "##urn:www.cenbii.eu:transaction:biicoretrdm010:ver1.0" +
             ":#urn:www.peppol.eu:bis:peppol5a:ver1.0" +
             "::2.0"),
 
-    // PEPPOL Billing (PEPPOL BIS Profile 5a)
+    // Peppol Billing (Peppol BIS Profile 5a)
     CREDIT_NOTE_BILLLING("urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2::CreditNote" +
             "##urn:www.cenbii.eu:transaction:biicoretrdm014:ver1.0" +
             ":#urn:www.peppol.eu:bis:peppol5a:ver1.0" +
             "::2.0"),
 
-    // Credit invoice according to PEPPOL BIS 6a (Procurement)
+    // Credit invoice according to Peppol BIS 6a (Procurement)
     CREDIT_NOTE("urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2::CreditNote" +
             "##urn:www.cenbii.eu:transaction:biicoretrdm014:ver1.0" +
             ":#urn:www.peppol.eu:bis:peppol6a:ver1.0" +

@@ -26,7 +26,7 @@ import network.oxalis.ng.sniffer.document.PlainUBLParser;
 import network.oxalis.vefa.peppol.common.model.ParticipantIdentifier;
 
 /**
- * Parser to retrieves information from PEPPOL Order scenarios.
+ * Parser to retrieves information from Peppol Order scenarios.
  * Should be able to decode Order and OrderResponse documents.
  *
  * @author thore

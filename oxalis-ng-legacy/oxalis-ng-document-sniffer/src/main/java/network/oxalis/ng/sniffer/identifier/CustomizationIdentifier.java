@@ -25,12 +25,12 @@ package network.oxalis.ng.sniffer.identifier;
 import java.io.Serializable;
 
 /**
- * Represents a PEPPOL Customization Identifier contained within a PEPPOL Document Identifier.
+ * Represents a Peppol Customization Identifier contained within a Peppol Document Identifier.
  *
  * @author Steinar Overbeck Cook steinar@sendregning.no
  * @author Thore Johnsen thore@sendregning.no
  *
- * @see "PEPPOL Policy for use of identifiers v3.0 of 2014-02-03"
+ * @see "Peppol Policy for use of identifiers v3.0 of 2014-02-03"
  */
 public class CustomizationIdentifier implements Serializable {
 

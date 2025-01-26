@@ -37,7 +37,7 @@
         <MaxSize>280</MaxSize>
     </appender>
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="cyclic-buffer"/>
         <appender-ref ref="logfile"/>
     </root>

@@ -29,7 +29,7 @@ import network.oxalis.vefa.peppol.common.model.ParticipantIdentifier;
 import org.w3c.dom.Element;
 
 /**
- * Abstract implementation based on the PlainUBLParser to retrieve information from PEPPOL documents.
+ * Abstract implementation based on the PlainUBLParser to retrieve information from Peppol documents.
  * Contains common functionality to be used as a base for decoding types.
  *
  * @author thore

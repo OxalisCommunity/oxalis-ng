@@ -43,7 +43,7 @@ public class ParticipantId implements Serializable {
     //max length for international organisation number
     private static final int INTERNATION_ORG_ID_MAX_LENGTH = 50;
 
-    // Holds the textual representation of this PEPPOL participant id
+    // Holds the textual representation of this Peppol participant id
     private final String value;
 
     /**
@@ -54,7 +54,7 @@ public class ParticipantId implements Serializable {
      * </ol>
      *
      * @param participantId participant Id represented as a string
-     * @throws InvalidPeppolParticipantException if we are unable to recognize the input as a PEPPOL participant ID
+     * @throws InvalidPeppolParticipantException if we are unable to recognize the input as a Peppol participant ID
      */
     public ParticipantId(String participantId) {
         value = parse(participantId);
@@ -83,12 +83,12 @@ public class ParticipantId implements Serializable {
                     , organisationId, INTERNATION_ORG_ID_MAX_LENGTH));
         }
 
-        // Formats the organisation identifier in accordance with what PEPPOL expects.
+        // Formats the organisation identifier in accordance with what Peppol expects.
         value = String.format("%s:%s", schemeId.getCode(), organisationId);
     }
 
     /**
-     * Parses the input string assuming it represents an organisation number or PEPPOL participant identifier in one
+     * Parses the input string assuming it represents an organisation number or Peppol participant identifier in one
      * of these forms:
      * <ol>
      * <li>icd +':' + organisation identifier</li>
@@ -124,7 +124,7 @@ public class ParticipantId implements Serializable {
         if (schemeId == null)
             throw new InvalidPeppolParticipantException("ICD " + icd + " is unknown");
 
-        // Constructs the textual representation of the PEPPOL participant identifier
+        // Constructs the textual representation of the Peppol participant identifier
         return String.format("%s:%s", schemeId.getCode(), organisationId);
     }
 

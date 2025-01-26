@@ -14,7 +14,7 @@ are considered non-compliant and will not be accepted when onboarding as a Peppo
 your SSL configuration, go to [https://www.ssllabs.com/ssltest/](https://www.ssllabs.com/ssltest/). It must be a grade A or above. This will
 eventually also be controlled by the OpenPEPPOL Operating Office.
 
-* Your PEPPOL Test certificate is installed in your browser so that your are able to open the [OpenPEPPOL Centralized Testbed](https://testbed.peppol.eu/secure/suite/view).
+* Your Peppol Test certificate is installed in your browser so that your are able to open the [OpenPEPPOL Centralized Testbed](https://testbed.peppol.eu/secure/suite/view).
 
 ## Setting up an Oxalis-NG Access Point
 
@@ -43,7 +43,7 @@ You need to specify the correct passwords and name of the keystore.
 Here is an example of a verbose logback.xml:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="false">
+<configuration>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

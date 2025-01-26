@@ -273,7 +273,7 @@ public class TestResourceModule extends OxalisModule {
 
     /**
      * Provides a Map of non-UBL type resource names and PeppolStandardBusinessHeader data.
-     * Oxalis should allow new or unknown formats to be transported using PEPPOL.
+     * Oxalis should allow new or unknown formats to be transported using Peppol.
      */
     @Provides
     @Named("test-non-ubl-documents")

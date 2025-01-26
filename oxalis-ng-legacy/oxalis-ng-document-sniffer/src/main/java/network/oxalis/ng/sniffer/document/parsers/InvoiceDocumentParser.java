@@ -26,7 +26,7 @@ import network.oxalis.ng.sniffer.document.PlainUBLParser;
 import network.oxalis.vefa.peppol.common.model.ParticipantIdentifier;
 
 /**
- * Parser to retrieves information from PEPPOL Invoice scenarios.
+ * Parser to retrieves information from Peppol Invoice scenarios.
  * Should be able to decode Invoices in plain UBL and Norwegian EHF variants.
  *
  * @author thore
