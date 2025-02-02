@@ -28,7 +28,7 @@
     <parent>
         <artifactId>oxalis-ng</artifactId>
         <groupId>network.oxalis</groupId>
-        <version>0.2.1-beta-SNAPSHOT</version>
+        <version>1.0.0-RC1</version>
     </parent>
 
     <artifactId>oxalis-ng-api</artifactId>
