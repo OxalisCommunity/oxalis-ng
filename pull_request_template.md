@@ -10,15 +10,19 @@ Please include a summary of the change request or bug which is supposed to be fi
 
 ## Type of Change
 
-- [ ] OpenPeppol AS4 specification
+- [ ] OpenPeppol eDEC Specifications
+- [ ] Peppol AS4 Profile specification
+- [ ] Peppol Business Envelope specification
+- [ ] Peppol Policies specification
+- [ ] Peppol eDEC Code Lists specification
 - [ ] OpenPeppol Spring/Fall release 
-- [ ] Oxalis software change or enhancement
-- [ ] CEF change
+- [ ] Oxalis software internal change or enhancement
+- [ ] General change
 
 ## Pull Request Checklist:
 
 - [ ] My code follows the style guidelines of this project
-- [ ] I have commented my code, particularly in hard-to-understand areas. But did not added unnecessary annotation/comment say @author name etc
+- [ ] I have commented my code, particularly in hard-to-understand areas. But did not add unnecessary annotation/comment say @author name etc
 - [ ] I have checked my code for variable and method name and corrected grammar/spelling mistakes if any
 - [ ] I have made corresponding changes to the documentation where needed
 - [ ] My changes generate no new/additional warnings
