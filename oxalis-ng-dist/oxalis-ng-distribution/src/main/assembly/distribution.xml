@@ -46,24 +46,6 @@
             <lineEnding>windows</lineEnding>
         </fileSet>
 
-        <!-- Documentation -->
-        <fileSet>
-            <directory>../../doc</directory>
-            <outputDirectory>doc</outputDirectory>
-            <includes>
-                <include>*/**</include>
-            </includes>
-        </fileSet>
-
-        <!-- Shell scripts -->
-        <fileSet>
-            <directory>../oxalis-ng-standalone/src/main/bash</directory>
-            <outputDirectory>bin</outputDirectory>
-            <includes>
-                <include>*.sh</include>
-            </includes>
-        </fileSet>
-
         <!-- SQL scripts -->
         <fileSet>
             <directory>../../oxalis-ng-legacy/oxalis-statistics/src/main/resources/sql</directory>
