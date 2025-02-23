@@ -48,7 +48,7 @@
 
         <!-- SQL scripts -->
         <fileSet>
-            <directory>../../oxalis-ng-legacy/oxalis-statistics/src/main/resources/sql</directory>
+            <directory>../../oxalis-ng-legacy/oxalis-ng-statistics/src/main/resources/sql</directory>
             <outputDirectory>sql</outputDirectory>
             <includes>
                 <include>*.sql</include>
