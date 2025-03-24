@@ -41,6 +41,7 @@ import network.oxalis.ng.commons.guice.OxalisModule;
 import network.oxalis.vefa.peppol.mode.Mode;
 import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
+import org.apache.cxf.transport.http.HttpServerEngineSupport;
 import org.apache.wss4j.dom.engine.WSSConfig;
 
 import java.security.Security;
@@ -59,6 +60,7 @@ public class As4CommonModule extends OxalisModule {
         bind(MerlinProvider.class);
 
         Bus bus = BusFactory.newInstance().createBus();
+        bus.setProperty(HttpServerEngineSupport.ENABLE_HTTP2, true);
         new OxalisAlgorithmSuiteLoader(bus);
         BusFactory.setThreadDefaultBus(bus);
 
