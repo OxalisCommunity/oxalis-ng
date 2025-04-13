@@ -63,11 +63,11 @@
         <java.version>11</java.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <lombok.version>1.18.24</lombok.version>
+        <lombok.version>1.18.32</lombok.version>
         <metainf-services.version>1.9</metainf-services.version>
         <network.oxalis.ng.version>1.0.1-SNAPSHOT</network.oxalis.ng.version>
-        <vefa.peppol.version>3.8.0</vefa.peppol.version>
-        <peppol.sbdh.version>2.3.0</peppol.sbdh.version>
+        <vefa.peppol.version>4.0.0-RC1</vefa.peppol.version>
+        <peppol.sbdh.version>2.4.0</peppol.sbdh.version>
         <cxf.version>4.0.6</cxf.version>
         <wss4j.version>3.0.4</wss4j.version>
         <bouncycastle.version>1.80</bouncycastle.version>
@@ -84,9 +84,9 @@
         <google.guice.version>7.0.0</google.guice.version>
         <guava.version>33.4.0-jre</guava.version>
         <commons-dbcp2.version>2.9.0</commons-dbcp2.version>
-        <httpclient.version>4.5.13</httpclient.version>
+        <httpclient.version>4.5.14</httpclient.version>
         <neethi.version>3.2.1</neethi.version>
-        <com.typesafe.config.version>1.4.2</com.typesafe.config.version>
+        <com.typesafe.config.version>1.4.3</com.typesafe.config.version>
         <commons-io.version>2.18.0</commons-io.version>
         <commons-codec.version>1.18.0</commons-codec.version>
         <jetty.version>11.0.24</jetty.version>
