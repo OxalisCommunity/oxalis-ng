@@ -9,6 +9,6 @@ public enum LookupConf {
 
     @Path("oxalis.pint.wildcard.migration.phase")
     @DefaultValue("0")
-    PINT_WILDCARD_MIGRATION_PHASE;
+    PINT_WILDCARD_MIGRATION_PHASE,
 
 }
