@@ -66,7 +66,7 @@
         <lombok.version>1.18.32</lombok.version>
         <metainf-services.version>1.9</metainf-services.version>
         <network.oxalis.ng.version>1.1.0-RC2-SNAPSHOT</network.oxalis.ng.version>
-        <vefa.peppol.version>4.0.0-RC1</vefa.peppol.version>
+        <vefa.peppol.version>4.0.0</vefa.peppol.version>
         <peppol.sbdh.version>2.4.0</peppol.sbdh.version>
         <cxf.version>4.0.6</cxf.version>
         <wss4j.version>3.0.4</wss4j.version>
