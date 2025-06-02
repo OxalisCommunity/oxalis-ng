@@ -399,7 +399,6 @@
                                 <usedDependency>com.sun.xml.bind:jaxb-impl</usedDependency>
                                 <usedDependency>commons-codec:commons-codec</usedDependency>
                                 <usedDependency>org.kohsuke.metainf-services:metainf-services</usedDependency>
-                                <usedDependency>org.projectlombok:lombok</usedDependency>
                             </usedDependencies>
                         </configuration>
                     </execution>

@@ -126,7 +126,7 @@ public class As4LazyAttachmentCollection implements Collection<Attachment> {
     }
 
     public boolean containsAll(Collection<?> arg0) {
-        return attachments.containsAll(arg0);
+        return new HashSet<>(attachments).containsAll(arg0);
     }
 
     public boolean isEmpty() {

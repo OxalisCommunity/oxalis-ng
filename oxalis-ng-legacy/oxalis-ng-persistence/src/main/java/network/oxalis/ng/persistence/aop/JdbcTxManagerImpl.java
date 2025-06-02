@@ -173,7 +173,6 @@ public class JdbcTxManagerImpl implements JdbcTxManager {
         } finally {
             //Essential that we remove the reference to thread local to avoid memory leaks
             trace("Removing transaction manager");
-            threadLocalJdbcTransaction.set(null);
             threadLocalJdbcTransaction.remove();    // Ensures we don't get memory leaks
         }
     }
@@ -243,7 +242,7 @@ public class JdbcTxManagerImpl implements JdbcTxManager {
     /**
      * Helper class that holds a Connection object and whether or not the transaction should be rolled back.
      */
-    private class JdbcTransaction {
+    private static class JdbcTransaction {
 
         private final Connection connection;
 
