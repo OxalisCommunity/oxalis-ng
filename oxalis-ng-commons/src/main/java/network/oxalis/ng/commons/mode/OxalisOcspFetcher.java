@@ -75,7 +75,7 @@ public class OxalisOcspFetcher implements OcspFetcher {
         return new ApacheOcspFetcherResponse(httpClientProvider.get().execute(httpPost, basicHttpContext));
     }
 
-    private static class ApacheOcspFetcherResponse implements OcspFetcherResponse {
+    private class ApacheOcspFetcherResponse implements OcspFetcherResponse {
 
         private CloseableHttpResponse response;
 

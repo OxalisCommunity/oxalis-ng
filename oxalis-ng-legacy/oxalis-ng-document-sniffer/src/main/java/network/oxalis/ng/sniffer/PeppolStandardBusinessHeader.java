@@ -66,6 +66,16 @@ public class PeppolStandardBusinessHeader {
      */
     private C1CountryIdentifier c1CountryIdentifier;
 
+    /**
+     * MLS_TO identifier
+     */
+    private MlsToIdentifier mlsToIdentifier;
+
+    /**
+     * MLS_TYPE identifier
+     */
+    private MlsTypeIdentifier mlsTypeIdentifier;
+
 
     /**
      * Represents the unique identity of the message envelope. It is not the same as the ID of the
@@ -100,6 +110,8 @@ public class PeppolStandardBusinessHeader {
         peppolDocumentTypeId = header.getDocumentType();
         profileTypeIdentifier = header.getProcess();
         c1CountryIdentifier = header.getC1CountryIdentifier();
+        mlsToIdentifier = header.getMlsToIdentifier();
+        mlsTypeIdentifier = header.getMlsTypeIdentifier();
         instanceId = new InstanceId(header.getIdentifier().getIdentifier());
     }
 
@@ -112,6 +124,8 @@ public class PeppolStandardBusinessHeader {
         peppolDocumentTypeId = peppolStandardBusinessHeader.getDocumentTypeIdentifier();
         profileTypeIdentifier = peppolStandardBusinessHeader.getProfileTypeIdentifier();
         c1CountryIdentifier = peppolStandardBusinessHeader.getC1CountryIdentifier();
+        mlsToIdentifier = peppolStandardBusinessHeader.getMlsToIdentifier();
+        mlsTypeIdentifier = peppolStandardBusinessHeader.getMlsTypeIdentifier();
         instanceId = peppolStandardBusinessHeader.getInstanceId();
         creationDateAndTime = peppolStandardBusinessHeader.getCreationDateAndTime();
     }
@@ -127,6 +141,10 @@ public class PeppolStandardBusinessHeader {
                 (peppolDocumentTypeId != null) &&
                 (profileTypeIdentifier != null) &&
                 (c1CountryIdentifier != null) &&
+                // TODO: MLS_TO is Not mandatory yet, uncomment once MLS_TO will become mandatory
+                //(mlsToIdentifier != null) &&
+                // TODO: MLS_TYPE is Not mandatory yet, uncomment once MLS_TYPE will become mandatory
+                //(mlsTypeIdentifier != null) &&
                 (instanceId != null) &&
                 (creationDateAndTime != null));
     }
@@ -143,6 +161,10 @@ public class PeppolStandardBusinessHeader {
         if (peppolDocumentTypeId == null) mhf.add("peppolDocumentTypeId");
         if (profileTypeIdentifier == null) mhf.add("profileTypeIdentifier");
         if (c1CountryIdentifier == null) mhf.add("c1CountryIdentifier");
+        // TODO: MLS_TO is Not mandatory yet, uncomment once MLS_TO will become mandatory
+        //if (mlsToIdentifier == null) mhf.add("mlsToIdentifier");
+        // TODO: MLS_TYPE is Not mandatory yet, uncomment once MLS_TYPE will become mandatory
+        //if (mlsTypeIdentifier == null) mhf.add("mlsTypeIdentifier");
         if (instanceId == null) mhf.add("messageId");
         if (creationDateAndTime == null) mhf.add("creationDateAndTime");
         return mhf;
@@ -209,6 +231,22 @@ public class PeppolStandardBusinessHeader {
         this.c1CountryIdentifier = c1CountryIdentifier;
     }
 
+    public MlsToIdentifier getMlsToIdentifier() {
+        return mlsToIdentifier;
+    }
+
+    public void setMlsToIdentifier(MlsToIdentifier mlsToIdentifier) {
+        this.mlsToIdentifier = mlsToIdentifier;
+    }
+
+    public MlsTypeIdentifier getMlsTypeIdentifier() {
+        return mlsTypeIdentifier;
+    }
+
+    public void setMlsTypeIdentifier(MlsTypeIdentifier mlsTypeIdentifier) {
+        this.mlsTypeIdentifier = mlsTypeIdentifier;
+    }
+
     public Header toVefa() {
         PeppolDocumentTypeId documentTypeId = PeppolDocumentTypeId.valueOf(peppolDocumentTypeId.getIdentifier());
 
@@ -218,6 +256,8 @@ public class PeppolStandardBusinessHeader {
                 profileTypeIdentifier,
                 peppolDocumentTypeId,
                 c1CountryIdentifier,
+                mlsToIdentifier,
+                mlsTypeIdentifier,
                 instanceId == null ? InstanceIdentifier.generateUUID() : instanceId.toVefa(),
                 InstanceType.of(
                         documentTypeId.getRootNameSpace(),

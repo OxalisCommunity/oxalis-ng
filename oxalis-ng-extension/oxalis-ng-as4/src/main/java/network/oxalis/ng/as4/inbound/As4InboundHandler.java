@@ -216,18 +216,12 @@ public class As4InboundHandler {
             EndpointNotFoundException, OxalisAs4Exception {
 
         LookupClient lookupClient = LookupClientBuilder.forMode(mode).build();
-        int pintWildcardMigrationPhase = 0;
-        if (config.hasPath("oxalis.pint.wildcard.migration.phase")) {
-            pintWildcardMigrationPhase = config.getInt("oxalis.pint.wildcard.migration.phase");
-        }
-
         if (config.getBoolean("access.point.isReceiverCheckEnabled")) {
             Header header = firstHeader.getHeader();
             Endpoint endpoint = lookupClient.getEndpoint(
                     ParticipantIdentifier.of(header.getReceiver().getIdentifier()),
                     DocumentTypeIdentifier.of(header.getDocumentType().getIdentifier()),
                     ProcessIdentifier.of(header.getProcess().getIdentifier()),
-                    pintWildcardMigrationPhase,
                     TransportProfile.PEPPOL_AS4_2_0
             );
 

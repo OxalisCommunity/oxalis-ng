@@ -242,7 +242,7 @@ public class JdbcTxManagerImpl implements JdbcTxManager {
     /**
      * Helper class that holds a Connection object and whether or not the transaction should be rolled back.
      */
-    private static class JdbcTransaction {
+    private class JdbcTransaction {
 
         private final Connection connection;
 
