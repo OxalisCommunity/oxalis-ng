@@ -44,7 +44,7 @@ import java.time.Duration;
  */
 public class ApacheHttpModule extends OxalisModule {
 
-    private static final String USER_AGENT = String.format("Oxalis %s", OxalisVersion.getVersion());
+    private static final String USER_AGENT = String.format("Oxalis-NG %s", OxalisVersion.getVersion());
 
     @Override
     protected void configure() {
