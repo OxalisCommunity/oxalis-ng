@@ -95,11 +95,9 @@ public class SignatureTest {
         return cipher.doFinal(plainText.getBytes());
     }
 
-
-    private KeyPair generateKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException {
+    private KeyPair generateKeyPair() throws NoSuchAlgorithmException {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-        keyPairGenerator.initialize(2048, new SecureRandom());
+        keyPairGenerator.initialize(2048); // uses default SecureRandom (stronger than SHA1PRNG)
         return keyPairGenerator.generateKeyPair();
     }
-
 }
