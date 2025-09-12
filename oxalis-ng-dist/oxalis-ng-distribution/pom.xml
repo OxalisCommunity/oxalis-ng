@@ -28,7 +28,7 @@
     <parent>
         <artifactId>oxalis-ng</artifactId>
         <groupId>network.oxalis</groupId>
-        <version>1.2.0-RC5</version>
+        <version>1.2.0-RC6-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
