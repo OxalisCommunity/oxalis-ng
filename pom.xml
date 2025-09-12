@@ -68,7 +68,7 @@
         <network.oxalis.ng.version>1.2.0-RC5-SNAPSHOT</network.oxalis.ng.version>
         <vefa.peppol.version>4.2.0-RC4</vefa.peppol.version>
         <peppol.sbdh.version>2.5.0</peppol.sbdh.version>
-        <cxf.version>4.0.8</cxf.version>
+        <cxf.version>4.0.9</cxf.version>
         <wss4j.version>3.0.4</wss4j.version>
         <bouncycastle.version>1.80</bouncycastle.version>
         <jakarta.xml.bind-api.version>4.0.2</jakarta.xml.bind-api.version>
