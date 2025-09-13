@@ -26,9 +26,8 @@ public class BrowserTypeProvider {
     }
 
     public String getBrowserType() {
-        return String.format("Oxalis %s / AS4 %s / %s",
+        return String.format("Oxalis-NG %s / %s",
                 OxalisVersion.getVersion(),
-                OxalisAS4Version.getVersion(),
                 getCN());
     }
 
