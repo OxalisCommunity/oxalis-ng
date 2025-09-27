@@ -37,6 +37,7 @@ public class As4FaultInHandler implements SOAPHandler<SOAPMessageContext> {
     private static final String CERTIFICATE_ERROR_MSG = "Cannot find key for certificate";
     private static final String ERROR_CODE_FAILED_CHECK = "FAILED_CHECK";
     private static final String FAULT_CODE_FAILED_CHECK = "FailedCheck";
+    private static final String PEPPOL_NOT_SERVICED = "PEPPOL:NOT_SERVICED";
 
     @Inject
     public As4FaultInHandler(As4MessageFactory as4MessageFactory, PersisterHandler persisterHandler) {
@@ -71,6 +72,14 @@ public class As4FaultInHandler implements SOAPHandler<SOAPMessageContext> {
         AS4Error as4Error = toAS4Error(exception);
 
         handleAS4Error(context, messageId, as4Error);
+
+        if (as4Error instanceof OxalisAs4Exception) {
+            OxalisAs4Exception oxalisAs4Exception = (OxalisAs4Exception) as4Error;
+            if (PEPPOL_NOT_SERVICED.equals(oxalisAs4Exception.getMessage())) {
+                context.put(MessageContext.HTTP_RESPONSE_CODE, 200);
+                context.setScope(MessageContext.HTTP_RESPONSE_CODE, MessageContext.Scope.APPLICATION);
+            }
+        }
 
         return true;
     }
@@ -118,22 +127,22 @@ public class As4FaultInHandler implements SOAPHandler<SOAPMessageContext> {
             boolean IsSecurityException = false;
             String detailSecurityExceptionMessage = "";
 
-            if(null != t.getMessage()) {
+            if (null != t.getMessage()) {
                 detailSecurityExceptionMessage = t.getMessage();
             }
 
-            if(null != ((WSSecurityException) t).getErrorCode()) {
+            if (null != ((WSSecurityException) t).getErrorCode()) {
                 String errorCode = ((WSSecurityException) t).getErrorCode().name();
                 IsSecurityException = errorCode.equalsIgnoreCase(ERROR_CODE_FAILED_CHECK);
             }
 
-            if(null != ((WSSecurityException) t).getFaultCode()) {
+            if (null != ((WSSecurityException) t).getFaultCode()) {
                 String faultCode = (null == ((WSSecurityException) t).getFaultCode().getLocalPart() ? "" : ((WSSecurityException) t).getFaultCode().getLocalPart());
                 IsSecurityException = faultCode.equalsIgnoreCase(FAULT_CODE_FAILED_CHECK);
             }
 
-            if(IsSecurityException || detailSecurityExceptionMessage.equalsIgnoreCase(CERTIFICATE_ERROR_MSG)) {
-                return new OxalisAs4Exception("PEPPOL:NOT_SERVICED", AS4ErrorCode.EBMS_0004, AS4ErrorCode.Severity.FAILURE);
+            if (IsSecurityException || detailSecurityExceptionMessage.equalsIgnoreCase(CERTIFICATE_ERROR_MSG)) {
+                return new OxalisAs4Exception(PEPPOL_NOT_SERVICED, AS4ErrorCode.EBMS_0004, AS4ErrorCode.Severity.FAILURE);
             }
 
             boolean isCompressionError = (boolean) inMessage.get().getOrDefault("oxalis.as4.compressionErrorDetected", false);
