@@ -50,7 +50,7 @@ import java.security.KeyStore;
 @Type("rem")
 public class RemEvidenceFactory implements EvidenceFactory {
 
-    private static final String ISSUER = String.format("Oxalis %s", OxalisVersion.getVersion());
+    private static final String ISSUER = String.format("Oxalis-NG %s", OxalisVersion.getVersion());
 
     private final KeyStore.PrivateKeyEntry privateKeyEntry;
 
