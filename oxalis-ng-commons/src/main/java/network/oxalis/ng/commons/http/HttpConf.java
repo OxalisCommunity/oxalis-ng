@@ -34,31 +34,31 @@ import network.oxalis.ng.api.settings.Title;
 public enum HttpConf {
 
     @Path("oxalis.http.pool.total")
-    @DefaultValue("20")
+    @DefaultValue("50")
     POOL_TOTAL,
 
     @Path("oxalis.http.pool.max_route")
-    @DefaultValue("2")
+    @DefaultValue("5")
     POOL_MAX_ROUTE,
 
     @Path("oxalis.http.pool.validate_after_inactivity")
-    @DefaultValue("1000")
+    @DefaultValue("2000")
     POOL_VALIDATE_AFTER_INACTIVITY,
 
     @Path("oxalis.http.pool.time_to_live")
-    @DefaultValue("30")
+    @DefaultValue("60")
     POOL_TIME_TO_LIVE,
 
     @Path("oxalis.http.timeout.connect")
-    @DefaultValue("0")
+    @DefaultValue("5000")
     TIMEOUT_CONNECT,
 
     @Path("oxalis.http.timeout.read")
-    @DefaultValue("0")
+    @DefaultValue("45000")
     TIMEOUT_READ,
 
     @Path("oxalis.http.timeout.socket")
-    @DefaultValue("0")
+    @DefaultValue("45000")
     TIMEOUT_SOCKET,
 
     @Path("oxalis.http.version")
