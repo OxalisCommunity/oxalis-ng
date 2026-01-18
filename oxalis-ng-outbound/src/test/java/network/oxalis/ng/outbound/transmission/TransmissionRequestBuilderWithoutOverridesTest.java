@@ -27,6 +27,7 @@ import com.google.inject.name.Named;
 import network.oxalis.ng.api.lang.OxalisException;
 import network.oxalis.ng.api.outbound.TransmissionRequest;
 import network.oxalis.ng.commons.guice.GuiceModuleLoader;
+import network.oxalis.ng.sniffer.identifier.InstanceId;
 import network.oxalis.ng.sniffer.identifier.ParticipantId;
 import network.oxalis.ng.test.lookup.MockLookupModule;
 import network.oxalis.vefa.peppol.common.model.*;
@@ -164,6 +165,7 @@ public class TransmissionRequestBuilderWithoutOverridesTest {
                         ":#urn:www.peppol.eu:bis:peppol4a:ver1.0" +
                         "::2.0", DocumentTypeIdentifier.BUSDOX_DOCID_QNS_SCHEME));
         transmissionRequestBuilder.processType(ProcessIdentifier.of("urn:www.cenbii.eu:profile:bii04:ver1.0"));
+        transmissionRequestBuilder.instanceId(new InstanceId("1070e7f0-3bae-11e3-aa6e-0800200c9a66"));
         transmissionRequestBuilder.overrideAs4Endpoint(Endpoint.of(
                 TransportProfile.PEPPOL_AS4_2_0, URI.create("https://localhost:8080/oxalis/as4"), certificate));
 
@@ -173,7 +175,7 @@ public class TransmissionRequestBuilderWithoutOverridesTest {
         TransmissionRequest request = transmissionRequestBuilder.build();
 
         Header header = request.getHeader();
-        assertNotEquals(header.getIdentifier().getIdentifier(), "1070e7f0-3bae-11e3-aa6e-0800200c9a66");
+        assertEquals(header.getIdentifier(), InstanceIdentifier.of("1070e7f0-3bae-11e3-aa6e-0800200c9a66"));
         assertEquals(header.getSender(), new ParticipantId("0192:976098897").toVefa());
         assertEquals(header.getReceiver(), new ParticipantId("0192:810017902").toVefa());
         assertEquals(header.getDocumentType(), DocumentTypeIdentifier.of(

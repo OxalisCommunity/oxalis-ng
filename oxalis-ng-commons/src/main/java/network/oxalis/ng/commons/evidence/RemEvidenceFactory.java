@@ -67,6 +67,7 @@ public class RemEvidenceFactory implements EvidenceFactory {
                     .eventCode(EventCode.DELIVERY)
                     // Missing optional "EventReason"
                     .issuer(ISSUER)
+                    // unique ID of the evidence
                     .evidenceIdentifier(InstanceIdentifier.generateUUID())
                     .timestamp(transmissionResult.getTimestamp())
                     .header(transmissionResult.getHeader())

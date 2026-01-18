@@ -320,13 +320,9 @@ public class TransmissionRequestBuilder {
         if (supplied.getMlsTypeIdentifier() != null) {
             mergedHeaders.setMlsTypeIdentifier(supplied.getMlsTypeIdentifier());
         }
-        // If instanceId was supplied by caller, use it otherwise, create new
         if (supplied.getInstanceId() != null) {
             mergedHeaders.setInstanceId(supplied.getInstanceId());
-        } else {
-            mergedHeaders.setInstanceId(new InstanceId());
         }
-
         if (supplied.getCreationDateAndTime() != null) {
             mergedHeaders.setCreationDateAndTime(supplied.getCreationDateAndTime());
         }
