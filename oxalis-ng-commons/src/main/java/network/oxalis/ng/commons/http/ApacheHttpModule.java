@@ -59,7 +59,9 @@ public class ApacheHttpModule extends OxalisModule {
 
         connectionManager.setDefaultMaxPerRoute(settings.getInt(HttpConf.POOL_MAX_ROUTE));
         connectionManager.setMaxTotal(settings.getInt(HttpConf.POOL_TOTAL));
-        connectionManager.setValidateAfterInactivity(TimeValue.ofSeconds(settings.getInt(HttpConf.POOL_VALIDATE_AFTER_INACTIVITY)));
+        connectionManager.setValidateAfterInactivity(
+                TimeValue.of(Duration.ofMillis(settings.getInt(HttpConf.POOL_VALIDATE_AFTER_INACTIVITY)))
+        );
 
         ConnectionConfig connectionConfig = ConnectionConfig.custom()
                 .setTimeToLive(TimeValue.of(Duration.ofSeconds(settings.getInt(HttpConf.POOL_TIME_TO_LIVE))))
