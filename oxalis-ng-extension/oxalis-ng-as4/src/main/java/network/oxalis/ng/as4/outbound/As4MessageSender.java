@@ -18,6 +18,7 @@ import network.oxalis.ng.commons.http.HttpConf;
 import network.oxalis.ng.commons.security.KeyStoreConf;
 import org.apache.cxf.attachment.AttachmentUtil;
 import org.apache.cxf.binding.soap.SoapHeader;
+import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.ext.logging.LoggingFeature;
 import org.apache.cxf.headers.Header;
@@ -32,6 +33,8 @@ import org.apache.wss4j.common.crypto.Merlin;
 import org.oasis_open.docs.ebxml_msg.ebms.v3_0.ns.core._200704.Messaging;
 
 import jakarta.xml.bind.JAXBException;
+
+import javax.net.ssl.KeyManager;
 import javax.xml.namespace.QName;
 import jakarta.xml.soap.SOAPMessage;
 import jakarta.xml.ws.BindingProvider;
@@ -163,6 +166,11 @@ public class As4MessageSender {
 
         configureSecurity(request, dispatch);
 
+        TLSClientParameters tls = new TLSClientParameters();
+        tls.setKeyManagers(new KeyManager[0]);   // no client cert, if in future bilateral test requires mTLS then set to null
+        tls.setTrustManagers(null);              // JVM truststore
+        //tls.setSecureSocketProtocol("TLSv1.2");// Not setting Protocol here, you can control it via -Djdk.tls.client.protocols=TLSv1.3,TLSv1.2
+
         final Client client = dispatch.getClient();
 
         if (AS4Constants.CEF_CONFORMANCE.equalsIgnoreCase(as4settings.getString(As4Conf.TYPE))) {
@@ -178,6 +186,7 @@ public class As4MessageSender {
         httpClientPolicy.setChunkLength(8192);
         httpClientPolicy.setBrowserType(browserType);
         httpConduit.setClient(httpClientPolicy);
+        httpConduit.setTlsClientParameters(tls);
 
         return dispatch;
     }
