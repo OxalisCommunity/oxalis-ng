@@ -77,8 +77,9 @@ public class As4MessageSender {
     }
 
     public TransmissionResponse send(TransmissionRequest request) throws OxalisAs4TransmissionException {
+        DispatchImpl<SOAPMessage> dispatch = createDispatch(request);
         AttachmentHolder attachmentHolder = null;
-        try (DispatchImpl<SOAPMessage> dispatch = createDispatch(request)) {
+        try {
             attachmentHolder = prepareAttachment(request);
             ArrayList<Attachment> attachments = new ArrayList<>(Collections.singletonList(attachmentHolder.attachment));
             dispatch.getRequestContext().put(Message.ATTACHMENTS, attachments);
@@ -87,8 +88,6 @@ public class As4MessageSender {
             SoapHeader header = getSoapHeader(messaging);
             dispatch.getRequestContext().put(Header.HEADER_LIST, new ArrayList<>(Collections.singletonList(header)));
             return invoke(request, dispatch);
-        } catch (IOException e) {
-            throw new OxalisAs4TransmissionException("Failed to send message", e);
         } finally {
             if (attachmentHolder != null) {
                 try {
