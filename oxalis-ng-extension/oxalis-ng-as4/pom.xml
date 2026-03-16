@@ -21,7 +21,8 @@
   ~ permissions and limitations under the Licence.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -33,7 +34,7 @@
 
     <artifactId>oxalis-ng-as4</artifactId>
     <packaging>jar</packaging>
-    <name>Oxalis-NG :: Ext  :: AS4</name>
+    <name>Oxalis-NG :: Ext :: AS4</name>
     <description>Extension adding AS4 support to Oxalis-NG</description>
     <url>https://github.com/OxalisCommunity/oxalis-ng</url>
 
@@ -339,6 +340,14 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/xsd</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.xsd</include>
+                    <include>**/*.dtd</include>
+                </includes>
             </resource>
         </resources>
 
