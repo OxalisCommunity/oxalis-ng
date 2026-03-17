@@ -140,9 +140,7 @@ public class TransmissionTask implements Callable<TransmissionResult> {
                 return requestBuilder.build();
             } catch (Exception e) {
                 span.setAttribute("exception", String.valueOf(e.getMessage()));
-                System.out.println();
-                System.out.println("Message failed : " + e.getMessage());
-                System.out.println();
+                log.error("Message failed ", e);
                 return null;
             }
         });
