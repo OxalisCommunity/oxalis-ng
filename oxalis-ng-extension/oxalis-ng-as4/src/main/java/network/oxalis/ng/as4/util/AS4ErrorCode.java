@@ -23,7 +23,9 @@ public enum AS4ErrorCode {
     EBMS_0201("EBMS:0201", "DysfunctionalReliability", PROCESSING, SECURITY),
     EBMS_0202("EBMS:0202", "DeliveryFailure", COMMUNICATION, SECURITY),
 
+    // https://docs.oasis-open.org/ebxml-msg/ebms/v3.0/profiles/AS4-profile/v1.0/os/AS4-profile-v1.0-os.html [section 3.6]
     EBMS_0301("EBMS:0301", "MissingReceipt", COMMUNICATION, EBMS),
+    EBMS_0302("EBMS:0302", "InvalidReceipt", COMMUNICATION, EBMS),
     EBMS_0303("EBMS:0303", "DecompressionFailure", COMMUNICATION, EBMS);
 
     private String errorCode;

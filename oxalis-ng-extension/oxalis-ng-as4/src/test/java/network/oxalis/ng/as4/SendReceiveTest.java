@@ -21,6 +21,7 @@ import network.oxalis.ng.api.tag.Tag;
 import network.oxalis.ng.as4.api.MessageIdGenerator;
 import network.oxalis.ng.as4.common.DefaultMessageIdGenerator;
 import network.oxalis.ng.as4.inbound.As4InboundModule;
+import network.oxalis.ng.as4.outbound.As4ReceiptValidationInInterceptor;
 import network.oxalis.ng.as4.util.PeppolConfiguration;
 import network.oxalis.ng.commons.guice.GuiceModuleLoader;
 import network.oxalis.ng.test.jetty.AbstractJettyServerTest;
@@ -29,6 +30,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.cxf.BusFactory;
 import org.apache.cxf.ext.logging.LoggingFeature;
 import org.apache.cxf.feature.Feature;
+import org.apache.cxf.phase.Phase;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -70,7 +72,7 @@ public class SendReceiveTest extends AbstractJettyServerTest {
 
     @Override
     public Injector getInjector() {
-        if(Security.getProvider(BouncyCastleProvider.PROVIDER_NAME)==null){
+        if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
             Security.addProvider(new BouncyCastleProvider());
         }
         return Guice.createInjector(
@@ -78,13 +80,18 @@ public class SendReceiveTest extends AbstractJettyServerTest {
                 Modules.override(new GuiceModuleLoader()).with(new AbstractModule() {
                     @Override
                     protected void configure() {
-                        bind(Key.get(MessageSender.class,Names.named("oxalis-as4")))
+                        bind(Key.get(MessageSender.class, Names.named("oxalis-as4")))
                                 .to(As4MessageSenderFacade.class);
                         bind(ReceiptPersister.class).toInstance((m, p) -> {
                         });
                         bind(PayloadPersister.class).toInstance(temporaryFilePersister);
                         bind(InboundService.class).toInstance(temporaryInboundService);
                         bind(MessageIdGenerator.class).toInstance(new DefaultMessageIdGenerator("test.com"));
+                        bind(As4ReceiptValidationInInterceptor.class).toInstance(
+                                new As4ReceiptValidationInInterceptor(
+                                        Phase.POST_PROTOCOL,
+                                        As4ReceiptValidationInInterceptor.ValidationMode.LOGGING)
+                        );
                     }
                 })
         );
@@ -267,8 +274,8 @@ public class SendReceiveTest extends AbstractJettyServerTest {
     }
 
     static class TemporaryInboundService implements InboundService {
-		@Override
-		public void complete(InboundMetadata inboundMetadata) {
-		}
+        @Override
+        public void complete(InboundMetadata inboundMetadata) {
+        }
     }
 }
