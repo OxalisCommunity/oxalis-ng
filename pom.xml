@@ -85,7 +85,7 @@
         <guava.version>33.4.8-jre</guava.version>
         <commons-dbcp2.version>2.13.0</commons-dbcp2.version>
         <httpclient.version>5.4.4</httpclient.version>
-        <neethi.version>3.2.1</neethi.version>
+        <neethi.version>3.2.2</neethi.version>
         <com.typesafe.config.version>1.4.3</com.typesafe.config.version>
         <commons-io.version>2.19.0</commons-io.version>
         <commons-codec.version>1.18.0</commons-codec.version>
