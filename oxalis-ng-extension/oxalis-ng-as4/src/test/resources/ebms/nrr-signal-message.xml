@@ -1,0 +1,45 @@
+<eb:Messaging xmlns:eb="http://docs.oasis-open.org/ebxml-msg/ebms/v3.0/ns/core/200704/"
+              xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+              wsu:Id="_ed19bdce-9f22-4fbc-a13b-f734a5addfc7">
+    <eb:SignalMessage
+            xmlns:ns6="http://www.w3.org/2000/09/xmldsig#"
+            xmlns:ns7="http://docs.oasis-open.org/ebxml-bp/ebbp-signals-2.0">
+        <eb:MessageInfo>
+            <eb:Timestamp>2026-02-06T12:00:28.426+01:00</eb:Timestamp>
+            <eb:MessageId>d3a83fa2-955e-4f12-89b5-d80d614c07f0@test</eb:MessageId>
+            <eb:RefToMessageId>f2ee7d49-c8a8-4b78-98e3-49d7db6657f4@test</eb:RefToMessageId>
+        </eb:MessageInfo>
+        <eb:Receipt>
+            <ns7:NonRepudiationInformation>
+                <ns7:MessagePartNRInformation>
+                    <ns6:Reference URI="#_ba9e9d94-97a6-47f2-8c91-6e317df425bd">
+                        <ns6:Transforms>
+                            <ns6:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                        </ns6:Transforms>
+                        <ns6:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                        <ns6:DigestValue>6Kvu0nc3EzKKbwJs7XGZfCnQlt971OVi1cm6T6HyBTs=</ns6:DigestValue>
+                    </ns6:Reference>
+                </ns7:MessagePartNRInformation>
+                <ns7:MessagePartNRInformation>
+                    <ns6:Reference URI="#_382c5cf1-af82-446f-a409-828e7c853351">
+                        <ns6:Transforms>
+                            <ns6:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                        </ns6:Transforms>
+                        <ns6:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                        <ns6:DigestValue>wCtCO88xutufHEOdOHmD3746QjkclPHGGfMkPfPECCI=</ns6:DigestValue>
+                    </ns6:Reference>
+                </ns7:MessagePartNRInformation>
+                <ns7:MessagePartNRInformation>
+                    <ns6:Reference URI="cid:7afeab9a-a9cb-47fb-9308-18163396f960@workstation-main">
+                        <ns6:Transforms>
+                            <ns6:Transform
+                                    Algorithm="http://docs.oasis-open.org/wss/oasis-wss-SwAProfile-1.1#Attachment-Content-Signature-Transform"/>
+                        </ns6:Transforms>
+                        <ns6:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                        <ns6:DigestValue>QnS8vRed/EehxjndcqLwnZHPIZ3aTxMmZbuNdrpG3BM=</ns6:DigestValue>
+                    </ns6:Reference>
+                </ns7:MessagePartNRInformation>
+            </ns7:NonRepudiationInformation>
+        </eb:Receipt>
+    </eb:SignalMessage>
+</eb:Messaging>

@@ -1,0 +1,35 @@
+<ns2:Messaging xmlns:ns2="http://docs.oasis-open.org/ebxml-msg/ebms/v3.0/ns/core/200704/"
+               xmlns:ns3="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+               wsu:Id="_382c5cf1-af82-446f-a409-828e7c853351">
+    <ns2:UserMessage>
+        <ns2:MessageInfo>
+            <ns2:Timestamp>2026-02-06T12:00:27.937+01:00</ns2:Timestamp>
+            <ns2:MessageId>f2ee7d49-c8a8-4b78-98e3-49d7db6657f4@test</ns2:MessageId>
+        </ns2:MessageInfo>
+
+
+        <!--   Missing party info : https://docs.oasis-open.org/ebxml-msg/ebms/v3.0/core/os/ebms_core-3.0-spec-os.html#5.2.2.eb:Messaging/eb:UserMessage|outline  -->
+
+        <ns2:CollaborationInfo>
+            <ns2:AgreementRef>urn:fdc:peppol.eu:2017:agreements:tia:ap_provider</ns2:AgreementRef>
+            <ns2:Service type="cenbii-procid-ubl">urn:www.cenbii.eu:profile:bii04:ver1.0</ns2:Service>
+            <ns2:Action>
+                busdox-docid-qns::urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:www.cenbii.eu:transaction:biicoretrdm010:ver1.0:#urn:www.peppol.eu:bis:peppol4a:ver1.0::2.0
+            </ns2:Action>
+            <!--            <ns2:ConversationId>45a62685-bd67-4d22-9e82-6b3e5126e75e@test</ns2:ConversationId>-->
+        </ns2:CollaborationInfo>
+        <ns2:MessageProperties>
+            <ns2:Property name="originalSender" type="iso6523-actorid-upis">0007:5567125082</ns2:Property>
+            <ns2:Property name="finalRecipient" type="iso6523-actorid-upis">0007:4455454480</ns2:Property>
+        </ns2:MessageProperties>
+        <ns2:PayloadInfo>
+            <ns2:PartInfo href="cid:7afeab9a-a9cb-47fb-9308-18163396f960@workstation-main">
+                <ns2:PartProperties>
+                    <ns2:Property name="CompressionType">application/gzip</ns2:Property>
+                    <ns2:Property name="MimeType">application/xml</ns2:Property>
+                </ns2:PartProperties>
+            </ns2:PartInfo>
+        </ns2:PayloadInfo>
+    </ns2:UserMessage>
+</ns2:Messaging>
