@@ -185,10 +185,37 @@ public class As4MessageSender {
         httpClientPolicy.setAllowChunking(true);
         httpClientPolicy.setChunkLength(8192);
         httpClientPolicy.setBrowserType(browserType);
+        configureProxy(httpClientPolicy);
         httpConduit.setClient(httpClientPolicy);
         httpConduit.setTlsClientParameters(tls);
 
         return dispatch;
+    }
+
+    /**
+     * Explicitly configures the CXF {@link HTTPClientPolicy} proxy from JVM system properties.
+     * <p>
+     * Unlike Apache HttpClient (which reads proxy settings via {@code useSystemProperties()}),
+     * CXF's {@link org.apache.cxf.transport.http.HTTPConduit} does not pick up
+     * {@code http.proxyHost} / {@code https.proxyHost} system properties automatically.
+     * This method bridges that gap so that AS4 outbound traffic respects the same proxy
+     * configuration as the rest of the application.
+     * <p>
+     * {@code https.*} properties take precedence over {@code http.*} as AS4 endpoints are HTTPS.
+     */
+    private void configureProxy(HTTPClientPolicy httpClientPolicy) {
+        String proxyHost = System.getProperty("https.proxyHost", System.getProperty("http.proxyHost", ""));
+        String proxyPort = System.getProperty("https.proxyPort", System.getProperty("http.proxyPort", ""));
+        String nonProxyHosts = System.getProperty("https.nonProxyHosts", System.getProperty("http.nonProxyHosts", ""));
+
+        if (!proxyHost.isBlank() && !proxyPort.isBlank()) {
+            log.info("AS4 conduit: configuring proxy {}:{}", proxyHost, proxyPort);
+            httpClientPolicy.setProxyServer(proxyHost);
+            httpClientPolicy.setProxyServerPort(Integer.parseInt(proxyPort));
+            if (!nonProxyHosts.isBlank()) {
+                httpClientPolicy.setNonProxyHosts(nonProxyHosts);
+            }
+        }
     }
 
     private LoggingBeforeSecurityInInterceptor getLoggingBeforeSecurityInInterceptor() {
