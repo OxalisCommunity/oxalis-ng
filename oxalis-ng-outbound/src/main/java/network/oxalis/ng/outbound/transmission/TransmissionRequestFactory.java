@@ -32,6 +32,7 @@ import network.oxalis.ng.api.tag.Tag;
 import network.oxalis.ng.api.tag.TagGenerator;
 import network.oxalis.ng.api.transformer.ContentDetector;
 import network.oxalis.ng.api.transformer.ContentWrapper;
+import network.oxalis.ng.commons.identifier.ParticipantIdentifierValidator;
 import network.oxalis.ng.commons.io.PeekingInputStream;
 import network.oxalis.ng.commons.tracing.Traceable;
 import network.oxalis.vefa.peppol.common.model.Header;
@@ -46,6 +47,7 @@ import java.io.InputStream;
  * @since 4.0.0
  */
 public class TransmissionRequestFactory extends Traceable {
+
 
     private final ContentDetector contentDetector;
 
@@ -85,11 +87,13 @@ public class TransmissionRequestFactory extends Traceable {
         PeekingInputStream peekingInputStream = new PeekingInputStream(inputStream);
         try {
             Header header = readHeaderFromSbdh(peekingInputStream);
+            validateParticipantIdentifiers(header);
             return new DefaultTransmissionMessage(header, peekingInputStream.newInputStream(),
                     tagGenerator.generate(Direction.OUT, tag));
         } catch (OxalisContentException e) {
             byte[] payload = peekingInputStream.getContent();
             Header header = detectHeaderFromContent(payload);
+            validateParticipantIdentifiers(header);
             InputStream wrappedContent = wrapContentInSbdh(header, payload);
             return new DefaultTransmissionMessage(header, wrappedContent, tagGenerator.generate(Direction.OUT, tag));
         }
@@ -133,6 +137,24 @@ public class TransmissionRequestFactory extends Traceable {
             throw e;
         } finally {
             span.end();
+        }
+    }
+
+    /**
+     * Validates that sender and receiver participant identifiers conform to ISO 6523 format.
+     * Rejects the message early if identifiers are malformed, preventing downstream persistence errors.
+     *
+     * @param header the parsed SBDH header
+     * @throws OxalisContentException if any participant identifier is invalid
+     */
+    private void validateParticipantIdentifiers(Header header) throws OxalisContentException {
+        if (!ParticipantIdentifierValidator.validateAndWarn("sender", header.getSender())) {
+            throw new OxalisContentException(
+                    ParticipantIdentifierValidator.errorMessage("sender", header.getSender().getIdentifier()));
+        }
+        if (!ParticipantIdentifierValidator.validateAndWarn("receiver", header.getReceiver())) {
+            throw new OxalisContentException(
+                    ParticipantIdentifierValidator.errorMessage("receiver", header.getReceiver().getIdentifier()));
         }
     }
 }
