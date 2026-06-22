@@ -135,4 +135,14 @@ public class As4PayloadHeader extends Header {
     public C1CountryIdentifier getC1CountryIdentifier() {
         return header.getC1CountryIdentifier();
     }
+
+    @Override
+    public MlsToIdentifier getMlsToIdentifier() {
+        return header.getMlsToIdentifier();
+    }
+
+    @Override
+    public MlsTypeIdentifier getMlsTypeIdentifier() {
+        return header.getMlsTypeIdentifier();
+    }
 }
