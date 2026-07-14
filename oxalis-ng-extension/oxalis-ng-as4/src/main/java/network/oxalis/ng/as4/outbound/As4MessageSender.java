@@ -36,11 +36,13 @@ import jakarta.xml.bind.JAXBException;
 
 import javax.net.ssl.KeyManager;
 import javax.xml.namespace.QName;
+
 import jakarta.xml.soap.SOAPMessage;
 import jakarta.xml.ws.BindingProvider;
 import jakarta.xml.ws.Dispatch;
 import jakarta.xml.ws.Service;
 import jakarta.xml.ws.soap.SOAPBinding;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -64,9 +66,10 @@ public class As4MessageSender {
     private final MerlinProvider merlinProvider;
     private final PolicyService policyService;
     private final String browserType;
+    private final As4ReceiptValidationInInterceptor receiptValidationInInterceptor;
 
     @Inject
-    public As4MessageSender(MessagingProvider messagingProvider, MessageIdGenerator messageIdGenerator, Settings<KeyStoreConf> settings, Settings<As4Conf> as4settings, CompressionUtil compressionUtil, Settings<HttpConf> httpConfSettings, TransmissionResponseConverter transmissionResponseConverter, MerlinProvider merlinProvider, PolicyService policyService, BrowserTypeProvider browserTypeProvider) {
+    public As4MessageSender(MessagingProvider messagingProvider, MessageIdGenerator messageIdGenerator, Settings<KeyStoreConf> settings, Settings<As4Conf> as4settings, CompressionUtil compressionUtil, Settings<HttpConf> httpConfSettings, TransmissionResponseConverter transmissionResponseConverter, MerlinProvider merlinProvider, PolicyService policyService, BrowserTypeProvider browserTypeProvider, As4ReceiptValidationInInterceptor receiptValidationInInterceptor) {
         this.messagingProvider = messagingProvider;
         this.messageIdGenerator = messageIdGenerator;
         this.settings = settings;
@@ -77,6 +80,7 @@ public class As4MessageSender {
         this.merlinProvider = merlinProvider;
         this.policyService = policyService;
         this.browserType = browserTypeProvider.getBrowserType();
+        this.receiptValidationInInterceptor = receiptValidationInInterceptor;
     }
 
     public TransmissionResponse send(TransmissionRequest request) throws OxalisAs4TransmissionException {
@@ -172,6 +176,11 @@ public class As4MessageSender {
         //tls.setSecureSocketProtocol("TLSv1.2");// Not setting Protocol here, you can control it via -Djdk.tls.client.protocols=TLSv1.3,TLSv1.2
 
         final Client client = dispatch.getClient();
+
+        // Add receipt validation interceptor for Peppol transmissions
+        if (AS4Constants.PEPPOL.equalsIgnoreCase(as4settings.getString(As4Conf.TYPE))) {
+            client.getInInterceptors().add(receiptValidationInInterceptor);
+        }
 
         if (AS4Constants.CEF_CONFORMANCE.equalsIgnoreCase(as4settings.getString(As4Conf.TYPE))) {
             client.getInInterceptors().add(getLoggingBeforeSecurityInInterceptor());

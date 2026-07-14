@@ -39,5 +39,10 @@ public enum As4Conf {
 
     @Path("oxalis.as4.type")
     @DefaultValue("peppol")
-    TYPE
+    TYPE,
+
+    @Path("oxalis.as4.receipt.validation")
+    @DefaultValue("logging") // options: none, logging, strict
+    RECEIPT_VALIDATION,
+
 }

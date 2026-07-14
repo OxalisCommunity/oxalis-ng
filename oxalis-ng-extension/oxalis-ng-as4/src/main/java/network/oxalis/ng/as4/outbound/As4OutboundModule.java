@@ -61,4 +61,10 @@ public class As4OutboundModule extends AbstractModule {
 
         return new PeppolConfiguration();
     }
+
+    @Singleton
+    @Provides
+    public As4ReceiptValidationInInterceptor getAs4ReceiptValidationInInterceptor(Settings<As4Conf> settings) {
+        return new As4ReceiptValidationInInterceptor(settings);
+    }
 }
