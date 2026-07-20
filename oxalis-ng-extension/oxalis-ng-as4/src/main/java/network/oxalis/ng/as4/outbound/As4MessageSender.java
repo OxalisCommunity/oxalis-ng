@@ -15,6 +15,7 @@ import network.oxalis.ng.api.outbound.TransmissionRequest;
 import network.oxalis.ng.api.outbound.TransmissionResponse;
 import network.oxalis.ng.api.settings.Settings;
 import network.oxalis.ng.commons.http.HttpConf;
+import network.oxalis.ng.commons.http.proxy.ProxyConfigurationProvider;
 import network.oxalis.ng.commons.security.KeyStoreConf;
 import org.apache.cxf.attachment.AttachmentUtil;
 import org.apache.cxf.binding.soap.SoapHeader;
@@ -63,10 +64,23 @@ public class As4MessageSender {
     private final TransmissionResponseConverter transmissionResponseConverter;
     private final MerlinProvider merlinProvider;
     private final PolicyService policyService;
+    private final ProxyConfigurationProvider proxyConfigurationProvider;
     private final String browserType;
 
     @Inject
-    public As4MessageSender(MessagingProvider messagingProvider, MessageIdGenerator messageIdGenerator, Settings<KeyStoreConf> settings, Settings<As4Conf> as4settings, CompressionUtil compressionUtil, Settings<HttpConf> httpConfSettings, TransmissionResponseConverter transmissionResponseConverter, MerlinProvider merlinProvider, PolicyService policyService, BrowserTypeProvider browserTypeProvider) {
+    public As4MessageSender(
+            MessagingProvider messagingProvider,
+            MessageIdGenerator messageIdGenerator,
+            Settings<KeyStoreConf> settings,
+            Settings<As4Conf> as4settings,
+            CompressionUtil compressionUtil,
+            Settings<HttpConf> httpConfSettings,
+            TransmissionResponseConverter transmissionResponseConverter,
+            MerlinProvider merlinProvider,
+            PolicyService policyService,
+            ProxyConfigurationProvider proxyConfigurationProvider,
+            BrowserTypeProvider browserTypeProvider) {
+
         this.messagingProvider = messagingProvider;
         this.messageIdGenerator = messageIdGenerator;
         this.settings = settings;
@@ -76,6 +90,7 @@ public class As4MessageSender {
         this.transmissionResponseConverter = transmissionResponseConverter;
         this.merlinProvider = merlinProvider;
         this.policyService = policyService;
+        this.proxyConfigurationProvider = proxyConfigurationProvider;
         this.browserType = browserTypeProvider.getBrowserType();
     }
 
@@ -185,10 +200,25 @@ public class As4MessageSender {
         httpClientPolicy.setAllowChunking(true);
         httpClientPolicy.setChunkLength(8192);
         httpClientPolicy.setBrowserType(browserType);
+        configureProxy(httpClientPolicy);
         httpConduit.setClient(httpClientPolicy);
         httpConduit.setTlsClientParameters(tls);
 
         return dispatch;
+    }
+
+    private void configureProxy(HTTPClientPolicy policy) {
+        proxyConfigurationProvider.get()
+                .ifPresent(proxy -> {
+                    log.debug("Configuring AS4 HTTP conduit using JVM proxy configuration.");
+
+                    policy.setProxyServer(proxy.getHost());
+                    policy.setProxyServerPort(proxy.getPort());
+
+                    if (!proxy.getNonProxyHosts().isBlank()) {
+                        policy.setNonProxyHosts(proxy.getNonProxyHosts());
+                    }
+                });
     }
 
     private LoggingBeforeSecurityInInterceptor getLoggingBeforeSecurityInInterceptor() {
