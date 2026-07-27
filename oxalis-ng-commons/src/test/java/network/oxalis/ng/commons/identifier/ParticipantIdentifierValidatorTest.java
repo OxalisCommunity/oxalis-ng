@@ -1,105 +1,101 @@
 package network.oxalis.ng.commons.identifier;
 
+import network.oxalis.vefa.peppol.common.lang.PeppolParsingException;
 import network.oxalis.vefa.peppol.common.model.ParticipantIdentifier;
 import network.oxalis.vefa.peppol.common.model.Scheme;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertThrows;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.expectThrows;
 
 public class ParticipantIdentifierValidatorTest {
 
     private static final Scheme DEFAULT_SCHEME = Scheme.of("iso6523-actorid-upis");
 
+    private static ParticipantIdentifier id(String value) {
+        return ParticipantIdentifier.of(value, DEFAULT_SCHEME);
+    }
+
     @Test
-    public void validStandardIdentifier() {
-        var id = ParticipantIdentifier.of("0192:987654321", DEFAULT_SCHEME);
-        assertTrue(ParticipantIdentifierValidator.isValid(id));
-        assertTrue(ParticipantIdentifierValidator.validateAndWarn("receiver", id));
+    public void validStandardIdentifier() throws PeppolParsingException {
+        // 0192 = NO:ORG, a recognised Peppol ICD
+        ParticipantIdentifierValidator.validate("receiver", id("0192:987654321"));
+        assertTrue(ParticipantIdentifierValidator.isValid(id("0192:987654321")));
     }
 
     @Test
     public void validMaxLengthIdentifier() {
         // 4-digit ICD + colon + 130 chars = 135 total (maximum allowed per PFUOI v4.4)
         var orgId = "a".repeat(130);
-        var id = ParticipantIdentifier.of("0192:" + orgId, DEFAULT_SCHEME);
-        assertTrue(ParticipantIdentifierValidator.isValid(id));
+        assertTrue(ParticipantIdentifierValidator.isValid(id("0192:" + orgId)));
     }
 
     @Test
     public void validMinLengthIdentifier() {
-        // 4-digit ICD + colon + 1 char = 6 total (minimum valid)
-        var id = ParticipantIdentifier.of("0192:X", DEFAULT_SCHEME);
-        assertTrue(ParticipantIdentifierValidator.isValid(id));
-    }
-
-    @Test
-    public void validOldMaxLengthStillValid() {
-        // Old max was 28 chars for org-id — should still be valid under new limits
-        var id = ParticipantIdentifier.of("0192:1234567890123456789012345678", DEFAULT_SCHEME);
-        assertTrue(ParticipantIdentifierValidator.isValid(id));
+        // 4-digit ICD + colon + 1 char (minimum valid organisation id)
+        assertTrue(ParticipantIdentifierValidator.isValid(id("0192:x")));
     }
 
     @Test
     public void validLongIdentifierWithinNewLimits() {
-        // 50 chars for org-id — exceeds old limit but valid under PFUOI v4.4
+        // 50 chars for org-id — exceeds the old 28/50 limit but valid under PFUOI v4.4
         var orgId = "a".repeat(50);
-        var id = ParticipantIdentifier.of("0192:" + orgId, DEFAULT_SCHEME);
-        assertTrue(ParticipantIdentifierValidator.isValid(id));
+        assertTrue(ParticipantIdentifierValidator.isValid(id("0192:" + orgId)));
     }
 
     @Test
-    public void nullIdentifierIsValid() {
+    public void nullIdentifierIsValid() throws PeppolParsingException {
         assertTrue(ParticipantIdentifierValidator.isValid(null));
-        assertTrue(ParticipantIdentifierValidator.validateAndWarn("sender", null));
+        ParticipantIdentifierValidator.validate("sender", null);
     }
 
     @Test
     public void identifierTooLong() {
         // 4-digit ICD + colon + 131 chars = 136 total (exceeds max of 135)
         var orgId = "a".repeat(131);
-        var id = ParticipantIdentifier.of("0192:" + orgId, DEFAULT_SCHEME);
-        assertFalse(ParticipantIdentifierValidator.isValid(id));
-        assertFalse(ParticipantIdentifierValidator.validateAndWarn("receiver", id));
+        assertFalse(ParticipantIdentifierValidator.isValid(id("0192:" + orgId)));
+        assertThrows(PeppolParsingException.class,
+                () -> ParticipantIdentifierValidator.validate("receiver", id("0192:" + orgId)));
+    }
+
+    @Test
+    public void identifierWithUnknownIcd() {
+        // ICD 9999 is not part of the Peppol participant identifier scheme code list
+        assertFalse(ParticipantIdentifierValidator.isValid(id("9999:987654321")));
     }
 
     @Test
     public void identifierMissingIcdPrefix() {
-        var id = ParticipantIdentifier.of("ABC:987654321", DEFAULT_SCHEME);
-        assertFalse(ParticipantIdentifierValidator.isValid(id));
+        assertFalse(ParticipantIdentifierValidator.isValid(id("abc:987654321")));
     }
 
     @Test
     public void identifierMissingColon() {
-        var id = ParticipantIdentifier.of("0192987654321", DEFAULT_SCHEME);
-        assertFalse(ParticipantIdentifierValidator.isValid(id));
+        assertFalse(ParticipantIdentifierValidator.isValid(id("0192987654321")));
     }
 
     @Test
     public void identifierWithEmptyOrgId() {
-        // 4-digit ICD + colon + nothing = invalid
-        var id = ParticipantIdentifier.of("0192:", DEFAULT_SCHEME);
-        assertFalse(ParticipantIdentifierValidator.isValid(id));
+        assertFalse(ParticipantIdentifierValidator.isValid(id("0192:")));
     }
 
     @Test
     public void identifierWithThreeDigitIcd() {
-        var id = ParticipantIdentifier.of("019:987654321", DEFAULT_SCHEME);
-        assertFalse(ParticipantIdentifierValidator.isValid(id));
+        assertFalse(ParticipantIdentifierValidator.isValid(id("019:987654321")));
     }
 
     @Test
     public void identifierWithFiveDigitIcd() {
-        var id = ParticipantIdentifier.of("01920:987654321", DEFAULT_SCHEME);
-        assertFalse(ParticipantIdentifierValidator.isValid(id));
+        assertFalse(ParticipantIdentifierValidator.isValid(id("01920:987654321")));
     }
 
     @Test
-    public void errorMessageContainsRole() {
-        var msg = ParticipantIdentifierValidator.errorMessage("receiver", "bad-id");
-        assertTrue(msg.contains("receiver"));
-        assertTrue(msg.contains("bad-id"));
-        assertTrue(msg.contains("Peppol"));
+    public void invalidIdentifierMessageContainsRoleAndValue() {
+        var ex = expectThrows(PeppolParsingException.class,
+                () -> ParticipantIdentifierValidator.validate("receiver", id("9999:bad-id")));
+        assertTrue(ex.getMessage().contains("receiver"));
+        assertTrue(ex.getMessage().contains("9999:bad-id"));
     }
 }
-

@@ -32,7 +32,6 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * Our representation of the SBDH (Standard Business Document Header), which makes us
@@ -44,7 +43,6 @@ import java.util.regex.Pattern;
  * @author thore
  */
 public class PeppolStandardBusinessHeader {
-
 
     /**
      * Peppol Participant Identification for the recipient
@@ -182,14 +180,7 @@ public class PeppolStandardBusinessHeader {
      */
     public void validateHeaderFields() throws PeppolParsingException {
         try {
-            if (!ParticipantIdentifierValidator.validateAndWarn("sender", senderId)) {
-                throw new PeppolParsingException(
-                        ParticipantIdentifierValidator.errorMessage("sender", senderId.getIdentifier()));
-            }
-            if (!ParticipantIdentifierValidator.validateAndWarn("receiver", recipientId)) {
-                throw new PeppolParsingException(
-                        ParticipantIdentifierValidator.errorMessage("receiver", recipientId.getIdentifier()));
-            }
+            ParticipantIdentifierValidator.validate(senderId, recipientId);
 
             DocumentTypeIdentifier documentTypeIdentifier =
                     DocumentTypeIdentifier.parse(peppolDocumentTypeId.toString());

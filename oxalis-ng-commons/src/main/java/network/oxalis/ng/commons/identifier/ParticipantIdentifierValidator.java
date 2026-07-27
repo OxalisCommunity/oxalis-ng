@@ -22,92 +22,121 @@
 
 package network.oxalis.ng.commons.identifier;
 
+import network.oxalis.vefa.peppol.common.lang.PeppolParsingException;
+import network.oxalis.vefa.peppol.common.model.Header;
 import network.oxalis.vefa.peppol.common.model.ParticipantIdentifier;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.regex.Pattern;
+import network.oxalis.vefa.peppol.icd.Icds;
+import network.oxalis.vefa.peppol.icd.code.PeppolIcd;
 
 /**
- * Utility for validating Peppol participant identifiers against the expected format.
+ * Central entry point for validating the Peppol participant identifiers carried by an SBDH header.
  * <p>
- * A valid Peppol participant identifier value has the form {@code NNNN:orgid} where {@code NNNN} is a 4-digit
- * ICD code and {@code orgid} is 1 to 130 characters, giving a maximum total length of 135 characters.
+ * Validation is intentionally lightweight and does not attempt full ISO 6523 semantic validation
+ * (e.g. organisation-number check digits). It verifies that a participant identifier value:
+ * <ul>
+ *     <li>has the structural form {@code icd:organizationId} with a non-empty organisation identifier;</li>
+ *     <li>carries an ICD that is part of the Peppol participant identifier scheme code list, by delegating
+ *     to vefa-peppol's {@link Icds} rather than a hand-rolled regular expression;</li>
+ *     <li>does not exceed the maximum length of {@value #MAX_PARTICIPANT_VALUE_LENGTH} characters defined by
+ *     the Peppol Policy for use of Identifiers (PFUOI) v4.4 (4-digit ICD + {@code ':'} + up to 130 characters).</li>
+ * </ul>
  * <p>
- * This aligns with the Peppol Policy for Use of Identifiers (PFUOI) v4.4 which increased the maximum
- * participant identifier value length from 50 to 135 (4 + ":" + 130) characters.
+ * A failing identifier is reported by throwing a {@link PeppolParsingException}: callers treat an invalid
+ * identifier as fatal and abort processing, so validation is deliberately not a "log a warning and continue"
+ * operation.
  *
  * @since 1.2.3
  */
 public final class ParticipantIdentifierValidator {
 
-    private static final Logger log = LoggerFactory.getLogger(ParticipantIdentifierValidator.class);
+    /**
+     * Maximum total length of a Peppol participant identifier value as defined by PFUOI v4.4:
+     * 4 (ICD) + 1 ({@code ':'}) + 130 (organisation id) = 135 characters.
+     */
+    public static final int MAX_PARTICIPANT_VALUE_LENGTH = 135;
 
     /**
-     * Maximum length of the organization identifier part (after the ICD and colon),
-     * as defined by PFUOI v4.4.
+     * vefa-peppol registry of the officially recognised Peppol participant identifier scheme (ICD) codes.
      */
-    private static final int MAX_ORG_ID_LENGTH = 130;
-
-    /**
-     * Peppol participant identifier pattern: 4-digit ICD code, colon, then 1 to 130 characters.
-     * Aligns with PFUOI v4.4 and {@code PeppolIdentifierHelper.MAX_PARTICIPANT_VALUE_LENGTH} (= 135).
-     */
-    private static final Pattern PARTICIPANT_ID_PATTERN = Pattern.compile("^\\d{4}:.{1," + MAX_ORG_ID_LENGTH + "}$");
-
-    /**
-     * Maximum total length of a Peppol participant identifier value: 4 (ICD) + 1 (:) + 130 (org-id) = 135.
-     */
-    private static final int MAX_PARTICIPANT_VALUE_LENGTH = 4 + 1 + MAX_ORG_ID_LENGTH;
+    private static final Icds ICDS = Icds.of(PeppolIcd.values());
 
     private ParticipantIdentifierValidator() {
         // utility class
     }
 
     /**
-     * Checks whether the given participant identifier conforms to the ISO 6523 format.
+     * Validates the sender and receiver participant identifiers of the given header.
+     *
+     * @param header the parsed SBDH header
+     * @throws PeppolParsingException if the sender or receiver participant identifier is invalid
+     */
+    public static void validate(Header header) throws PeppolParsingException {
+        validate(header.getSender(), header.getReceiver());
+    }
+
+    /**
+     * Validates a sender/receiver pair of participant identifiers.
+     *
+     * @param sender   the sender participant identifier, may be {@code null}
+     * @param receiver the receiver participant identifier, may be {@code null}
+     * @throws PeppolParsingException if either participant identifier is invalid
+     */
+    public static void validate(ParticipantIdentifier sender, ParticipantIdentifier receiver)
+            throws PeppolParsingException {
+        validate("sender", sender);
+        validate("receiver", receiver);
+    }
+
+    /**
+     * Validates a single participant identifier.
+     *
+     * @param role          a label for the participant role (e.g. "sender", "receiver") used in error messages
+     * @param participantId the participant identifier to validate, may be {@code null}
+     * @throws PeppolParsingException if the participant identifier is invalid
+     */
+    public static void validate(String role, ParticipantIdentifier participantId) throws PeppolParsingException {
+        if (participantId == null || participantId.getIdentifier() == null) {
+            return;
+        }
+
+        String identifier = participantId.getIdentifier();
+
+        if (identifier.length() > MAX_PARTICIPANT_VALUE_LENGTH) {
+            throw new PeppolParsingException(errorMessage(role, identifier, String.format(
+                    "value length %d exceeds the maximum of %d characters",
+                    identifier.length(), MAX_PARTICIPANT_VALUE_LENGTH)));
+        }
+
+        int separator = identifier.indexOf(':');
+        if (separator < 0 || separator == identifier.length() - 1) {
+            throw new PeppolParsingException(errorMessage(role, identifier,
+                    "expected format 'icd:organizationId' with a non-empty organisation identifier"));
+        }
+
+        try {
+            ICDS.parse(participantId);
+        } catch (PeppolParsingException e) {
+            throw new PeppolParsingException(errorMessage(role, identifier, e.getMessage()), e);
+        }
+    }
+
+    /**
+     * Convenience non-throwing check.
      *
      * @param participantId the participant identifier to validate, may be {@code null}
-     * @return {@code true} if valid or {@code null}, {@code false} otherwise
+     * @return {@code true} if the identifier is valid (or {@code null}), {@code false} otherwise
      */
     public static boolean isValid(ParticipantIdentifier participantId) {
-        if (participantId == null) {
+        try {
+            validate("participant", participantId);
             return true;
+        } catch (PeppolParsingException e) {
+            return false;
         }
-        var identifier = participantId.getIdentifier();
-        return identifier == null || PARTICIPANT_ID_PATTERN.matcher(identifier).matches();
     }
 
-    /**
-     * Validates a participant identifier and logs a warning if it does not conform to ISO 6523.
-     *
-     * @param role          a label for the participant role (e.g. "sender", "receiver") used in log messages
-     * @param participantId the participant identifier to validate, may be {@code null}
-     * @return {@code true} if valid or {@code null}, {@code false} if invalid (a warning is logged)
-     */
-    public static boolean validateAndWarn(String role, ParticipantIdentifier participantId) {
-        if (isValid(participantId)) {
-            return true;
-        }
-        var identifier = participantId.getIdentifier();
-        log.warn("Invalid {} participant identifier '{}' (length={}) — "
-                        + "expected format is 'NNNN:orgid' with max {} characters total",
-                role, identifier, identifier.length(), MAX_PARTICIPANT_VALUE_LENGTH);
-        return false;
-    }
-
-    /**
-     * Returns a human-readable error message for an invalid participant identifier.
-     *
-     * @param role       a label for the participant role (e.g. "sender", "receiver")
-     * @param identifier the raw identifier string
-     * @return formatted error message
-     */
-    public static String errorMessage(String role, String identifier) {
+    private static String errorMessage(String role, String identifier, String reason) {
         return String.format(
-                "Invalid %s participant identifier '%s' — does not conform to expected Peppol format "
-                        + "(expected 4-digit ICD, colon, 1-%d char org id, max %d characters total)",
-                role, identifier, MAX_ORG_ID_LENGTH, MAX_PARTICIPANT_VALUE_LENGTH);
+                "Invalid %s participant identifier '%s': %s", role, identifier, reason);
     }
 }
-

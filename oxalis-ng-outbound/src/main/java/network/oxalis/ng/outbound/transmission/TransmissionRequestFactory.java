@@ -35,6 +35,7 @@ import network.oxalis.ng.api.transformer.ContentWrapper;
 import network.oxalis.ng.commons.identifier.ParticipantIdentifierValidator;
 import network.oxalis.ng.commons.io.PeekingInputStream;
 import network.oxalis.ng.commons.tracing.Traceable;
+import network.oxalis.vefa.peppol.common.lang.PeppolParsingException;
 import network.oxalis.vefa.peppol.common.model.Header;
 
 import jakarta.inject.Inject;
@@ -47,7 +48,6 @@ import java.io.InputStream;
  * @since 4.0.0
  */
 public class TransmissionRequestFactory extends Traceable {
-
 
     private final ContentDetector contentDetector;
 
@@ -141,20 +141,18 @@ public class TransmissionRequestFactory extends Traceable {
     }
 
     /**
-     * Validates that sender and receiver participant identifiers conform to ISO 6523 format.
-     * Rejects the message early if identifiers are malformed, preventing downstream persistence errors.
+     * Validates that the sender and receiver participant identifiers of the header are well-formed
+     * before the message is accepted. Rejecting malformed identifiers early prevents downstream
+     * persistence errors.
      *
      * @param header the parsed SBDH header
      * @throws OxalisContentException if any participant identifier is invalid
      */
     private void validateParticipantIdentifiers(Header header) throws OxalisContentException {
-        if (!ParticipantIdentifierValidator.validateAndWarn("sender", header.getSender())) {
-            throw new OxalisContentException(
-                    ParticipantIdentifierValidator.errorMessage("sender", header.getSender().getIdentifier()));
-        }
-        if (!ParticipantIdentifierValidator.validateAndWarn("receiver", header.getReceiver())) {
-            throw new OxalisContentException(
-                    ParticipantIdentifierValidator.errorMessage("receiver", header.getReceiver().getIdentifier()));
+        try {
+            ParticipantIdentifierValidator.validate(header);
+        } catch (PeppolParsingException e) {
+            throw new OxalisContentException(e.getMessage(), e);
         }
     }
 }
