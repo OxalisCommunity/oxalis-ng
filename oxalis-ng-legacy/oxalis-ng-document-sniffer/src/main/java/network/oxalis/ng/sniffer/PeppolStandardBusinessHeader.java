@@ -22,6 +22,7 @@
 
 package network.oxalis.ng.sniffer;
 
+import network.oxalis.ng.commons.identifier.ParticipantIdentifierValidator;
 import network.oxalis.ng.sniffer.identifier.InstanceId;
 import network.oxalis.ng.sniffer.identifier.PeppolDocumentTypeId;
 import network.oxalis.vefa.peppol.common.lang.PeppolParsingException;
@@ -179,6 +180,8 @@ public class PeppolStandardBusinessHeader {
      */
     public void validateHeaderFields() throws PeppolParsingException {
         try {
+            ParticipantIdentifierValidator.validate(senderId, recipientId);
+
             DocumentTypeIdentifier documentTypeIdentifier =
                     DocumentTypeIdentifier.parse(peppolDocumentTypeId.toString());
             if (documentTypeIdentifier.getScheme() == null
