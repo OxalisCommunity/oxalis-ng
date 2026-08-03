@@ -27,6 +27,8 @@ import com.google.inject.Key;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
+import jakarta.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 import network.oxalis.ng.api.identifier.MessageIdGenerator;
 import network.oxalis.ng.api.settings.Settings;
 import network.oxalis.ng.commons.guice.ImplLoader;
@@ -36,6 +38,7 @@ import network.oxalis.ng.commons.guice.OxalisModule;
  * @author erlend
  * @since 4.0.4
  */
+@Slf4j
 public class IdentifierModule extends OxalisModule {
 
     @Override
@@ -47,6 +50,24 @@ public class IdentifierModule extends OxalisModule {
         bindTyped(MessageIdGenerator.class, DefaultMessageIdGenerator.class);
 
         bindSettings(IdentifierConf.class);
+
+        // Applied eagerly so the configured mode is in effect before the first message is processed,
+        // including at call sites reached from objects built outside the injector.
+        bind(IcdValidationConfigurer.class).asEagerSingleton();
+    }
+
+    /**
+     * Pushes the configured {@link IcdValidationMode} into {@link ParticipantIdentifierValidator}
+     * at startup.
+     */
+    static class IcdValidationConfigurer {
+
+        @Inject
+        IcdValidationConfigurer(Settings<IdentifierConf> settings) {
+            IcdValidationMode mode = IcdValidationMode.of(settings.getString(IdentifierConf.ICD_VALIDATION));
+            ParticipantIdentifierValidator.setIcdValidationMode(mode);
+            log.info("Participant identifier ICD validation mode: {}", mode);
+        }
     }
 
     @Provides
