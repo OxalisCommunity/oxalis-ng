@@ -3,6 +3,7 @@ package org.apache.cxf.attachment;
 import lombok.Getter;
 import org.apache.cxf.common.logging.LogUtils;
 import org.apache.cxf.common.util.StringUtils;
+import org.apache.cxf.common.util.SystemPropertyAction;
 import org.apache.cxf.helpers.HttpHeaderHelper;
 import org.apache.cxf.helpers.IOUtils;
 import org.apache.cxf.io.CachedOutputStream;
@@ -22,6 +23,12 @@ import java.util.regex.Pattern;
 import static org.apache.cxf.attachment.AttachmentDeserializer.*;
 
 public class As4AttachmentDeserializer {
+
+    // Mirrors CXF 4.1.7's AttachmentDeserializer fix for CVE-2026-50645 (GHSA-ghvc-7hp8-2g2v).
+    // This class forks CXF's attachment parsing, so the upstream fix never reaches this path.
+    public static final String ATTACHMENT_HEADERS_MAX_COUNT = "attachment-headers-max-count";
+    public static final int DEFAULT_ATTACHMENT_HEADERS_MAX_COUNT =
+            SystemPropertyAction.getInteger("org.apache.cxf.attachment-max-headers-count", 500);
 
     private static final Pattern CONTENT_TYPE_BOUNDARY_PATTERN = Pattern.compile("boundary=\"?([^\";]*)");
 
@@ -55,6 +62,8 @@ public class As4AttachmentDeserializer {
 
     private int maxHeaderLength = DEFAULT_MAX_HEADER_SIZE;
 
+    private int maxHeadersCount = DEFAULT_ATTACHMENT_HEADERS_MAX_COUNT;
+
     @Getter
     private List<Attachment> removed = new ArrayList<>();
 
@@ -69,6 +78,9 @@ public class As4AttachmentDeserializer {
         // Get the maximum Header length from configuration
         maxHeaderLength = MessageUtils.getContextualInteger(message, ATTACHMENT_MAX_HEADER_SIZE,
                 DEFAULT_MAX_HEADER_SIZE);
+
+        maxHeadersCount = MessageUtils.getContextualInteger(message, ATTACHMENT_HEADERS_MAX_COUNT,
+                DEFAULT_ATTACHMENT_HEADERS_MAX_COUNT);
     }
 
     public void initializeAttachments() throws IOException {
@@ -379,7 +391,7 @@ public class As4AttachmentDeserializer {
         return buffer.length() != 0;
     }
 
-    private void addHeaderLine(Map<String, List<String>> heads, StringBuilder line) {
+    private void addHeaderLine(Map<String, List<String>> heads, StringBuilder line) throws IOException {
         // null lines are a nop
         final int size = line.length();
         if (size == 0) {
@@ -406,6 +418,9 @@ public class As4AttachmentDeserializer {
         }
         List<String> v = heads.get(name);
         if (v == null) {
+            if (heads.size() >= maxHeadersCount) {
+                throw new IOException("The attachment contains more headers than are permitted");
+            }
             v = new ArrayList<>(1);
             heads.put(name, v);
         }
