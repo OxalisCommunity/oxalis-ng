@@ -84,7 +84,7 @@
         <google.guice.version>7.0.0</google.guice.version>
         <guava.version>33.4.8-jre</guava.version>
         <commons-dbcp2.version>2.13.0</commons-dbcp2.version>
-        <httpclient.version>5.4.4</httpclient.version>
+        <httpclient.version>5.6.4</httpclient.version>
         <neethi.version>3.2.2</neethi.version>
         <com.typesafe.config.version>1.4.3</com.typesafe.config.version>
         <commons-io.version>2.19.0</commons-io.version>
@@ -97,8 +97,8 @@
         <hsqldb.version>2.7.4</hsqldb.version>
         <slf4j.version>2.0.17</slf4j.version>
         <logback.version>1.5.18</logback.version>
-        <opentelemetry.apache.httpclient.version>2.16.0-alpha</opentelemetry.apache.httpclient.version>
-        <opentelemetry.bom.version>1.50.0</opentelemetry.bom.version>
+        <opentelemetry.apache.httpclient.version>2.30.0-alpha</opentelemetry.apache.httpclient.version>
+        <opentelemetry.bom.version>1.64.0</opentelemetry.bom.version>
         <testng.version>7.11.0</testng.version>
         <mockito-core.version>5.17.0</mockito-core.version>
         <junit.version>4.13.2</junit.version>
