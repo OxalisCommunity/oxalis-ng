@@ -27,6 +27,17 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import network.oxalis.ng.as4.api.MessageIdGenerator;
+import network.oxalis.ng.as4.mls.HeaderMlsEnricher;
+import network.oxalis.ng.as4.mls.certificate.CertificateSpIdExtractor;
+import network.oxalis.ng.as4.mls.certificate.SeatIdParser;
+import network.oxalis.ng.as4.mls.config.MlsConf;
+import network.oxalis.ng.as4.mls.config.MlsResolutionPolicy;
+import network.oxalis.ng.as4.mls.resolver.MlsToResolver;
+import network.oxalis.ng.as4.mls.resolver.MlsTypeResolver;
+import network.oxalis.ng.as4.mls.smp.LookupClientMlsToSmpValidator;
+import network.oxalis.ng.as4.mls.smp.MlsToSmpValidator;
+import network.oxalis.ng.as4.mls.validation.MlsToValidator;
+import network.oxalis.ng.as4.mls.validation.MlsTypeValidator;
 import network.oxalis.ng.as4.outbound.DefaultActionProvider;
 import network.oxalis.ng.as4.util.OxalisAlgorithmSuiteLoader;
 import network.oxalis.ng.as4.util.PolicyService;
@@ -38,6 +49,7 @@ import network.oxalis.ng.as4.outbound.ActionProvider;
 import network.oxalis.ng.as4.util.As4MessageFactory;
 import network.oxalis.ng.commons.guice.ImplLoader;
 import network.oxalis.ng.commons.guice.OxalisModule;
+import network.oxalis.vefa.peppol.common.model.MlsTypeIdentifier;
 import network.oxalis.vefa.peppol.mode.Mode;
 import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
@@ -59,6 +71,16 @@ public class As4CommonModule extends OxalisModule {
         bindSettings(As4Conf.class);
         bind(MerlinProvider.class);
 
+        bindSettings(MlsConf.class);
+        bind(SeatIdParser.class);
+        bind(CertificateSpIdExtractor.class);
+        bind(MlsToValidator.class);
+        bind(MlsTypeValidator.class);
+        bind(MlsToSmpValidator.class).to(LookupClientMlsToSmpValidator.class);
+        bind(MlsToResolver.class);
+        bind(MlsTypeResolver.class);
+        bind(HeaderMlsEnricher.class);
+
         Bus bus = BusFactory.newInstance().createBus();
         bus.setProperty(HttpServerEngineSupport.ENABLE_HTTP2, true);
         new OxalisAlgorithmSuiteLoader(bus);
@@ -72,6 +94,14 @@ public class As4CommonModule extends OxalisModule {
     @Singleton
     public MessageIdGenerator getMessageIdGenerator(Injector injector, Settings<As4Conf> settings) {
         return ImplLoader.get(injector, MessageIdGenerator.class, settings, As4Conf.MSGID_GENERATOR);
+    }
+
+    @Provides
+    @Singleton
+    public MlsResolutionPolicy getMlsResolutionPolicy(Settings<MlsConf> settings) {
+        MlsTypeIdentifier defaultMlsType = MlsTypeIdentifier.of(settings.getString(MlsConf.TYPE_DEFAULT));
+        boolean smpValidationEnabled = Boolean.parseBoolean(settings.getString(MlsConf.SMP_VALIDATION_ENABLED));
+        return new MlsResolutionPolicy(defaultMlsType, smpValidationEnabled);
     }
 
     @Provides

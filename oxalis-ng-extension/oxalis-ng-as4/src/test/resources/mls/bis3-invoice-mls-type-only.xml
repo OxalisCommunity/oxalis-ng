@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardBusinessDocument xmlns="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader">
+    <StandardBusinessDocumentHeader>
+        <HeaderVersion>1.0</HeaderVersion>
+        <Sender>
+            <Identifier Authority="iso6523-actorid-upis">0007:5567125082</Identifier>
+        </Sender>
+        <Receiver>
+            <Identifier Authority="iso6523-actorid-upis">0204:API-GLOBAL-MLS</Identifier>
+        </Receiver>
+        <DocumentIdentification>
+            <Standard>urn:oasis:names:specification:ubl:schema:xsd:Invoice-2</Standard>
+            <TypeVersion>2.1</TypeVersion>
+            <InstanceIdentifier>2b8f1a4e-1a2b-4c3d-9e5f-000000000103</InstanceIdentifier>
+            <Type>Invoice</Type>
+            <CreationDateAndTime>2026-08-08T09:10:00</CreationDateAndTime>
+        </DocumentIdentification>
+        <BusinessScope>
+            <Scope>
+                <Type>DOCUMENTID</Type>
+                <InstanceIdentifier>urn:oasis:names:specification:ubl:schema:xsd:Invoice-2::Invoice##urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0::2.1</InstanceIdentifier>
+            </Scope>
+            <Scope>
+                <Type>PROCESSID</Type>
+                <InstanceIdentifier>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</InstanceIdentifier>
+            </Scope>
+            <Scope>
+                <Type>COUNTRY_C1</Type>
+                <InstanceIdentifier>SE</InstanceIdentifier>
+            </Scope>
+            <Scope>
+                <Type>MLS_TYPE</Type>
+                <InstanceIdentifier>FAILURE_ONLY</InstanceIdentifier>
+            </Scope>
+        </BusinessScope>
+    </StandardBusinessDocumentHeader>
+    <Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
+             xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+             xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+        <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+        <cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0</cbc:CustomizationID>
+        <cbc:ProfileID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</cbc:ProfileID>
+        <cbc:ID>INV-2026-000103</cbc:ID>
+        <cbc:IssueDate>2026-08-08</cbc:IssueDate>
+        <cbc:DueDate>2026-09-07</cbc:DueDate>
+        <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+        <cbc:Note>Ordered in accordance with our purchase order 4711.</cbc:Note>
+        <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+        <cbc:BuyerReference>4711</cbc:BuyerReference>
+        <cac:OrderReference>
+            <cbc:ID>4711</cbc:ID>
+        </cac:OrderReference>
+        <cac:AccountingSupplierParty>
+            <cac:Party>
+                <cbc:EndpointID schemeID="0007">5567125082</cbc:EndpointID>
+                <cac:PartyIdentification>
+                    <cbc:ID schemeID="SE:ORGNR">5567125082</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                    <cbc:Name>Ecru Consulting AB</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                    <cbc:StreetName>Gamla Brogatan 29</cbc:StreetName>
+                    <cbc:CityName>Stockholm</cbc:CityName>
+                    <cbc:PostalZone>11120</cbc:PostalZone>
+                    <cac:Country>
+                        <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                    </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyTaxScheme>
+                    <cbc:CompanyID>SE556712508201</cbc:CompanyID>
+                    <cac:TaxScheme>
+                        <cbc:ID>VAT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:PartyTaxScheme>
+                <cac:PartyLegalEntity>
+                    <cbc:RegistrationName>Ecru Consulting AB</cbc:RegistrationName>
+                    <cbc:CompanyID schemeID="SE:ORGNR">5567125082</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                    <cbc:Name>Martin Forsberg</cbc:Name>
+                    <cbc:ElectronicMail>martin.forsberg@ecru-consulting.example</cbc:ElectronicMail>
+                </cac:Contact>
+            </cac:Party>
+        </cac:AccountingSupplierParty>
+        <cac:AccountingCustomerParty>
+            <cac:Party>
+                <cbc:EndpointID schemeID="0007">4455454480</cbc:EndpointID>
+                <cac:PartyIdentification>
+                    <cbc:ID schemeID="SE:ORGNR">4455454480</cbc:ID>
+                </cac:PartyIdentification>
+                <cac:PartyName>
+                    <cbc:Name>Ekonomistyrningsverket</cbc:Name>
+                </cac:PartyName>
+                <cac:PostalAddress>
+                    <cbc:StreetName>Box 45316</cbc:StreetName>
+                    <cbc:CityName>Stockholm</cbc:CityName>
+                    <cbc:PostalZone>10430</cbc:PostalZone>
+                    <cac:Country>
+                        <cbc:IdentificationCode>SE</cbc:IdentificationCode>
+                    </cac:Country>
+                </cac:PostalAddress>
+                <cac:PartyLegalEntity>
+                    <cbc:RegistrationName>Ekonomistyrningsverket</cbc:RegistrationName>
+                    <cbc:CompanyID schemeID="SE:ORGNR">4455454480</cbc:CompanyID>
+                </cac:PartyLegalEntity>
+                <cac:Contact>
+                    <cbc:Name>Soren Pedersen</cbc:Name>
+                    <cbc:ElectronicMail>infomail@esv.se.example</cbc:ElectronicMail>
+                </cac:Contact>
+            </cac:Party>
+        </cac:AccountingCustomerParty>
+        <cac:PaymentMeans>
+            <cbc:PaymentMeansCode name="Credit transfer">30</cbc:PaymentMeansCode>
+            <cbc:PaymentID>INV-2026-000103</cbc:PaymentID>
+            <cac:PayeeFinancialAccount>
+                <cbc:ID>SE1234567890123456789012</cbc:ID>
+                <cac:FinancialInstitutionBranch>
+                    <cbc:ID>BGABSESS</cbc:ID>
+                </cac:FinancialInstitutionBranch>
+            </cac:PayeeFinancialAccount>
+        </cac:PaymentMeans>
+        <cac:PaymentTerms>
+            <cbc:Note>Net 30 days</cbc:Note>
+        </cac:PaymentTerms>
+        <cac:TaxTotal>
+            <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount>
+            <cac:TaxSubtotal>
+                <cbc:TaxableAmount currencyID="EUR">1000.00</cbc:TaxableAmount>
+                <cbc:TaxAmount currencyID="EUR">210.00</cbc:TaxAmount>
+                <cac:TaxCategory>
+                    <cbc:ID>S</cbc:ID>
+                    <cbc:Percent>21</cbc:Percent>
+                    <cac:TaxScheme>
+                        <cbc:ID>VAT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:TaxCategory>
+            </cac:TaxSubtotal>
+        </cac:TaxTotal>
+        <cac:LegalMonetaryTotal>
+            <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
+            <cbc:TaxExclusiveAmount currencyID="EUR">1000.00</cbc:TaxExclusiveAmount>
+            <cbc:TaxInclusiveAmount currencyID="EUR">1210.00</cbc:TaxInclusiveAmount>
+            <cbc:PayableAmount currencyID="EUR">1210.00</cbc:PayableAmount>
+        </cac:LegalMonetaryTotal>
+        <cac:InvoiceLine>
+            <cbc:ID>1</cbc:ID>
+            <cbc:InvoicedQuantity unitCode="HUR">10</cbc:InvoicedQuantity>
+            <cbc:LineExtensionAmount currencyID="EUR">1000.00</cbc:LineExtensionAmount>
+            <cac:Item>
+                <cbc:Name>Peppol integration consulting</cbc:Name>
+                <cac:ClassifiedTaxCategory>
+                    <cbc:ID>S</cbc:ID>
+                    <cbc:Percent>21</cbc:Percent>
+                    <cac:TaxScheme>
+                        <cbc:ID>VAT</cbc:ID>
+                    </cac:TaxScheme>
+                </cac:ClassifiedTaxCategory>
+            </cac:Item>
+            <cac:Price>
+                <cbc:PriceAmount currencyID="EUR">100.00</cbc:PriceAmount>
+            </cac:Price>
+        </cac:InvoiceLine>
+    </Invoice>
+</StandardBusinessDocument>

@@ -19,6 +19,7 @@ import network.oxalis.ng.api.timestamp.TimestampProvider;
 import network.oxalis.ng.api.transmission.TransmissionVerifier;
 import network.oxalis.ng.as4.common.As4MessageProperties;
 import network.oxalis.ng.as4.common.As4MessageProperty;
+import network.oxalis.ng.as4.mls.HeaderMlsEnricher;
 import network.oxalis.ng.as4.lang.OxalisAs4Exception;
 import network.oxalis.ng.as4.lang.OxalisAs4TransmissionException;
 import network.oxalis.ng.as4.util.*;
@@ -70,6 +71,7 @@ public class As4InboundHandler {
     private final PersisterHandler persisterHandler;
     private final TimestampProvider timestampProvider;
     private final HeaderParser headerParser;
+    private final HeaderMlsEnricher headerMlsEnricher;
     private final As4MessageFactory as4MessageFactory;
     private final PolicyService policyService;
     private final InboundService inboundService;
@@ -79,13 +81,14 @@ public class As4InboundHandler {
 
     @Inject
     public As4InboundHandler(TransmissionVerifier transmissionVerifier, PersisterHandler persisterHandler,
-                             TimestampProvider timestampProvider, HeaderParser headerParser, As4MessageFactory as4MessageFactory,
-                             PolicyService policyService, InboundService inboundService,
+                             TimestampProvider timestampProvider, HeaderParser headerParser, HeaderMlsEnricher headerMlsEnricher,
+                             As4MessageFactory as4MessageFactory, PolicyService policyService, InboundService inboundService,
                              OxalisCertificateValidator certificateValidator, Mode mode, Config config) {
         this.transmissionVerifier = transmissionVerifier;
         this.persisterHandler = persisterHandler;
         this.timestampProvider = timestampProvider;
         this.headerParser = headerParser;
+        this.headerMlsEnricher = headerMlsEnricher;
         this.as4MessageFactory = as4MessageFactory;
         this.policyService = policyService;
         this.inboundService = inboundService;
@@ -133,7 +136,7 @@ public class As4InboundHandler {
             byte[] copyOfReceipt = copyReceipt(response);
 
             // Handle payload
-            LinkedHashMap<InputStream, As4PayloadHeader> payloads = parseAttachments(attachments, userMessage);
+            LinkedHashMap<InputStream, As4PayloadHeader> payloads = parseAttachments(attachments, userMessage, senderCertificate);
 
             List<Path> paths = new ArrayList<>();
             for (Map.Entry<InputStream, As4PayloadHeader> payload : payloads.entrySet()) {
@@ -369,7 +372,8 @@ public class As4InboundHandler {
 
     }
 
-    private LinkedHashMap<InputStream, As4PayloadHeader> parseAttachments(Iterator<AttachmentPart> attachments, UserMessage userMessage) throws OxalisAs4Exception {
+    private LinkedHashMap<InputStream, As4PayloadHeader> parseAttachments(Iterator<AttachmentPart> attachments,
+                                                                          UserMessage userMessage, X509Certificate senderCertificate) throws OxalisAs4Exception {
 
         if (!attachments.hasNext()) {
             throw new OxalisAs4Exception("No attachment(s) present");
@@ -439,6 +443,8 @@ public class As4InboundHandler {
                             .documentType(DocumentTypeIdentifier.of(userMessage.getCollaborationInfo().getService().getValue(), Scheme.of(userMessage.getCollaborationInfo().getService().getType())))
                             .identifier(InstanceIdentifier.of(userMessage.getCollaborationInfo().getAction()));
                 }
+
+                sbdh = headerMlsEnricher.enrich(sbdh, senderCertificate);
 
                 // Get an "unexpected eof in prolog"
                 As4PayloadHeader header = new As4PayloadHeader(sbdh, partInfoHeaders.values(), contentId, userMessage.getMessageInfo().getMessageId());
