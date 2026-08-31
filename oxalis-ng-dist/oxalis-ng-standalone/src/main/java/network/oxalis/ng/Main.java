@@ -241,21 +241,21 @@ public class Main {
 
             for (TransmissionResult transmissionResult : results) {
                 TransmissionIdentifier transmissionIdentifier = transmissionResult.getTransmissionIdentifier();
-                System.out.println(String.format("%s transmission took %s ms",
-                        transmissionIdentifier, transmissionResult.getDuration()));
+                log.info("{} transmission took {} ms",
+                        transmissionIdentifier, transmissionResult.getDuration());
             }
 
             OptionalDouble average = results.stream().mapToLong(TransmissionResult::getDuration).average();
 
             if (average.isPresent()) {
-                System.out.println("Average transmission time was " + average.getAsDouble() + "ms");
+                log.info("Average transmission time was {}ms", average.getAsDouble());
             }
             long elapsedInSeconds = TimeUnit.SECONDS.convert(elapsed, TimeUnit.NANOSECONDS);
-            System.out.println("Total time spent: " + elapsedInSeconds + "s");
-            System.out.println("Attempted to send " + results.size() + " files");
-            System.out.println("Failed transmissions: " + failed);
-            if (results.size() > 0 && elapsedInSeconds > 0) {
-                System.out.println("Transmission speed " + results.size() / elapsedInSeconds + " documents per second");
+            log.info("Total time spent: {}s", elapsedInSeconds);
+            log.info("Attempted to send {} files", results.size());
+            log.info("Failed transmissions: {}", failed);
+            if (!results.isEmpty() && elapsedInSeconds > 0) {
+                log.info("Transmission speed {} documents per second",  results.size() / elapsedInSeconds);
             }
 
             // Sleep if set to do so.
