@@ -22,14 +22,13 @@
 
 package network.oxalis.ng.outbound.transmission;
 
-import network.oxalis.ng.api.tag.Tag;
 import network.oxalis.ng.api.outbound.TransmissionMessage;
 import network.oxalis.ng.api.outbound.TransmissionRequest;
+import network.oxalis.ng.api.tag.Tag;
 import network.oxalis.vefa.peppol.common.model.Endpoint;
 import network.oxalis.vefa.peppol.common.model.Header;
 
 import java.io.InputStream;
-import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -40,9 +39,7 @@ import java.util.Objects;
  * @author thore
  * @author erlend
  */
-class DefaultTransmissionRequest implements TransmissionRequest, Serializable {
-
-    private static final long serialVersionUID = -4542158917465140099L;
+class DefaultTransmissionRequest implements TransmissionRequest {
 
     private final Tag tag;
 
