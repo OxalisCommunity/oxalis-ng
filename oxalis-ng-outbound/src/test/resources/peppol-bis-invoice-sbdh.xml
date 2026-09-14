@@ -25,7 +25,7 @@
     <StandardBusinessDocumentHeader>
         <HeaderVersion>1.0</HeaderVersion>
         <Sender>
-            <Identifier Authority="iso6523-actorid-upis">9908:976098897</Identifier>
+            <Identifier Authority="iso6523-actorid-upis">0192:976098897</Identifier>
         </Sender>
         <Receiver>
             <Identifier Authority="iso6523-actorid-upis">0192:923829644</Identifier>

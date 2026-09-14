@@ -32,8 +32,10 @@ import network.oxalis.ng.api.tag.Tag;
 import network.oxalis.ng.api.tag.TagGenerator;
 import network.oxalis.ng.api.transformer.ContentDetector;
 import network.oxalis.ng.api.transformer.ContentWrapper;
+import network.oxalis.ng.commons.identifier.ParticipantIdentifierValidator;
 import network.oxalis.ng.commons.io.PeekingInputStream;
 import network.oxalis.ng.commons.tracing.Traceable;
+import network.oxalis.vefa.peppol.common.lang.PeppolParsingException;
 import network.oxalis.vefa.peppol.common.model.Header;
 
 import jakarta.inject.Inject;
@@ -85,11 +87,13 @@ public class TransmissionRequestFactory extends Traceable {
         PeekingInputStream peekingInputStream = new PeekingInputStream(inputStream);
         try {
             Header header = readHeaderFromSbdh(peekingInputStream);
+            validateParticipantIdentifiers(header);
             return new DefaultTransmissionMessage(header, peekingInputStream.newInputStream(),
                     tagGenerator.generate(Direction.OUT, tag));
         } catch (OxalisContentException e) {
             byte[] payload = peekingInputStream.getContent();
             Header header = detectHeaderFromContent(payload);
+            validateParticipantIdentifiers(header);
             InputStream wrappedContent = wrapContentInSbdh(header, payload);
             return new DefaultTransmissionMessage(header, wrappedContent, tagGenerator.generate(Direction.OUT, tag));
         }
@@ -133,6 +137,22 @@ public class TransmissionRequestFactory extends Traceable {
             throw e;
         } finally {
             span.end();
+        }
+    }
+
+    /**
+     * Validates that the sender and receiver participant identifiers of the header are well-formed
+     * before the message is accepted. Rejecting malformed identifiers early prevents downstream
+     * persistence errors.
+     *
+     * @param header the parsed SBDH header
+     * @throws OxalisContentException if any participant identifier is invalid
+     */
+    private void validateParticipantIdentifiers(Header header) throws OxalisContentException {
+        try {
+            ParticipantIdentifierValidator.validate(header);
+        } catch (PeppolParsingException e) {
+            throw new OxalisContentException(e.getMessage(), e);
         }
     }
 }
