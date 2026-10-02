@@ -1,4 +1,4 @@
-FROM maven:3.9.9-amazoncorretto-11-alpine AS mvn
+FROM maven:3.9.16-amazoncorretto-11-alpine AS mvn
 
 ADD . $MAVEN_HOME
 
@@ -9,7 +9,7 @@ RUN cd $MAVEN_HOME \
  && mkdir -p /oxalis-ng/lib \
  && for f in $(ls /oxalis-ng-server/lib); do \
     if [ -e /oxalis-ng-standalone/lib/$f ]; then \
-        mv /oxalis-ng-server/lib/$f /oxalis/lib/; \
+        mv /oxalis-ng-server/lib/$f /oxalis-ng/lib/; \
         rm /oxalis-ng-standalone/lib/$f; \
     fi; \
  done \
@@ -26,7 +26,7 @@ RUN cd $MAVEN_HOME \
  && find /oxalis-ng -name .gitkeep -exec rm -rf '{}' \;
 
 
-FROM amazoncorretto:11.0.25-alpine AS  oxalis-ng-base
+FROM amazoncorretto:11.0.32-alpine3.24 AS oxalis-ng-base
 
 COPY --from=mvn /oxalis-ng /oxalis-ng
 
