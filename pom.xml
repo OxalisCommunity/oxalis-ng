@@ -69,7 +69,7 @@
         <vefa.peppol.version>4.6.0</vefa.peppol.version>
         <peppol.sbdh.version>2.5.0</peppol.sbdh.version>
         <cxf.version>4.0.11</cxf.version>
-        <wss4j.version>3.0.5</wss4j.version>
+        <wss4j.version>3.0.6</wss4j.version>
         <bouncycastle.version>1.85</bouncycastle.version>
         <bouncycastle.bcprov.version>1.85.2</bouncycastle.bcprov.version>
         <jakarta.xml.bind-api.version>4.0.2</jakarta.xml.bind-api.version>
