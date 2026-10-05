@@ -41,4 +41,13 @@ public enum IdentifierConf {
     @DefaultValue("default")
     MSGID_GENERATOR,
 
+    /**
+     * Reaction to a participant identifier whose ICD is not in the bundled Peppol code list:
+     * STRICT (reject), WARN (log and continue, the default) or NONE (skip the check).
+     * Structural validation (format and length) is always enforced.
+     */
+    @Path("oxalis.identifier.icd.validation")
+    @DefaultValue("WARN")
+    ICD_VALIDATION,
+
 }

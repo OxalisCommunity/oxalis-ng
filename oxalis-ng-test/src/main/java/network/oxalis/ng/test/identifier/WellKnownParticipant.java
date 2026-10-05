@@ -31,15 +31,15 @@ import network.oxalis.vefa.peppol.common.model.ParticipantIdentifier;
  */
 public class WellKnownParticipant {
 
-    public static final ParticipantIdentifier U4_TEST = ParticipantIdentifier.of("9908:810017902");
+    public static final ParticipantIdentifier U4_TEST = ParticipantIdentifier.of("0192:810017902");
 
 
-    public static final ParticipantIdentifier DIFI = ParticipantIdentifier.of("9908:991825827");
+    public static final ParticipantIdentifier DIFI = ParticipantIdentifier.of("0192:991825827");
 
     /**
      * Use this in test mode
      */
-    public static final ParticipantIdentifier DIFI_TEST = ParticipantIdentifier.of("9908:810418052");
+    public static final ParticipantIdentifier DIFI_TEST = ParticipantIdentifier.of("0192:810418052");
 
     /**
      * Random endpoint in test mode
@@ -49,6 +49,6 @@ public class WellKnownParticipant {
     /**
      * Old organisation number for Balder Treindustri
      */
-    public static final ParticipantIdentifier DUMMY = ParticipantIdentifier.of("9908:976098897");
+    public static final ParticipantIdentifier DUMMY = ParticipantIdentifier.of("0192:976098897");
 
 }
