@@ -32,7 +32,6 @@ import network.oxalis.ng.commons.util.OxalisVersion;
 import org.apache.hc.client5.http.config.ConnectionConfig;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
 import org.apache.hc.core5.util.TimeValue;
 import org.apache.hc.core5.util.Timeout;
@@ -86,7 +85,7 @@ public class ApacheHttpModule extends OxalisModule {
                                                 RequestConfig requestConfig, OpenTelemetry openTelemetry) {
         ApacheHttpClientTelemetry telemetry = ApacheHttpClientTelemetry.builder(openTelemetry).build();
 
-        return HttpClients.custom()
+        return telemetry.createHttpClientBuilder()
                 .setUserAgent(USER_AGENT)
                 .setDefaultRequestConfig(requestConfig)
                 .setConnectionManager(connectionManager)
