@@ -1,4 +1,4 @@
-FROM maven:3.9.16-amazoncorretto-11-alpine AS mvn
+FROM maven:3.9.16-amazoncorretto-17-alpine AS mvn
 
 ADD . $MAVEN_HOME
 
@@ -26,7 +26,7 @@ RUN cd $MAVEN_HOME \
  && find /oxalis-ng -name .gitkeep -exec rm -rf '{}' \;
 
 
-FROM amazoncorretto:11.0.32-alpine3.24 AS oxalis-ng-base
+FROM amazoncorretto:17.0.21-alpine3.24 AS oxalis-ng-base
 
 COPY --from=mvn /oxalis-ng /oxalis-ng
 

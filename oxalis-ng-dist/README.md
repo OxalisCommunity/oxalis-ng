@@ -8,7 +8,7 @@ The following distributions are available:
     The traditional distribution package of Oxalis.
 
 * **[Oxalis-NG Server](/oxalis-ng-dist/oxalis-ng-server)** - 
-    Oxalis as an application needing only Java 11 to run. 
+    Oxalis as an application needing only Java 17 to run. 
     This is the distribution used to create the Docker image. 
 
 * **[Oxalis-NG Standalone](/oxalis-ng-dist/oxalis-ng-standalone)** -
