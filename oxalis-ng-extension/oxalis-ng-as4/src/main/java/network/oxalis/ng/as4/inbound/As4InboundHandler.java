@@ -29,12 +29,9 @@ import network.oxalis.ng.commons.mode.OxalisCertificateValidator;
 import network.oxalis.vefa.peppol.common.code.DigestMethod;
 import network.oxalis.vefa.peppol.common.code.Service;
 import network.oxalis.vefa.peppol.common.lang.EndpointNotFoundException;
-import network.oxalis.vefa.peppol.common.lang.PeppolLoadingException;
 import network.oxalis.vefa.peppol.common.model.*;
 import network.oxalis.vefa.peppol.lookup.LookupClient;
-import network.oxalis.vefa.peppol.lookup.LookupClientBuilder;
 import network.oxalis.vefa.peppol.lookup.api.LookupException;
-import network.oxalis.vefa.peppol.mode.Mode;
 import network.oxalis.vefa.peppol.sbdh.SbdReader;
 import network.oxalis.vefa.peppol.sbdh.lang.SbdhException;
 import network.oxalis.vefa.peppol.security.lang.PeppolSecurityException;
@@ -76,14 +73,14 @@ public class As4InboundHandler {
     private final PolicyService policyService;
     private final InboundService inboundService;
     private final OxalisCertificateValidator certificateValidator;
-    private final Mode mode;
+    private final LookupClient lookupClient;
     private final Config config;
 
     @Inject
     public As4InboundHandler(TransmissionVerifier transmissionVerifier, PersisterHandler persisterHandler,
                              TimestampProvider timestampProvider, HeaderParser headerParser, HeaderMlsEnricher headerMlsEnricher,
                              As4MessageFactory as4MessageFactory, PolicyService policyService, InboundService inboundService,
-                             OxalisCertificateValidator certificateValidator, Mode mode, Config config) {
+                             OxalisCertificateValidator certificateValidator, LookupClient lookupClient, Config config) {
         this.transmissionVerifier = transmissionVerifier;
         this.persisterHandler = persisterHandler;
         this.timestampProvider = timestampProvider;
@@ -93,7 +90,7 @@ public class As4InboundHandler {
         this.policyService = policyService;
         this.inboundService = inboundService;
         this.certificateValidator = certificateValidator;
-        this.mode = mode;
+        this.lookupClient = lookupClient;
         this.config = config;
     }
 
@@ -168,9 +165,9 @@ public class As4InboundHandler {
 
             try {
                 if (config.hasPath("access.point.isReceiverCheckEnabled")) {
-                    isThisMessageForUs(config, firstHeader, mode);
+                    isThisMessageForUs(config, firstHeader);
                 }
-            } catch (EndpointNotFoundException | LookupException | PeppolLoadingException | PeppolSecurityException ex) {
+            } catch (EndpointNotFoundException | LookupException | PeppolSecurityException ex) {
                 log.warn("Error checking whether this message is for us: " + ex.getMessage());
             } catch (OxalisAs4Exception OxalisAs4Exception) {
                 throw new OxalisAs4Exception("PEPPOL:NOT_SERVICED", AS4ErrorCode.EBMS_0004, AS4ErrorCode.Severity.FAILURE);
@@ -214,11 +211,10 @@ public class As4InboundHandler {
         }
     }
 
-    private void isThisMessageForUs(Config config, As4PayloadHeader firstHeader, Mode mode)
-            throws PeppolLoadingException, PeppolSecurityException, LookupException,
+    private void isThisMessageForUs(Config config, As4PayloadHeader firstHeader)
+            throws PeppolSecurityException, LookupException,
             EndpointNotFoundException, OxalisAs4Exception {
 
-        LookupClient lookupClient = LookupClientBuilder.forMode(mode).build();
         if (config.getBoolean("access.point.isReceiverCheckEnabled")) {
             Header header = firstHeader.getHeader();
             Endpoint endpoint = lookupClient.getEndpoint(

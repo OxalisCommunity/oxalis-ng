@@ -20,7 +20,7 @@
  * permissions and limitations under the Licence.
  */
 
-package network.oxalis.ng.outbound.lookup;
+package network.oxalis.ng.commons.lookup;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

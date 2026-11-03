@@ -29,11 +29,6 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 import network.oxalis.ng.api.lookup.LookupService;
 import network.oxalis.ng.commons.guice.OxalisModule;
-import network.oxalis.ng.commons.mode.OxalisCertificateValidator;
-import network.oxalis.vefa.peppol.common.lang.PeppolLoadingException;
-import network.oxalis.vefa.peppol.lookup.LookupClient;
-import network.oxalis.vefa.peppol.lookup.LookupClientBuilder;
-import network.oxalis.vefa.peppol.lookup.api.MetadataFetcher;
 import network.oxalis.vefa.peppol.mode.Mode;
 
 /**
@@ -46,25 +41,11 @@ public class LookupModule extends OxalisModule {
     protected void configure() {
         bindTyped(LookupService.class, CachedLookupService.class);
         bindTyped(LookupService.class, DefaultLookupService.class);
-
-        bind(MetadataFetcher.class)
-                .to(OxalisApacheFetcher.class);
     }
 
     @Provides
     @Singleton
     protected LookupService getLookupService(Mode mode, Injector injector) {
         return injector.getInstance(Key.get(LookupService.class, Names.named(mode.getString("oxalis.lookup.service"))));
-    }
-
-    @Provides
-    @Singleton
-    protected LookupClient providesLookupClient(Mode mode, OxalisCertificateValidator certificateValidator,
-                                                MetadataFetcher fetcher)
-            throws PeppolLoadingException {
-        return LookupClientBuilder.forMode(mode)
-                .fetcher(fetcher)
-                .certificateValidator(certificateValidator)
-                .build();
     }
 }
