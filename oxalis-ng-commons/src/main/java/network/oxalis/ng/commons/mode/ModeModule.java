@@ -69,8 +69,10 @@ public class ModeModule extends OxalisModule {
 
     @Provides
     @Singleton
-    protected CertificateValidator getCertificateValidator(Mode mode) throws PeppolLoadingException {
-        return mode.initiate("security.validator.class", CertificateValidator.class);
+    protected CertificateValidator getCertificateValidator(Mode mode, OcspFetcher ocspFetcher, CrlFetcher crlFetcher)
+            throws PeppolLoadingException {
+        return mode.initiate("security.validator.class", CertificateValidator.class,
+                CertificateValidatorObjectStorage.of(ocspFetcher, crlFetcher));
     }
 
     @Provides

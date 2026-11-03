@@ -35,8 +35,6 @@ import network.oxalis.vefa.peppol.mode.Mode;
 import network.oxalis.vefa.peppol.security.ModeDetector;
 
 import java.security.cert.X509Certificate;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author erlend
@@ -66,11 +64,8 @@ public class ModeProvider implements Provider<Mode> {
     public Mode get() {
         Span span = tracer.spanBuilder("Mode detection").startSpan();
         try {
-            Map<String, Object> objectStorage = new HashMap<>();
-            objectStorage.put("ocsp_fetcher", ocspFetcher);
-            objectStorage.put("crlFetcher", crlFetcher);
-
-            return ModeDetector.detect(certificate, config, objectStorage);
+            return ModeDetector.detect(certificate, config,
+                    CertificateValidatorObjectStorage.of(ocspFetcher, crlFetcher));
         } catch (PeppolLoadingException e) {
             throw new OxalisLoadingException("Unable to detect mode.", e);
         } finally {
